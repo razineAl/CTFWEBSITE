@@ -4,6 +4,7 @@ import './App.css'
 import Home from "./pages/Home";
 import AuthContext from "./helpers/AuthContext";
 import { useState } from "react";
+import Rankings from "./pages/Rankings";
 
 function App() {
   const [authState,setAuthState] = useState({username:'',status:false,accessToken:'',id:''});
@@ -15,6 +16,8 @@ function App() {
           <Routes>
             <Route path="/" exact Component={Login}></Route>
             <Route path="/home" exact Component={Home}></Route>
+            <Route path="/ranking" exact Component={Rankings}></Route>
+            
 
           </Routes>
         </Router>

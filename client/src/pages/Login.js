@@ -1,6 +1,6 @@
 
 import Navbar from '../components/Navbar';
-import {useContext, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../helpers/AuthContext';
@@ -48,6 +48,13 @@ function Login(){
             setFocused(false);
         }        
     }
+    useEffect(
+        ()=>{
+            const refreshToken = cookies.get('refreshToken');
+            if (refreshToken) {
+                cookies.remove('refreshToken');
+            }
+        },[])
     return(
         <>
             <Navbar></Navbar>

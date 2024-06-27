@@ -10,14 +10,14 @@ import Home from './Home';
 function Rankings(){
 
     return(
-        <div id='home'>
+        <div id='ranking-page'>
             <nav id="home-navbar">
-                <Link className='link' to={Home}>Challenges</Link>
-                <Link className='link' to={Rankings}>Rankings</Link>
+                <Link className='link' to='/home'>Challenges</Link>
+                <Link className='link' to='/ranking'>Rankings</Link>
                 <Link className='link'>More</Link>
                 <Link className='link'>Settings</Link>
             </nav>
-            <div id='challenges'>
+            <div id='ranking-tab'>
             
             </div>
         
