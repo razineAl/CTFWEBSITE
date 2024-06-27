@@ -46,9 +46,6 @@ function Home(){
                     </div>
                 )
             })}
-            <div>
-                <img src=''></img>
-            </div>
             </div>
         
         </div>
