@@ -1,0 +1,257 @@
+@font-face {
+    font-family: ubuntu-medium;
+    src: url('../public/fonts/Ubuntu-Medium.ttf');
+}
+@font-face {
+    font-family: ubuntu-regular;
+    src: url('../public/fonts/Ubuntu-Regular.ttf');
+}
+@font-face {
+    font-family: ubuntu-bold;
+    src: url('../public/fonts/Ubuntu-Bold.ttf');
+}
+button:hover{
+    cursor: pointer;
+}
+div.App{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow-x: hidden;
+}
+*{
+    font-family: ubuntu-regular,Verdana, Geneva, Tahoma, sans-serif;
+}
+nav{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    color: #fff;
+}
+#main-navbar{
+    background-color: hsl(213, 96%, 18%);
+    height: 80px;
+}
+nav img{
+    height: 90%;
+    width: auto;
+    transform: translate(25px,0);
+}
+#main-navbar div:first-child{
+    height: 100%;
+    width: 60%;
+}
+#main-navbar div:nth-child(2){
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+#main-navbar button.btn{
+    border: none;
+    border-radius: 5px;
+    height: 35px;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1.2em;
+    transition: color 0.9s;
+    transition: background-color 0.9s;
+}
+#main-navbar button.btn:hover{
+    background-color: #fff;
+    color: hsl(213, 96%, 18%);
+    cursor: pointer;
+}
+/*                                               */
+form{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 200px;
+    width: 400px;
+
+}
+form button{
+    background-color: hsl(213, 96%, 18%);
+    border: none;
+    color: #fff;
+    font-size: 1.1em;
+    height: 32px;
+}
+form div{
+    display: flex;
+    position: relative;
+}
+form div label{
+    position: absolute;
+    top: 5px;
+    left: 3px;
+    color: hsl(231, 6%, 59%);
+    font-size: .85em;
+    transition: top 0.3s,font-size 0.3s;
+}
+form div label.focused{
+    top: -15px;
+    font-size: .75em;
+}
+
+form div input{
+    height: 25px;
+    width: 100%;
+    border: none;
+    border-bottom: 1.8px solid hsl(231, 11%, 63%);
+    outline: none;
+    padding: 0 5px;
+    font-family: ubuntu-medium;
+}
+form div input.focused{
+    border-bottom: 1.8px solid hsl(213, 96%, 18%);
+}
+
+form button:hover{
+    background-color: hsla(213, 96%, 19%, 0.973);
+}
+
+#title{
+    background-color: #004E64;
+    font-size: 60px;
+
+}
+#title span{
+    display: inline-block;
+    font-family: ubuntu-bold;
+    margin: 0 4px;
+    position: relative;
+    top: -20px;
+    animation: wave 0.8s;
+}
+
+
+@keyframes wave {
+    0% {
+        transform: translateY(-20px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+
+
+/*                      HOME PAGEEEEEEEEEEEE                         */
+
+
+#home{
+    width: 100%;
+    height: 100%;
+    padding-top: 250px;
+    background-color: #e9ecef;
+    overflow:hidden;
+}
+#home-navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    background-color: #fff;
+}
+#home-navbar .link{
+    color: #245498 ;
+    text-decoration: none;
+}
+#home .challenge-container{
+    width: 80%;
+    height: 200px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    background-color: #fff;
+    border-radius: 5px;
+}
+#home .challenge-container:hover{
+    cursor: pointer;
+}
+#home .challenge-container div:first-child{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+}
+#home .challenge-container div:first-child span{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: ubuntu-medium;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+#challenges{
+    display: flex;
+    width: 100%;
+    display: grid;
+    box-sizing: border-box;
+    padding:0 20px;
+    column-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: #e9ecef;
+    overflow:hidden;
+
+}
+.color1{
+    color: rgb(106, 190, 205);
+}
+.color2{
+    color: rgb(170, 215, 66);
+}
+.color3{
+    color: rgb(241, 182, 4);
+}
+.color4{
+    color: rgb(244, 137, 37);
+}
+.color5{
+    color: rgb(237, 44, 73);
+}
+.bg-color1{
+    background-color: rgb(106, 190, 205);
+}
+.bg-color2{
+    background-color: rgb(170, 215, 66);
+}
+.bg-color3{
+    background-color: rgb(241, 182, 4);
+}
+.bg-color4{
+    background-color: rgb(244, 137, 37);
+}
+.bg-color5{
+    background-color: rgb(237, 44, 73);
+}
+#home .challenge-container div:nth-child(2),#home .challenge-container div:nth-child(3){
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#home .challenge-container div:nth-child(2){
+    font-family: ubuntu-medium;
+    font-size: 1.1em;
+}
