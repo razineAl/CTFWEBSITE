@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import AuthContext from '../helpers/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Router,Routes,Route, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Rankings from './Rankings';
 
@@ -30,12 +30,22 @@ function Home(){
 
     return(
         <div id='home'>
+            <Router>
             <nav id="home-navbar">
-                <Link className='link' to={Home}>Challenges</Link>
-                <Link className='link' to={Rankings}>Rankings</Link>
+                <Link className='link'>Challenges</Link>
+                <Link className='link'>Rankings</Link>
                 <Link className='link'>More</Link>
                 <Link className='link'>Settings</Link>
             </nav>
+            <Routes>
+                <Route path='/home' exact Component={Home}></Route>
+                <Route path='/rankings' exact Component={Rankings}></Route>
+                <Route path='/' exact Component={Rankings}></Route>
+                <Route path='/' exact Component={Rankings}></Route>
+            </Routes>
+
+            </Router>
+            
             <div id='challenges'>
             {challenges.map((challenge,index)=>{
                 return(
