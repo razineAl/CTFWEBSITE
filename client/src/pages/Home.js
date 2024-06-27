@@ -35,11 +35,19 @@ function Home(){
                 <Link className='link' to='/home'>Challenges</Link>
                 <Link className='link' to='/ranking'>Rankings</Link>
                 <Link className='link'>More</Link>
-                <Link className='link'>Settings</Link>
+                <Link className='link'>{authState.username+">"}</Link>
             </nav>
             
 
-            
+            <aside id='categories-side-panel'>
+                <label htmlFor='categories'>Categories</label>
+                <select name='categories' id='categories'>
+                    <option>All</option>
+                    <option>Web</option>
+                    <option>Forensics</option>
+                    <option>Linux</option>
+                </select>
+            </aside>
             <div id='challenges'>
             {challenges.map((challenge,index)=>{
                 return(

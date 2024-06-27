@@ -160,6 +160,9 @@ form button:hover{
     padding-top: 250px;
     background-color: #e9ecef;
     overflow:hidden;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: 1fr 5fr;
 }
 #home-navbar{
     display: flex;
@@ -214,6 +217,26 @@ form button:hover{
     background-color: #e9ecef;
     overflow:hidden;
 
+}
+#categories-side-panel{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #fff;
+}
+#categories{
+    font-size: .9em;
+    color: #004E64;
+}
+#categories-side-panel select{
+    height: 30px;
+    color: #004E64;
+    font-size: 1.2em;
+    border: solid 1px #004E64;
+    border-radius: 5px;
+}
+#categories-side-panel select:hover{
+    cursor: pointer;
 }
 .color1{
     color: rgb(106, 190, 205);
