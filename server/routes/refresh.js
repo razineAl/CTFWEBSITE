@@ -10,7 +10,6 @@ const jwt = require('jsonwebtoken');
 
 
 router.get('/',async(req,res)=>{
-    const cookies = req.cookies;
 
     const refreshToken = req.header('refreshToken');
 
@@ -25,7 +24,7 @@ router.get('/',async(req,res)=>{
     try {
         if (validRefresh) {
             const accessToken = jwt.sign({username:user.username},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'900s'});
-            res.json({...validRefresh,accessToken:accessToken});
+            res.json({username:user.username,id:user._id,accessToken:accessToken});
         }
     } catch (error) {
         res.sendStatus(403);

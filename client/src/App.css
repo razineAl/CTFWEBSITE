@@ -207,7 +207,6 @@ form button:hover{
     right: 15px;
 }
 #challenges{
-    display: flex;
     width: 100%;
     display: grid;
     box-sizing: border-box;
@@ -221,8 +220,8 @@ form button:hover{
 #categories-side-panel{
     display: flex;
     flex-direction: column;
-    padding: 10px;
     background-color: #fff;
+    padding: 20px 5px 20px 20px;
 }
 #categories{
     font-size: .9em;
