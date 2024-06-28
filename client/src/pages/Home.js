@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState, useCallback} from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import AuthContext from '../helpers/AuthContext';
@@ -10,12 +10,10 @@ import Rankings from './Rankings';
 function Home(){
     const [challenges,setChallenges] = useState([]);
     const [effChallenges,setEffChallenges] = useState([]);
+    const [trace_challenge,setTrace_challenge] = useState({category:'All',difficulty:'All'});
     const {authState,setAuthState} = useContext(AuthContext);
     const cookies = new Cookies();
-    var trace_challenge = {
-        category:"All",
-        difficulty:"All"
-    }
+    
     let navigate = useNavigate();
     
     useEffect(()=>{
@@ -31,27 +29,22 @@ function Home(){
         })
         
     },[])
+    useEffect(() => {
+        let filteredChallenges = challenges;
+        if (trace_challenge.category !== "All") {
+            filteredChallenges = filteredChallenges.filter(challenge => challenge.category === trace_challenge.category);
+        }
+        if (trace_challenge.difficulty !== "All") {
+            filteredChallenges = filteredChallenges.filter(challenge => challenge.difficulty.toString() === trace_challenge.difficulty);
+        }
+        setEffChallenges(filteredChallenges);
+    }, [challenges, trace_challenge]);
 
     const filterByCategory = (e)=>{
-        trace_challenge.category = e.target.value;
-        if (e.target.value == 'All') {
-            if (trace_challenge.difficulty == 'All') {
-                setEffChallenges(challenges);
-            } else {
-                setEffChallenges(challenges.filter(challenge => challenge.difficulty == trace_challenge.difficulty));
-            }
-            
-        } else {
-            setEffChallenges(challenges.filter(challenge => (challenge.category == e.target.value) && (challenge.difficulty == 'All') ));
-        }   
+        setTrace_challenge({difficulty:trace_challenge.difficulty,category:e.target.value});
     }
     const filterByDifficulty = (e)=>{
-        trace_challenge.difficulty = e.target.value;
-        if (e.target.value == 'All') {
-            setEffChallenges(challenges.filter(challenge => challenge.category == trace_challenge.category));
-        } else {
-            setEffChallenges(challenges.filter(challenge => (challenge.difficulty == e.target.value) && (challenge.category == trace_challenge.category) ));
-        }    
+        setTrace_challenge({difficulty:e.target.value.toString(),category:trace_challenge.category});  
     }
     
 
