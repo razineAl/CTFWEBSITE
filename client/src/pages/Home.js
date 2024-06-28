@@ -12,6 +12,10 @@ function Home(){
     const [effChallenges,setEffChallenges] = useState([]);
     const {authState,setAuthState} = useContext(AuthContext);
     const cookies = new Cookies();
+    var trace_challenge = {
+        category:"All",
+        difficulty:"All"
+    }
     let navigate = useNavigate();
     
     useEffect(()=>{
@@ -29,17 +33,24 @@ function Home(){
     },[])
 
     const filterByCategory = (e)=>{
+        trace_challenge.category = e.target.value;
         if (e.target.value == 'All') {
-            setEffChallenges(challenges);
+            if (trace_challenge.difficulty == 'All') {
+                setEffChallenges(challenges);
+            } else {
+                setEffChallenges(challenges.filter(challenge => challenge.difficulty == trace_challenge.difficulty));
+            }
+            
         } else {
-            setEffChallenges(challenges.filter(challenge => challenge.category == e.target.value));
-        }    
+            setEffChallenges(challenges.filter(challenge => (challenge.category == e.target.value) && (challenge.difficulty == 'All') ));
+        }   
     }
     const filterByDifficulty = (e)=>{
+        trace_challenge.difficulty = e.target.value;
         if (e.target.value == 'All') {
-            setEffChallenges(challenges.filter(challenge => challenge.category == effChallenges[0].category));
+            setEffChallenges(challenges.filter(challenge => challenge.category == trace_challenge.category));
         } else {
-            setEffChallenges(challenges.filter(challenge => (challenge.difficulty == e.target.value) && (challenge.category == effChallenges[0].category) ));
+            setEffChallenges(challenges.filter(challenge => (challenge.difficulty == e.target.value) && (challenge.category == trace_challenge.category) ));
         }    
     }
     
