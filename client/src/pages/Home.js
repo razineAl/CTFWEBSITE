@@ -9,6 +9,7 @@ import Rankings from './Rankings';
 
 function Home(){
     const [challenges,setChallenges] = useState([]);
+    const [effChallenges,setEffChallenges] = useState([]);
     const {authState,setAuthState} = useContext(AuthContext);
     const cookies = new Cookies();
     let navigate = useNavigate();
@@ -20,12 +21,27 @@ function Home(){
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id});
             axios.get('http://localhost:3001/challenge/all',{headers:{accessToken:res.data.accessToken}})
             .then((response)=>{
-                setChallenges(response.data);   
-                console.log(res.data.accessToken);
+                setChallenges(response.data);
+                setEffChallenges(response.data);   
             })    
         })
         
     },[])
+
+    const filterByCategory = (e)=>{
+        if (e.target.value == 'All') {
+            setEffChallenges(challenges);
+        } else {
+            setEffChallenges(challenges.filter(challenge => challenge.category == e.target.value));
+        }    
+    }
+    const filterByDifficulty = (e)=>{
+        if (e.target.value == 'All') {
+            setEffChallenges(challenges.filter(challenge => challenge.category == effChallenges[0].category));
+        } else {
+            setEffChallenges(challenges.filter(challenge => (challenge.difficulty == e.target.value) && (challenge.category == effChallenges[0].category) ));
+        }    
+    }
     
 
     return(
@@ -41,15 +57,25 @@ function Home(){
 
             <aside id='categories-side-panel'>
                 <label htmlFor='categories'>Categories</label>
-                <select name='categories' id='categories'>
+                <select name='categories' id='categories' onChange={(e)=>{filterByCategory(e)}}>
                     <option>All</option>
-                    <option>Web</option>
                     <option>Forensics</option>
-                    <option>Linux</option>
+                    <option>Reverse Eng</option>
+                    <option>Binary Exp</option>
+                    <option>general</option>
+                </select>
+                <label htmlFor='difficulty'>Difficulty</label>
+                <select name='difficulty' id='difficulty' onChange={(e)=>{filterByDifficulty(e)}}>
+                    <option>All</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
                 </select>
             </aside>
             <div id='challenges'>
-            {challenges.map((challenge,index)=>{
+            {effChallenges.map((challenge,index)=>{
                 return(
                     <div className='challenge-container' key={index}>
                         <div className='challenge-header'><p>{challenge.category}</p><span className={`bg-color${challenge.difficulty}`}>{challenge.difficulty}</span></div>
