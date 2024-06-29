@@ -42,8 +42,8 @@ router.post('/login',async (req,res)=>{
     
     res.cookie('refresh',refreshToken,{maxAge:1000*3600*24});
 
-    res.json({refreshToken:refreshToken,accessToken:accessToken,username:user.username,id:user._id});
-    console.log({accessToken:accessToken,username:user.username,id:user._id});
+    res.json({refreshToken:refreshToken,accessToken:accessToken,username:user.username,id:user._id,role:user.role});
+
 
 });
 

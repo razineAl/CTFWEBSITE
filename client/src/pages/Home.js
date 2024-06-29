@@ -20,7 +20,7 @@ function Home(){
         const refreshToken = cookies.get('refreshToken');
         axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
         .then((res)=>{
-            setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id});
+            setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
             axios.get('http://localhost:3001/challenge/all',{headers:{accessToken:res.data.accessToken}})
             .then((response)=>{
                 setChallenges(response.data);

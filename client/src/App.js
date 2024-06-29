@@ -8,7 +8,7 @@ import Rankings from "./pages/Rankings";
 import Admin from "./pages/Admin";
 
 function App() {
-  const [authState,setAuthState] = useState({username:'',status:false,accessToken:'',id:''});
+  const [authState,setAuthState] = useState({username:'',status:false,accessToken:'',id:'',role:'user'});
 
   return (
     <div className="App">
