@@ -2,7 +2,7 @@ import {useContext, useEffect, useState, useCallback} from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import AuthContext from '../helpers/AuthContext';
-import { Link, BrowserRouter as Router,Routes,Route, useNavigate } from 'react-router-dom';
+import { Link,  useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Rankings from './Rankings';
 
@@ -19,10 +19,10 @@ function Admin(){
                 setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});    
             })
         },[]);
-
-    if (authState.role ==! 'Admin') {
+    if (authState.role !== 'Admin') {
         navigate('/home');
     }
+    
     
     
     
