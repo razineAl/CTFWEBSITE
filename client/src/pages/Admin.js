@@ -19,11 +19,10 @@ function Admin(){
                 setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});    
             })
         },[]);
-    useEffect(()=>{
-        if (authState.role ==! 'Admin') {
-            navigate('/home');
-        }
-    },[authState])
+
+    if (authState.role ==! 'Admin') {
+        navigate('/home');
+    }
     
     
     

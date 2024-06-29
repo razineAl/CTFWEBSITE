@@ -24,7 +24,7 @@ router.get('/',async(req,res)=>{
     try {
         if (validRefresh) {
             const accessToken = jwt.sign({username:user.username},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'900s'});
-            res.json({username:user.username,id:user._id,accessToken:accessToken});
+            res.json({username:user.username,id:user._id,accessToken:accessToken,role:user.role});
         }
     } catch (error) {
         res.sendStatus(403);
