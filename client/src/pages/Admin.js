@@ -10,7 +10,22 @@ import Rankings from './Rankings';
 function Admin(){
 
     const {authState,setAuthState} = useContext(AuthContext);
-    console.log(authState.accessToken);
+    const cookies = new Cookies();
+    let navigate = useNavigate();
+    const refreshToken = cookies.get('refreshToken');
+    useEffect(()=>{
+            axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
+            .then((res)=>{
+                setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});    
+            })
+        },[]);
+    useEffect(()=>{
+        if (authState.role ==! 'Admin') {
+            navigate('/home');
+        }
+    },[authState])
+    
+    
     
 
     return(
