@@ -8,12 +8,14 @@ import Rankings from './Rankings';
 
 
 function Admin(){
-    
+
+    const {authState,setAuthState} = useContext(AuthContext);
+    console.log(authState.accessToken);
     
 
     return(
         <div id='admin-page'>
-
+            Welcome to the Admin Page 
         </div>
   
     );

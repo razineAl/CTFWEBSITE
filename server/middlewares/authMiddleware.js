@@ -14,7 +14,7 @@ const validateToken = async (req,res,next)=>{
     try {
         if (validToken) return next();
     } catch (error) {
-        res.sendStatus(403);
+        res.sendStatus(401);
     }
 }
 
