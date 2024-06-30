@@ -288,3 +288,22 @@ form button:hover{
     column-gap: 10px;
     grid-template-columns: 2fr 5fr;
 }
+#admin-page .side-panel{
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 10px;
+}
+#admin-page .admin-sidebar-sections{
+    display: flex;
+    border-radius: 5px;
+    height: 40px;
+    align-items: center;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+}
+#admin-page .admin-sidebar-sections.active{
+    background-color: #007bff;
+    color: #fff;
+}

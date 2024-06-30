@@ -46,7 +46,7 @@ function Admin() {
     return (
         <div id='admin-page'>
             <Sidebar>
-                <div className='admin-sidebar-sections'>User Management</div>
+                <div className='admin-sidebar-sections active'>User Management</div>
                 <div className='admin-sidebar-sections'>Challenge Management</div>
                 <div className='admin-sidebar-sections'>Submissions and Scoring</div>
             </Sidebar>
