@@ -277,3 +277,14 @@ form button:hover{
     font-family: ubuntu-medium;
     font-size: 1.1em;
 }
+
+/*                 admin home                       */
+#admin-page{
+    width: 100%;
+    height: 100%;
+    background-color: #e9ecef;
+    overflow:hidden;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: 2fr 5fr;
+}
