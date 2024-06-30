@@ -5,6 +5,7 @@ import AuthContext from '../helpers/AuthContext';
 import { Link,  useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Rankings from './Rankings';
+import Sidebar from '../components/Sidebar';
 
 
 function Admin(){
@@ -22,14 +23,21 @@ function Admin(){
     if (authState.role !== 'Admin') {
         navigate('/home');
     }
-    
+
     
     
     
 
     return(
         <div id='admin-page'>
-            Welcome to the Admin Page 
+            <Sidebar>
+                <div className='admin-sidebar-sections'>User Management</div>
+                <div className='admin-sidebar-sections'>Challenge Management</div>
+                <div className='admin-sidebar-sections'>Submissions and Scoring</div>
+            </Sidebar>
+            <main id='admin-interface'>
+
+            </main>
         </div>
   
     );
