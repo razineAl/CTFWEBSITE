@@ -1,8 +1,8 @@
 
-function Sidebar(){
+function Sidebar({children}){
     return(
         <aside className='side-panel'>
-            
+            {children}
         </aside>
     );
 }
