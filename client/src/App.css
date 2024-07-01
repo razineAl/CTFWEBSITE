@@ -303,6 +303,10 @@ form button:hover{
     margin-bottom: 5px;
     box-sizing: border-box;
 }
+#admin-page .admin-sidebar-sections:hover{
+    cursor: pointer;
+    background-color: #f1f3f5;
+}
 #admin-page .admin-sidebar-sections.active{
     background-color: #007bff;
     color: #fff;
