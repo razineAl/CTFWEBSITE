@@ -8,6 +8,14 @@ import Sidebar from '../components/Sidebar';
 function Admin() {
     const { authState, setAuthState } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
+    const [username1,setUsername1] = useState('');
+    const [password1,setPassword1] = useState('');
+    const [username2,setUsername2] = useState('');
+    const [password2,setPassword2] = useState('');
+    const [focus,setFocus] = useState(false); 
+    const [focused,setFocused] = useState(false); 
+
+    
     const cookies = new Cookies();
     let navigate = useNavigate();
     const refreshToken = cookies.get('refreshToken');
@@ -43,6 +51,27 @@ function Admin() {
         return <div>Loading...</div>;
     }
 
+    const handleFocus = ()=>{
+        setFocus(true);
+
+    }
+    const handleFocused = ()=>{
+        setFocused(true);
+
+    }
+
+    const handleBlur = ()=>{
+        if (username1==='') {
+            setFocus(false);
+        }
+
+    }
+    const handleBlured = ()=>{
+        if (password1==='') {
+            setFocused(false);
+        }        
+    }
+
     return (
         <div id='admin-page'>
             <Sidebar>
@@ -61,26 +90,34 @@ function Admin() {
                     </div>
                     <div className='admin-interface-section-body'>
                         <form onSubmit="">
-                            <label>Mail</label>
-                            <input type='email'></input>
-                            <label>Password</label>
-                            <input type='password'></input>
-                            <button type='submit'>Create</button>
+                            <div>
+                                <label>Mail</label>
+                                <input type='email' className={focus ? 'focused' : ''} value={username1} onChange={(e)=>{setUsername1(e.target.value)}} onFocus={handleFocus} onBlur={handleBlur}></input>
+                            </div>
+                            <div>
+                                <label>Password</label>
+                                <input type='password' className={focused ? 'focused' : ''} value={password1} onChange={(e)=>{setPassword1(e.target.value)}} onFocus={handleFocused} onBlur={handleBlured}></input>
+                            </div>                           
+                            <button type='submit' className='btn bg-blue'>Create</button>
                         </form>
                     </div>
 
                 </div>
                 <div className='admin-interface-section' id='admin-delete-user'>
                     <div className='admin-interface-section-title'>
-                        Delete User
+                        Delete User             {/*change        ---------      -----------    font*/}
                     </div>
                     <div className='admin-interface-section-body'>
                         <form onSubmit="">
-                            <label>Mail</label>
-                            <input type='email'></input>
-                            <label>Password</label>
-                            <input type='password'></input>
-                            <button type='submit'>Create</button>
+                            <div>
+                                <label>Mail</label>
+                                <input type='email' value={username2} onChange={(e)=>{setUsername2(e.target.value)}}></input>
+                            </div>
+                            <div>
+                                <label>Password</label>
+                                <input type='password' value={password2} onChange={(e)=>{setPassword2(e.target.value)}}></input>
+                            </div> 
+                            <button type='submit' className='bg-red'>Delete</button>
                         </form>
                     </div>
 
