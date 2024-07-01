@@ -85,7 +85,7 @@ function Login(){
                     <label htmlFor='pwd' className={focused ? 'focused' : ''}>Password</label>
                     <input className={focused ? 'focused' : ''} type='password' id='pwd' name='pwd' value={password} onBlur={handleBlured} onFocus={handleFocused} onChange={(e)=>{setPassword(e.target.value)}}></input>
                 </div>
-                <button type='submit'>Log in</button>
+                <button type='submit' className='bg-blue'>Log in</button>
             </form>
             
 
