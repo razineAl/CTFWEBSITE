@@ -91,11 +91,11 @@ function Admin() {
                     <div className='admin-interface-section-body'>
                         <form onSubmit="">
                             <div>
-                                <label>Mail</label>
+                                <label className={focus ? 'focused' : ''}>Mail</label>
                                 <input type='email' className={focus ? 'focused' : ''} value={username1} onChange={(e)=>{setUsername1(e.target.value)}} onFocus={handleFocus} onBlur={handleBlur}></input>
                             </div>
                             <div>
-                                <label>Password</label>
+                                <label className={focused ? 'focused' : ''}>Password</label>
                                 <input type='password' className={focused ? 'focused' : ''} value={password1} onChange={(e)=>{setPassword1(e.target.value)}} onFocus={handleFocused} onBlur={handleBlured}></input>
                             </div>                           
                             <button type='submit' className='btn bg-blue'>Create</button>
