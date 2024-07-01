@@ -49,10 +49,43 @@ function Admin() {
                 <div className='admin-sidebar-sections active'>User Management</div>
                 <div className='admin-sidebar-sections'>Challenge Management</div>
                 <div className='admin-sidebar-sections'>Submissions and Scoring</div>
+                <div className='admin-sidebar-sections'>Event Management</div>
+                <div className='admin-sidebar-sections'>Security</div>
+                <div className='admin-sidebar-sections'>Interface and Usability</div>
+                <div className='admin-sidebar-sections'>Backup and Restore</div>
             </Sidebar>
-            <main id='admin-interface'>
-                {/* Admin interface content goes here */}
-            </main>
+            <div id='admin-interface'>
+                <div className='admin-interface-section' id='admin-create-user'>
+                    <div className='admin-interface-section-title'>
+                        Create User
+                    </div>
+                    <div className='admin-interface-section-body'>
+                        <form onSubmit="">
+                            <label>Mail</label>
+                            <input type='email'></input>
+                            <label>Password</label>
+                            <input type='password'></input>
+                            <button type='submit'>Create</button>
+                        </form>
+                    </div>
+
+                </div>
+                <div className='admin-interface-section' id='admin-delete-user'>
+                    <div className='admin-interface-section-title'>
+                        Delete User
+                    </div>
+                    <div className='admin-interface-section-body'>
+                        <form onSubmit="">
+                            <label>Mail</label>
+                            <input type='email'></input>
+                            <label>Password</label>
+                            <input type='password'></input>
+                            <button type='submit'>Create</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
         </div>
     );
 }
