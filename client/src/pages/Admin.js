@@ -69,7 +69,19 @@ function Admin() {
     const handleBlured = ()=>{
         if (password1==='') {
             setFocused(false);
-        }        
+        }         
+    }
+    const handleUserCreation = async ()=>{
+        try {
+            const response = await axios.post('http://localhost:3001/auth/register',{username:username1,password:password1});
+            console.log(response);
+
+        } catch (error) {
+            console.log(error);
+        }
+        
+
+        
     }
 
     return (
@@ -89,10 +101,10 @@ function Admin() {
                         Create User
                     </div>
                     <div className='admin-interface-section-body'>
-                        <form onSubmit="">
+                        <form onSubmit={handleUserCreation}>
                             <div>
-                                <label className={focus ? 'focused' : ''}>Mail</label>
-                                <input type='email' className={focus ? 'focused' : ''} value={username1} onChange={(e)=>{setUsername1(e.target.value)}} onFocus={handleFocus} onBlur={handleBlur}></input>
+                                <label className={focus ? 'focused' : ''}>Username</label>
+                                <input type='text' className={focus ? 'focused' : ''} value={username1} onChange={(e)=>{setUsername1(e.target.value)}} onFocus={handleFocus} onBlur={handleBlur}></input>
                             </div>
                             <div>
                                 <label className={focused ? 'focused' : ''}>Password</label>
@@ -110,8 +122,8 @@ function Admin() {
                     <div className='admin-interface-section-body'>
                         <form onSubmit="">
                             <div>
-                                <label>Mail</label>
-                                <input type='email' value={username2} onChange={(e)=>{setUsername2(e.target.value)}}></input>
+                                <label>Username</label>
+                                <input type='text' value={username2} onChange={(e)=>{setUsername2(e.target.value)}}></input>
                             </div>
                             <div>
                                 <label>Password</label>
