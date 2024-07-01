@@ -78,7 +78,7 @@ function Login(){
                 }}>
 
                 <div>
-                    <label htmlFor='user' className={focus ? 'focused' : ''} >Username</label>
+                    <label htmlFor='user' className={focus ? 'focused' : ''}>Username</label>
                     <input className={ focus ? 'focused' : ''} type='text' id='user' name='user' value={username} onBlur={handleBlur} onFocus={handleFocus} onChange={(e)=>{setUsername(e.target.value)}}></input>
                 </div>
                 <div>
