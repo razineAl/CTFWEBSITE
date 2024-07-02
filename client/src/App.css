@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: ubuntu-medium;
     src: url('../public/fonts/Ubuntu-Medium.ttf');
@@ -170,8 +171,8 @@ form div input.focused{
 #home{
     width: 100%;
     height: 100%;
-    padding-top: 250px;
-    background-color: #e9ecef;
+    padding: 150px 0 0 20px;
+    background-color: #f8f9fa;
     overflow:hidden;
     display: grid;
     column-gap: 10px;
@@ -195,6 +196,7 @@ form div input.focused{
     grid-template-rows: 1fr 1fr 1fr;
     background-color: #fff;
     border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 #home .challenge-container:hover{
     cursor: pointer;
@@ -223,18 +225,18 @@ form div input.focused{
     width: 100%;
     display: grid;
     box-sizing: border-box;
-    padding:0 20px;
+    padding: 20px;
     column-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    background-color: #e9ecef;
     overflow:hidden;
-
 }
 #categories-side-panel{
     display: flex;
     flex-direction: column;
     background-color: #fff;
     padding: 20px 5px 20px 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 2px 20px rgba(0, 0, 0, 0.1);
+    height: 450px;
 }
 #categories{
     font-size: .9em;
@@ -291,7 +293,7 @@ form div input.focused{
     font-size: 1.1em;
 }
 
-/*                 admin home                       */
+/*                 admin page                       */
 #admin-page{
     width: 100%;
     height: 100%;
