@@ -7,10 +7,12 @@ import Rankings from './Rankings';
 
 
 function Home(){
+    const {authState,setAuthState} = useContext(AuthContext);
     const [challenges,setChallenges] = useState([]);
     const [effChallenges,setEffChallenges] = useState([]);
     const [trace_challenge,setTrace_challenge] = useState({category:'All',difficulty:'All'});
-    const {authState,setAuthState} = useContext(AuthContext);
+    const [visible,setVisible] = useState(false);
+
     const cookies = new Cookies();
     
     let navigate = useNavigate();
@@ -45,7 +47,9 @@ function Home(){
     const filterByDifficulty = (e)=>{
         setTrace_challenge({difficulty:e.target.value.toString(),category:trace_challenge.category});  
     }
-    
+    const triggerChallenge = ()=>{
+        setVisible(true);
+    }
 
     return(
         <div id='home'>
@@ -77,10 +81,13 @@ function Home(){
                     <option>5</option>
                 </select>
             </aside>
+            {visible && <div id='triggered-challenge-container'>
+                conditional bayyyby    
+            </div>}
             <div id='challenges'>
             {effChallenges.map((challenge,index)=>{
                 return(
-                    <div className='challenge-container' key={index}>
+                    <div className='challenge-container' key={index} onClick={triggerChallenge}>
                         <div className='challenge-header'><p>{challenge.category}</p><span className={`bg-color${challenge.difficulty}`}>{challenge.difficulty}</span></div>
                         <div className={`challenge-body color${challenge.difficulty}`}>{challenge.title}</div>
                         <div className='challenge-footer'>{challenge.points} points</div>
