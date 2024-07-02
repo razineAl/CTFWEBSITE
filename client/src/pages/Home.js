@@ -56,6 +56,9 @@ function Home(){
     }
     const handleCanceling = (e)=>{
         console.log(e.target);
+        if (condition) {
+            
+        }
     }
     return(
         <div id='home' onClick={(e)=>{handleCanceling(e)}}>
