@@ -54,9 +54,11 @@ function Home(){
         setChosen(challenge);
 
     }
-
+    const handleCanceling = (e)=>{
+        console.log(e.target);
+    }
     return(
-        <div id='home'>
+        <div id='home' onClick={(e)=>{handleCanceling(e)}}>
   
             <nav id="home-navbar">
                 <Link className='link' to='/home'>Challenges</Link>
