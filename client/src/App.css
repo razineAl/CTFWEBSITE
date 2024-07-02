@@ -11,11 +11,14 @@
     font-family: ubuntu-bold;
     src: url('../public/fonts/Ubuntu-Bold.ttf');
 }
+body{
+    position: relative;
+}
 button:hover{
     cursor: pointer;
 }
 div.App{
-    position: relative;
+    
     height: 100vh;
     width: 100vw;
     margin: 0;
@@ -177,6 +180,7 @@ form div input.focused{
     display: grid;
     column-gap: 10px;
     grid-template-columns: 1fr 5fr;
+
 }
 #home-navbar{
     display: flex;
@@ -292,6 +296,18 @@ form div input.focused{
     font-family: ubuntu-medium;
     font-size: 1.1em;
 }
+
+#triggered-challenge-container{
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    top:150px;
+    left: 25%;
+    background-color: #fff;
+    z-index: 10;
+}
+
+
 
 /*                 admin page                       */
 #admin-page{
