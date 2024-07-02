@@ -12,6 +12,8 @@ function Home(){
     const [effChallenges,setEffChallenges] = useState([]);
     const [trace_challenge,setTrace_challenge] = useState({category:'All',difficulty:'All'});
     const [visible,setVisible] = useState(false);
+    const [trigerred,setTriggered] = useState(false);
+    const [chosen,setChosen] = useState({});
 
     const cookies = new Cookies();
     
@@ -47,8 +49,10 @@ function Home(){
     const filterByDifficulty = (e)=>{
         setTrace_challenge({difficulty:e.target.value.toString(),category:trace_challenge.category});  
     }
-    const triggerChallenge = ()=>{
+    const triggerChallenge = (challenge)=>{
         setVisible(true);
+        setChosen(challenge);
+
     }
 
     return(
@@ -58,7 +62,7 @@ function Home(){
                 <Link className='link' to='/home'>Challenges</Link>
                 <Link className='link' to='/ranking'>Rankings</Link>
                 <Link className='link'>More</Link>
-                <Link className='link'>{authState.username+">"}</Link>
+                <Link className='link'>{authState.username+" >"}</Link>
             </nav>
             
 
@@ -82,12 +86,17 @@ function Home(){
                 </select>
             </aside>
             {visible && <div id='triggered-challenge-container'>
-                conditional bayyyby    
+                {chosen.title+" "}    
+                {chosen.difficulty+" "}    
+                {chosen.points+" "}    
+                {chosen.url+" "}    
+                {chosen.body+" "}    
+                {chosen.category}    
             </div>}
             <div id='challenges'>
             {effChallenges.map((challenge,index)=>{
                 return(
-                    <div className='challenge-container' key={index} onClick={triggerChallenge}>
+                    <div className='challenge-container' key={index} onClick={()=>{triggerChallenge(challenge)}}>
                         <div className='challenge-header'><p>{challenge.category}</p><span className={`bg-color${challenge.difficulty}`}>{challenge.difficulty}</span></div>
                         <div className={`challenge-body color${challenge.difficulty}`}>{challenge.title}</div>
                         <div className='challenge-footer'>{challenge.points} points</div>
