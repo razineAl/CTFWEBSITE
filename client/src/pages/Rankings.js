@@ -8,7 +8,7 @@ import Home from './Home';
 
 
 function Rankings(){
-
+    const [topUsers,setTopUsers] = useState([]);
     return(
         <div id='ranking-page'>
             <nav id="home-navbar">
@@ -18,7 +18,7 @@ function Rankings(){
                 <Link className='link'>Settings</Link>
             </nav>
             <div id='ranking-tab'>
-            
+
             </div>
         
         </div>
