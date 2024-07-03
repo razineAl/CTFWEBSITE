@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState, useCallback} from 'react';
+import {useContext, useEffect, useState, useCallback, useRef} from 'react';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ function Home(){
     const [visible,setVisible] = useState(false);
     const [trigerred,setTriggered] = useState(false);
     const [chosen,setChosen] = useState({});
+    const individualChallenge = useRef(null);
 
     const cookies = new Cookies();
     
@@ -55,9 +56,8 @@ function Home(){
 
     }
     const handleCanceling = (e)=>{
-        console.log(e.target);
-        if (condition) {
-            
+        if (individualChallenge.current && !individualChallenge.current.contains(e.target)) {
+            console.log('annule hbibi');
         }
     }
     return(
@@ -90,7 +90,7 @@ function Home(){
                     <option>5</option>
                 </select>
             </aside>
-            {visible && <div id='triggered-challenge-container'>
+            {visible && <div id='triggered-challenge-container' ref={individualChallenge}>
                 {chosen.title+" "}    
                 {chosen.difficulty+" "}    
                 {chosen.points+" "}    
