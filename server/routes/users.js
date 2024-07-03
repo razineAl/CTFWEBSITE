@@ -20,6 +20,11 @@ router.get('/challengeId/:challenge', async (req,res)=>{
     const users = await User.find({challenges:challenge});
     res.json(users);
 });
+router.get('/top/:number', async (req,res)=>{
+    const number = req.params.number;
+    const users = await User.find({points:number});
+    res.json(users);
+});
 
 module.exports = router;
 
