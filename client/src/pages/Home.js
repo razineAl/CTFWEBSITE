@@ -94,10 +94,13 @@ function Home(){
             </aside>
             {visible && <div id='triggered-challenge-container' ref={individualChallenge}>
                 <div id='tr-challenge-header'>
+                    {chosen.title}
                 </div>    
                 <div id='tr-challenge-body'>
+                    <p>{chosen.body + "."} <a href={chosen.url} target='blank'>Link to the challenge</a></p>
                 </div>    
                 <div id='tr-challenge-footer'>
+                    {chosen.difficulty}
                 </div>    
             </div>}
             <div id='challenges'>
