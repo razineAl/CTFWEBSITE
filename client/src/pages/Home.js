@@ -54,10 +54,12 @@ function Home(){
         setVisible(true);
         setChosen(challenge);
 
+
     }
     const handleCanceling = (e)=>{
+        
         if (individualChallenge.current && !individualChallenge.current.contains(e.target)) {
-            console.log('annule hbibi');
+            setVisible(false);
         }
     }
     return(
@@ -91,12 +93,12 @@ function Home(){
                 </select>
             </aside>
             {visible && <div id='triggered-challenge-container' ref={individualChallenge}>
-                {chosen.title+" "}    
-                {chosen.difficulty+" "}    
-                {chosen.points+" "}    
-                {chosen.url+" "}    
-                {chosen.body+" "}    
-                {chosen.category}    
+                <div id='tr-challenge-header'>
+                </div>    
+                <div id='tr-challenge-body'>
+                </div>    
+                <div id='tr-challenge-footer'>
+                </div>    
             </div>}
             <div id='challenges'>
             {effChallenges.map((challenge,index)=>{
