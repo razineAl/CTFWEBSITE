@@ -9,6 +9,14 @@ import Home from './Home';
 
 function Rankings(){
     const [topUsers,setTopUsers] = useState([]);
+
+
+    useEffect(()=>{
+        axios.get('http://localhost:3001/users/top/3')
+        .then((res)=>{
+            setTopUsers(res.data);
+        })
+    },[])
     return(
         <div id='ranking-page'>
             <nav id="home-navbar">
@@ -18,7 +26,13 @@ function Rankings(){
                 <Link className='link'>Settings</Link>
             </nav>
             <div id='ranking-tab'>
-
+                {
+                    topUsers.map((topUser,index)=>{
+                        return(
+                            <div key={index} className='top-player-section'>{topUser.username}</div>
+                        )
+                    })
+                }
             </div>
         
         </div>
