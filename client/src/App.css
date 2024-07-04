@@ -378,16 +378,18 @@ form div input.focused{
 }
 #ranking-tab{
     width: 675px;
-    background-color: #2d6827;
     display: flex;
     flex-direction: column;
     margin: auto;
+    background-color: #fff;
+    box-shadow: 1px 1px 6px #004E64;
+    cursor: pointer;
 }
 .top-player-section{
-    background-color: #004E64;
     display: grid;
     grid-template-columns: 3fr 1fr;
-    margin-bottom: 15px;
+    padding: 8px 0;
+    border-bottom: solid 1px hsl(229, 10%, 67%);
 }
 .top-player-username-container{
     padding-left: 20px;
