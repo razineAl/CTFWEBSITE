@@ -6,6 +6,7 @@ import AuthContext from "./helpers/AuthContext";
 import { useState } from "react";
 import Rankings from "./pages/Rankings";
 import Admin from "./pages/Admin";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   const [authState,setAuthState] = useState({username:'',status:false,accessToken:'',id:'',role:'user'});
@@ -19,6 +20,7 @@ function App() {
             <Route path="/home" exact Component={Home}></Route>
             <Route path="/ranking" exact Component={Rankings}></Route>
             <Route path="/admin-panel" exact Component={Admin}></Route>
+            <Route path="/profile/:user" exact Component={UserProfile}></Route>
             
 
           </Routes>
