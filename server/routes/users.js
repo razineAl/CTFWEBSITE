@@ -27,13 +27,13 @@ router.get('/top/:number',async (req,res)=>{
         return res.status(400).json("not a number !");
     }
     try {
-        const users = User.find()
+        const users = await User.find()
         .sort({points:-1})
         .limit(number);
         res.json(users);
 
     } catch (error) {
-        res.sendStatus(500);
+        res.status(500).json("some error occured in the backend !");
     }
 })
 
