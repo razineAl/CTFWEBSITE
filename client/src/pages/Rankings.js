@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import AuthContext from '../helpers/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Home from './Home';
 
@@ -11,12 +11,19 @@ function Rankings(){
     const [topUsers,setTopUsers] = useState([]);
 
 
+
+    let navigate = useNavigate();
+
     useEffect(()=>{
         axios.get('http://localhost:3001/users/top/10')
         .then((res)=>{
             setTopUsers(res.data);
         })
     },[])
+
+    const goToProfile = (user)=>{
+        navigate(`profile/:${user}`);
+    }
     return(
         <div id='ranking-page'>
             <nav id="home-navbar">
@@ -34,7 +41,7 @@ function Rankings(){
                     
                     topUsers.map((topUser,index)=>{
                         return(
-                            <div key={index} className='top-player-section'>
+                            <div key={index} className='top-player-section' onClick={(topUser)=>{goToProfile(topUser)}}>
                                 <div className='top-player-username-container'>{topUser.username}</div>
                                 <div className='top-player-points-container'>{topUser.points}</div>
                             </div>
