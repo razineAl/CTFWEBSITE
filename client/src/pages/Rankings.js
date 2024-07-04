@@ -26,7 +26,12 @@ function Rankings(){
                 <Link className='link'>Settings</Link>
             </nav>
             <div id='ranking-tab'>
+                <div className='top-player-section top-player-section-title'>
+                    <div className='top-player-username-container'>Username</div>
+                    <div className='top-player-points-container'>Points</div>
+                </div>
                 {
+                    
                     topUsers.map((topUser,index)=>{
                         return(
                             <div key={index} className='top-player-section'>
