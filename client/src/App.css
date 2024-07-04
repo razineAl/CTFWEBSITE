@@ -309,6 +309,7 @@ form div input.focused{
 
 
 
+
 /*                 admin page                       */
 #admin-page{
     width: 100%;
@@ -362,4 +363,35 @@ form div input.focused{
 }
 .admin-interface-section input{
     height: 30px;
+}
+
+/*            rankigs page                            */
+
+
+#ranking-page{
+    width: 100%;
+    height: 100%;
+    padding-top: 150px;
+    background-color: #f8f9fa;
+    overflow:hidden;
+
+}
+#ranking-tab{
+    width: 675px;
+    background-color: #2d6827;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.top-player-section{
+    background-color: #004E64;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    margin-bottom: 15px;
+}
+.top-player-username-container{
+    padding-left: 20px;
+}
+.top-player-points-container{
+    text-align: center;
 }
