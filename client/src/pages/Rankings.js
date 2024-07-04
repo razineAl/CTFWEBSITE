@@ -22,7 +22,7 @@ function Rankings(){
     },[])
 
     const goToProfile = (user)=>{
-        navigate(`profile/:${user}`);
+        navigate(`../profile/:${user._id}`);
     }
     return(
         <div id='ranking-page'>
@@ -41,7 +41,7 @@ function Rankings(){
                     
                     topUsers.map((topUser,index)=>{
                         return(
-                            <div key={index} className='top-player-section' onClick={(topUser)=>{goToProfile(topUser)}}>
+                            <div key={index} className='top-player-section' onClick={()=>{goToProfile(topUser)}}>
                                 <div className='top-player-username-container'>{topUser.username}</div>
                                 <div className='top-player-points-container'>{topUser.points}</div>
                             </div>
