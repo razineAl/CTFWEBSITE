@@ -12,7 +12,7 @@ function Rankings(){
 
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/users/top/3')
+        axios.get('http://localhost:3001/users/top/10')
         .then((res)=>{
             setTopUsers(res.data);
         })
@@ -29,7 +29,10 @@ function Rankings(){
                 {
                     topUsers.map((topUser,index)=>{
                         return(
-                            <div key={index} className='top-player-section'>{topUser.username}</div>
+                            <div key={index} className='top-player-section'>
+                                <div className='top-player-username-container'>{topUser.username}</div>
+                                <div className='top-player-points-container'>{topUser.points}</div>
+                            </div>
                         )
                     })
                 }
