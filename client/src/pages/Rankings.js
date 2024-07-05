@@ -1,28 +1,35 @@
 import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
 import AuthContext from '../helpers/AuthContext';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import Home from './Home';
 
 
 function Rankings(){
     const [topUsers,setTopUsers] = useState([]);
-
+    const {authState,setAuthState} = useContext(AuthContext);
 
 
     let navigate = useNavigate();
+    const cookies = new Cookies();
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/users/top/10')
+
+        const refreshToken = cookies.get('refreshToken');
+        axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
         .then((res)=>{
-            setTopUsers(res.data);
+            setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
+            axios.get('http://localhost:3001/users/top/10',{headers:{accessToken:res.data.accessToken}})
+            .then((response)=>{
+                setTopUsers(response.data);  
+            })    
         })
+    
+        
     },[])
 
     const goToProfile = (user)=>{
-        navigate(`../profile/:${user._id}`);
+        navigate(`../profile/${user._id}`);
     }
     return(
         <div id='ranking-page'>
