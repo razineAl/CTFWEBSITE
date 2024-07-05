@@ -24,10 +24,10 @@ function UserProfile(){
         axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
         .then((res)=>{
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get(`http://localhost:3001/users/byId/${id}`)
+            axios.get(`http://localhost:3001/users/byId/${id}`,{headers:{accessToken:res.data.accessToken}})
             .then((response)=>{
-                setUser(response.data);   
-            })
+                setUser(response.data);  
+            }) 
         })    
 
         
