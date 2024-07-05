@@ -20,7 +20,7 @@ function App() {
             <Route path="/home" exact Component={Home}></Route>
             <Route path="/ranking" exact Component={Rankings}></Route>
             <Route path="/admin-panel" exact Component={Admin}></Route>
-            <Route path="/profile/:user" exact Component={UserProfile}></Route>
+            <Route path="/profile/:id" exact Component={UserProfile}></Route>
             
 
           </Routes>
