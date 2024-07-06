@@ -66,10 +66,16 @@ function Home(){
         <div id='home' onClick={(e)=>{handleCanceling(e)}}>
   
             <nav id="home-navbar">
-                <Link className='link' to='/home'>Challenges</Link>
-                <Link className='link' to='/ranking'>Rankings</Link>
-                <Link className='link'>More</Link>
-                <Link className='link'>{authState.username+" >"}</Link>
+                <div className="navbar-part">
+                    <Link className='link' to='/home'>Challenges</Link>
+                    <Link className='link' to='/ranking'>Rankings</Link>
+                    <Link className='link'>Premium</Link>
+                </div>
+                <div className='navbar-part'>
+                    <Link className='link'>{authState.username+" >"}</Link>
+                </div>
+                
+                
             </nav>
             
 
@@ -98,6 +104,7 @@ function Home(){
                 </div>    
                 <div id='tr-challenge-body'>
                     <p>{chosen.body + "."} <a href={chosen.url} target='blank'>Link to the challenge</a></p>
+
                 </div>    
                 <div id='tr-challenge-footer'>
                     {chosen.difficulty}
