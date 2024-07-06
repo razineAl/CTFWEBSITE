@@ -176,7 +176,6 @@ form div input.focused{
     height: 100%;
     padding: 150px 0 0 20px;
     background-color: #f8f9fa;
-    overflow:hidden;
     display: grid;
     column-gap: 10px;
     grid-template-columns: 1fr 5fr;
@@ -187,22 +186,38 @@ form div input.focused{
     grid-template-columns: 1fr 1fr;
     height: 50px;
     background-color: #fff;
+    box-shadow: 0px 1px 10px #acacac;
 }
-#home-navbar .navbar-part{
+#home-navbar>div:first-of-type{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+#home-navbar div:nth-of-type(2){
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-#home-navbar div:first-of-type{
-
-}
-#home-navbar div:nth-of-type(2){
-
-}
 #home-navbar .link{
-    color: #245498 ;
+
     text-decoration: none;
+    color: black;
+
 }
+#home-navbar .link:hover{
+    color: #004E64;
+}
+#home-navbar .navbar-section{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#home-navbar .navbar-section:hover{
+    cursor: pointer;
+    border-bottom: solid 2px #004E64;
+}
+
+
 #home .challenge-container{
     width: 80%;
     height: 200px;
