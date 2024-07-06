@@ -12,7 +12,7 @@ router.get('/', async (req,res)=>{
 
 
 router.get('byId/:id',validateToken ,async (req,res)=>{
-    const user = await User.findById(req.params.id);
+    const user = await User.findOne({_id:req.params.id});
     res.json(user);
 });
 
