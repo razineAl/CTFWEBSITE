@@ -183,11 +183,21 @@ form div input.focused{
 
 }
 #home-navbar{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
     height: 50px;
     background-color: #fff;
+}
+#home-navbar .navbar-part{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#home-navbar div:first-of-type{
+
+}
+#home-navbar div:nth-of-type(2){
+
 }
 #home-navbar .link{
     color: #245498 ;
