@@ -55,7 +55,7 @@ function UserProfile(){
                     
                 </div>
                 <div className='navbar-part'>
-                    <Link className='link'>{authState.username+" >"}</Link>
+                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" >"}</Link>
                 </div>
                 
                 
