@@ -35,6 +35,38 @@ function UserProfile(){
 
     return(
         <div id='user-profile-page'>
+            <nav className="home-navbar">
+                <div className="navbar-part">
+                    <div className='navbar-section'>
+                        <Link className='link' to='/home'>Challenges</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link' to='/ranking'>Rankings</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link'>Premium</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link'>FAQ</Link>
+                    </div>
+
+                    
+                    
+                    
+                </div>
+                <div className='navbar-part'>
+                    <Link className='link'>{authState.username+" >"}</Link>
+                </div>
+                
+                
+            </nav>
+
+            <div id='user-profile-general-section'>
+                {user.username}
+            </div>
+            <div id='user-profile-informations-section'>
+
+            </div>
             
         
         </div>
