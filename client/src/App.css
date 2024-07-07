@@ -181,38 +181,38 @@ form div input.focused{
     grid-template-columns: 1fr 5fr;
 
 }
-#home-navbar{
+.home-navbar{
     display:grid;
     grid-template-columns: 1fr 1fr;
     height: 50px;
     background-color: #fff;
     box-shadow: 0px 1px 10px #acacac;
 }
-#home-navbar>div:first-of-type{
+.home-navbar>div:first-of-type{
     display: grid;
     grid-template-columns: repeat(4,1fr);
 }
-#home-navbar div:nth-of-type(2){
+.home-navbar div:nth-of-type(2){
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-#home-navbar .link{
+.home-navbar .link{
 
     text-decoration: none;
     color: black;
 
 }
-#home-navbar .link:hover{
+.home-navbar .link:hover{
     color: #004E64;
 }
-#home-navbar .navbar-section{
+.home-navbar .navbar-section{
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#home-navbar .navbar-section:hover{
+.home-navbar .navbar-section:hover{
     cursor: pointer;
     border-bottom: solid 2px #004E64;
 }
