@@ -215,6 +215,7 @@ form div input.focused{
 .home-navbar .navbar-section:hover{
     cursor: pointer;
     border-bottom: solid 2px #004E64;
+    background-color: #ffffffe2;
 }
 
 
