@@ -33,11 +33,30 @@ function Rankings(){
     }
     return(
         <div id='ranking-page'>
-            <nav id="home-navbar">
-                <Link className='link' to='/home'>Challenges</Link>
-                <Link className='link' to='/ranking'>Rankings</Link>
-                <Link className='link'>More</Link>
-                <Link className='link'>Settings</Link>
+            <nav className="home-navbar">
+                <div className="navbar-part">
+                    <div className='navbar-section'>
+                        <Link className='link' to='/home'>Challenges</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link' to='/ranking'>Rankings</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link'>Premium</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link'>FAQ</Link>
+                    </div>
+
+                    
+                    
+                    
+                </div>
+                <div className='navbar-part'>
+                    <Link className='link'>{authState.username+" >"}</Link>
+                </div>
+                
+                
             </nav>
             <div id='ranking-tab'>
                 <div className='top-player-section top-player-section-title'>
