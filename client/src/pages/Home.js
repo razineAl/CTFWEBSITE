@@ -67,9 +67,22 @@ function Home(){
   
             <nav id="home-navbar">
                 <div className="navbar-part">
-                    <Link className='link' to='/home'>Challenges</Link>
-                    <Link className='link' to='/ranking'>Rankings</Link>
-                    <Link className='link'>Premium</Link>
+                    <div className='navbar-section'>
+                        <Link className='link' to='/home'>Challenges</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link' to='/ranking'>Rankings</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link'>Premium</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link'>FAQ</Link>
+                    </div>
+
+                    
+                    
+                    
                 </div>
                 <div className='navbar-part'>
                     <Link className='link'>{authState.username+" >"}</Link>
