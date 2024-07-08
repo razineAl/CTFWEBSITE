@@ -174,12 +174,11 @@ form div input.focused{
 #home{
     width: 100%;
     height: 100%;
-    padding: 150px 0 0 20px;
     background-color: #f8f9fa;
+    padding: 150px 0 0 20px;
     display: grid;
     column-gap: 10px;
     grid-template-columns: 1fr 5fr;
-
 }
 .home-navbar{
     display:grid;
@@ -254,9 +253,7 @@ form div input.focused{
 #challenges{
     width: 100%;
     display: grid;
-    box-sizing: border-box;
     padding: 20px;
-    column-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     overflow:hidden;
 }
@@ -281,6 +278,19 @@ form div input.focused{
 }
 #categories-side-panel select:hover{
     cursor: pointer;
+}
+.black-filter{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 75px 0 0 20px;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: 1fr 5fr;
+    background-color: #e4e3e356;
+}
+.filtered{
+    background-color: #e4e3e356;
 }
 .color1{
     color: rgb(106, 190, 205);
@@ -324,15 +334,31 @@ form div input.focused{
 }
 
 #triggered-challenge-container{
-    height: 600px;
+    height: 425px;
     width: 600px;
     position: absolute;
     top:150px;
     left: 25%;
     background-color: #fff;
-    z-index: 10;
+    z-index: 1;
 }
-
+#challenge-modal{  
+    position: fixed;
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(41, 41, 41, 0.4);
+    align-items: center;
+    justify-content: center;
+}
+.filtered{
+    display: flex;
+}
+.non-filtered{
+    display: none;
+}
 
 
 
