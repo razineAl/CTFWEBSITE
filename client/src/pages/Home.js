@@ -12,7 +12,7 @@ function Home(){
     const [effChallenges,setEffChallenges] = useState([]);
     const [trace_challenge,setTrace_challenge] = useState({category:'All',difficulty:'All'});
     const [visible,setVisible] = useState(false);
-    const [trigerred,setTriggered] = useState(false);
+    const [filtered,setFiltered] = useState(false);
     const [chosen,setChosen] = useState({});
 
     const individualChallenge = useRef(null);
@@ -55,6 +55,7 @@ function Home(){
     const triggerChallenge = (challenge)=>{
         setVisible(true);
         setChosen(challenge);
+        setFiltered(true);
 
 
     }
@@ -62,11 +63,11 @@ function Home(){
         
         if (individualChallenge.current && !individualChallenge.current.contains(e.target)) {
             setVisible(false);
+            setFiltered(false);
         }
     }
     return(
         <div id='home' onClick={(e)=>{handleCanceling(e)}}>
-  
             <nav className="home-navbar">
                 <div className="navbar-part">
                     <div className='navbar-section'>
@@ -81,19 +82,11 @@ function Home(){
                     <div className='navbar-section'>
                         <Link className='link'>FAQ</Link>
                     </div>
-
-                    
-                    
-                    
                 </div>
                 <div className='navbar-part'>
                     <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" >"}</Link>
                 </div>
-                
-                
             </nav>
-            
-
             <aside id='categories-side-panel'>
                 <label htmlFor='categories'>Categories</label>
                 <select name='categories' id='categories' onChange={(e)=>{filterByCategory(e)}}>
@@ -113,18 +106,6 @@ function Home(){
                     <option>5</option>
                 </select>
             </aside>
-            {visible && <div id='triggered-challenge-container' ref={individualChallenge}>
-                <div id='tr-challenge-header'>
-                    {chosen.title}
-                </div>    
-                <div id='tr-challenge-body'>
-                    <p>{chosen.body + "."} <a href={chosen.url} target='blank'>Link to the challenge</a></p>
-
-                </div>    
-                <div id='tr-challenge-footer'>
-                    {chosen.difficulty}
-                </div>    
-            </div>}
             <div id='challenges'>
             {effChallenges.map((challenge,index)=>{
                 return(
@@ -135,6 +116,20 @@ function Home(){
                     </div>
                 )
             })}
+            </div>
+
+            <div className={filtered ? 'filtered' : 'non-filtered'} id='challenge-modal'>
+            {visible && <div id='triggered-challenge-container' ref={individualChallenge}>
+                    <div id='tr-challenge-header'>
+                        {chosen.title}
+                    </div>    
+                    <div id='tr-challenge-body'>
+                        <p>{chosen.body + "."} <a href={chosen.url} target='blank'>Link to the challenge</a></p>
+                    </div>    
+                    <div id='tr-challenge-footer'>
+                        {chosen.difficulty}
+                    </div>    
+                </div>}
             </div>
         
         </div>
