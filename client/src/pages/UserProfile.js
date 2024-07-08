@@ -31,7 +31,8 @@ function UserProfile(){
         })    
 
         
-    },[])
+    },[id])
+
 
     return(
         <div id='user-profile-page'>
