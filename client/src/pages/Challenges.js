@@ -67,7 +67,7 @@ function Challenges(){
         }
     }
     return(
-        <div id='home' onClick={(e)=>{handleCanceling(e)}}>
+        <div id='challenges-page' onClick={(e)=>{handleCanceling(e)}}>
             <nav className="home-navbar">
                 <div className="navbar-part">
                     <div className='navbar-section'>
