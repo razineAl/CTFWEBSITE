@@ -166,12 +166,40 @@ form div input.focused{
         transform: translateY(0);
     }
 }
-
-
-/*                      HOME PAGEEEEEEEEEEEE                         */
-
-
+/*                     HOME PAGEEEEEEEEEEEEEEEE                 */
 #home{
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    padding: 150px 0 0 0;
+}
+#main-carousel-container{
+    height: 450px;
+    width: 100%;
+    background-image: url('./darkBg.png') ;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.typed-text{
+    font-size: 2.5em;
+    color: #fff;
+    text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.3),
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.3),
+    0 0 25px rgba(255, 255, 255, 0.3);   
+    
+}
+
+/*                      Challenges PAGEEEEEEEEEEEE                         */
+
+
+#challenges-page{
     width: 100%;
     height: 100%;
     background-color: #f8f9fa;
@@ -182,14 +210,14 @@ form div input.focused{
 }
 .home-navbar{
     display:grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 13fr 11fr;
     height: 50px;
     background-color: #fff;
     box-shadow: 0px 1px 10px #acacac;
 }
 .home-navbar>div:first-of-type{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(5,1fr);
 }
 .home-navbar div:nth-of-type(2){
     display: flex;
@@ -217,8 +245,7 @@ form div input.focused{
     background-color: #ffffffe2;
 }
 
-
-#home .challenge-container{
+#challenges-page .challenge-container{
     width: 80%;
     height: 200px;
     display: grid;
@@ -227,17 +254,17 @@ form div input.focused{
     border-radius: 5px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 2px 20px rgba(0, 0, 0, 0.1);
 }
-#home .challenge-container:hover{
+#challenges-page .challenge-container:hover{
     cursor: pointer;
 }
-#home .challenge-container div:first-child{
+#challenges-page .challenge-container div:first-child{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.1em;
 }
-#home .challenge-container div:first-child span{
+#challenges-page .challenge-container div:first-child span{
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -322,13 +349,13 @@ form div input.focused{
 .bg-color5{
     background-color: rgb(237, 44, 73);
 }
-#home .challenge-container div:nth-child(2),#home .challenge-container div:nth-child(3){
+#challenges-page .challenge-container div:nth-child(2),#challenges-page .challenge-container div:nth-child(3){
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-#home .challenge-container div:nth-child(2){
+#challenges-page .challenge-container div:nth-child(2){
     font-family: ubuntu-medium;
     font-size: 1.1em;
 }
@@ -341,6 +368,13 @@ form div input.focused{
     left: 25%;
     background-color: #fff;
     z-index: 1;
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+}
+#triggered-challenge-container #tr-challenge-header{
+
+    background-color: #ff0000;
+
 }
 #challenge-modal{  
     position: fixed;
