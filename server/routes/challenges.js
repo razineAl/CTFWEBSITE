@@ -17,6 +17,23 @@ router.get('/:id',validateToken,async(req,res)=>{
 });
 
 
+router.get('/newest/:number',async(req,res)=>{
+    const number = parseInt(req.params.number);
+
+    if (isNaN(number)) {
+        return res.status(400).json("not a number");
+    }
+    try {
+        const challenges = await Challenge.find()
+        .sort({_id:-1})
+        .limit(number);
+        res.json(challenges);
+    } catch (error) {
+        return res.status(500).json("some error occured in the server-side");
+    }   
+})
+
+
 
 router.get('/category/:category',validateToken,async(req,res)=>{
 
