@@ -3,7 +3,7 @@ import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import Rankings from './Rankings';
+import Typed from 'typed.js';
 
 
 function Home(){
@@ -36,42 +36,30 @@ function Home(){
         
     },[])
     useEffect(() => {
-        let filteredChallenges = challenges;
-        if (trace_challenge.category !== "All") {
-            filteredChallenges = filteredChallenges.filter(challenge => challenge.category === trace_challenge.category);
-        }
-        if (trace_challenge.difficulty !== "All") {
-            filteredChallenges = filteredChallenges.filter(challenge => challenge.difficulty.toString() === trace_challenge.difficulty);
-        }
-        setEffChallenges(filteredChallenges);
-    }, [challenges, trace_challenge]);
+        const options = {
+          strings: ['Welcome to Elmore CTF', 'Where all cybersecurity enthusiasts meet'],
+          typeSpeed: 30,
+          backSpeed: 15,
+          loop: true,
+        };
+    
+        const typed = new Typed('.typed-text', options);
+    
+        return () => {
+            typed.destroy();
+          };
+      }, []);
 
-    const filterByCategory = (e)=>{
-        setTrace_challenge({difficulty:trace_challenge.difficulty,category:e.target.value});
-    }
-    const filterByDifficulty = (e)=>{
-        setTrace_challenge({difficulty:e.target.value.toString(),category:trace_challenge.category});  
-    }
-    const triggerChallenge = (challenge)=>{
-        setVisible(true);
-        setChosen(challenge);
-        setFiltered(true);
-
-
-    }
-    const handleCanceling = (e)=>{
-        
-        if (individualChallenge.current && !individualChallenge.current.contains(e.target)) {
-            setVisible(false);
-            setFiltered(false);
-        }
-    }
+    
     return(
-        <div id='home' onClick={(e)=>{handleCanceling(e)}}>
+        <div id='home' onClick=''>
             <nav className="home-navbar">
                 <div className="navbar-part">
                     <div className='navbar-section'>
-                        <Link className='link' to='/home'>Challenges</Link>
+                        <Link className='link' to='/home'>Home</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link' to='/challenges'>Challenges</Link>
                     </div>
                     <div className='navbar-section'>
                         <Link className='link' to='/ranking'>Rankings</Link>
@@ -87,49 +75,8 @@ function Home(){
                     <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" >"}</Link>
                 </div>
             </nav>
-            <aside id='categories-side-panel'>
-                <label htmlFor='categories'>Categories</label>
-                <select name='categories' id='categories' onChange={(e)=>{filterByCategory(e)}}>
-                    <option>All</option>
-                    <option>Forensics</option>
-                    <option>Reverse Eng</option>
-                    <option>Binary Exp</option>
-                    <option>general</option>
-                </select>
-                <label htmlFor='difficulty'>Difficulty</label>
-                <select name='difficulty' id='difficulty' onChange={(e)=>{filterByDifficulty(e)}}>
-                    <option>All</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </aside>
-            <div id='challenges'>
-            {effChallenges.map((challenge,index)=>{
-                return(
-                    <div className='challenge-container' key={index} onClick={()=>{triggerChallenge(challenge)}}>
-                        <div className='challenge-header'><p>{challenge.category}</p><span className={`bg-color${challenge.difficulty}`}>{challenge.difficulty}</span></div>
-                        <div className={`challenge-body color${challenge.difficulty}`}>{challenge.title}</div>
-                        <div className='challenge-footer'>{challenge.points} points</div>
-                    </div>
-                )
-            })}
-            </div>
-
-            <div className={filtered ? 'filtered' : 'non-filtered'} id='challenge-modal'>
-            {visible && <div id='triggered-challenge-container' ref={individualChallenge}>
-                    <div id='tr-challenge-header'>
-                        {chosen.title}
-                    </div>    
-                    <div id='tr-challenge-body'>
-                        <p>{chosen.body + "."} <a href={chosen.url} target='blank'>Link to the challenge</a></p>
-                    </div>    
-                    <div id='tr-challenge-footer'>
-                        {chosen.difficulty}
-                    </div>    
-                </div>}
+            <div id='main-carousel-container'>
+                <span><h2 className='typed-text'></h2></span>
             </div>
         
         </div>
