@@ -20,7 +20,8 @@ const challengeSchema = new Schema({
     },
     points:{
         type:Number,
-        required:true
+        required:true,
+        min:0
     },
     url:{
         type:String,
