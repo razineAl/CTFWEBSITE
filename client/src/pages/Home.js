@@ -9,13 +9,7 @@ import Typed from 'typed.js';
 function Home(){
     const {authState,setAuthState} = useContext(AuthContext);
     const [challenges,setChallenges] = useState([]);
-    const [effChallenges,setEffChallenges] = useState([]);
-    const [trace_challenge,setTrace_challenge] = useState({category:'All',difficulty:'All'});
-    const [visible,setVisible] = useState(false);
-    const [filtered,setFiltered] = useState(false);
-    const [chosen,setChosen] = useState({});
 
-    const individualChallenge = useRef(null);
 
 
     const cookies = new Cookies();
@@ -27,32 +21,42 @@ function Home(){
         axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
         .then((res)=>{
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get('http://localhost:3001/challenge/all',{headers:{accessToken:res.data.accessToken}})
+            axios.get('http://localhost:3001/challenge/newest/3',{headers:{accessToken:res.data.accessToken}})
             .then((response)=>{
-                setChallenges(response.data);
-                setEffChallenges(response.data);   
+                console.log(response.data);
+                setChallenges(response.data);  
             })    
         })
         
     },[])
+    
     useEffect(() => {
+        
         const options = {
-          strings: ['Welcome to Elmore CTF', 'Where all cybersecurity enthusiasts meet'],
-          typeSpeed: 30,
-          backSpeed: 15,
-          loop: true,
-        };
+            strings: [
+              'Welcome to Elmore CTF',
+              'Where all the cybersecurity enthusiasts meet',
+              'Learn by solving challenges of various categories :',
+              'Both server-side and client-side web security challenges',
+              'Forensics, Binary exploitation, Reverse Engineering and much more !'
+            ],
+            typeSpeed: 40,
+            backSpeed: 25,
+            backDelay: 1000,  
+            loop: true,
+          };
     
         const typed = new Typed('.typed-text', options);
     
         return () => {
             typed.destroy();
-          };
+        };
+        
       }, []);
 
     
     return(
-        <div id='home' onClick=''>
+        <div id='home'>
             <nav className="home-navbar">
                 <div className="navbar-part">
                     <div className='navbar-section'>
@@ -75,8 +79,16 @@ function Home(){
                     <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" >"}</Link>
                 </div>
             </nav>
-            <div id='main-carousel-container'>
+            <div id='main-typing-container'>
                 <span><h2 className='typed-text'></h2></span>
+            </div>
+            <div id='home-main-content'>
+                {challenges.map((challenge,index)=>{
+                    return(
+                        <div key={index} className='new-challenge'>{challenge.title}</div>
+                    )
+                    
+                })}
             </div>
         
         </div>
