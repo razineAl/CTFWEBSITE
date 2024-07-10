@@ -58,7 +58,7 @@ function Home(){
 
        
     const settings = {
-        dots: true,
+        dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 3,
@@ -103,7 +103,8 @@ function Home(){
                     </Slider>
                   
             </div>
- 
+            
+
         
         </div>
     );
