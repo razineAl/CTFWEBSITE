@@ -4,12 +4,15 @@ import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import Typed from 'typed.js';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 
 
 function Home(){
     const {authState,setAuthState} = useContext(AuthContext);
-    const [challenges,setChallenges] = useState([]);
-
+    const [newChallenges,setNewChallenges] = useState([]);
 
 
     const cookies = new Cookies();
@@ -21,10 +24,9 @@ function Home(){
         axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
         .then((res)=>{
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get('http://localhost:3001/challenge/newest/3',{headers:{accessToken:res.data.accessToken}})
+            axios.get('http://localhost:3001/challenge/newest/6',{headers:{accessToken:res.data.accessToken}})
             .then((response)=>{
-                console.log(response.data);
-                setChallenges(response.data);  
+                setNewChallenges(response.data); 
             })    
         })
         
@@ -36,9 +38,9 @@ function Home(){
             strings: [
               'Welcome to Elmore CTF',
               'Where all the cybersecurity enthusiasts meet',
-              'Learn by solving challenges of various categories :',
+              'Learn by solving challenges of various categories',
               'Both server-side and client-side web security challenges',
-              'Forensics, Binary exploitation, Reverse Engineering and much more !'
+              'Forensics, Cryptography, Reverse Engineering and much more !'
             ],
             typeSpeed: 40,
             backSpeed: 25,
@@ -52,8 +54,16 @@ function Home(){
             typed.destroy();
         };
         
-      }, []);
+    }, []);
 
+       
+    const settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 3
+    };
     
     return(
         <div id='home'>
@@ -82,14 +92,18 @@ function Home(){
             <div id='main-typing-container'>
                 <span><h2 className='typed-text'></h2></span>
             </div>
-            <div id='home-main-content'>
-                {challenges.map((challenge,index)=>{
-                    return(
-                        <div key={index} className='new-challenge'>{challenge.title}</div>
-                    )
-                    
-                })}
+            <div id='home-main-content' className='slider-container'>
+                    <Slider {...settings} className='slider'>
+                        {newChallenges.map((challenge,index)=>{
+                            return(
+                                <div key={index} className='new-challenge'>{challenge.title}</div>
+                            )
+
+                        })}
+                    </Slider>
+                  
             </div>
+ 
         
         </div>
     );
