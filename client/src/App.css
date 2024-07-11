@@ -182,6 +182,8 @@ form div input.focused{
     justify-content: center;
 }
 .typed-text{
+
+    text-align: center;
     font-size: 2.5em;
     color: #fff;
     text-shadow: 
@@ -195,17 +197,23 @@ form div input.focused{
 #home-main-content{
     width: 100%;
     height: 100%;
-    margin-top: 10px;
+    background-color: #f8f9fa;
+    margin-top: 30px;
     
 }
 .slider{
-    width: 95%;
+    width: 92%;
     margin: auto;
 }
 .new-challenge{
     background-color: #d1242f;
-    height: 240px;
+    height: 180px;
+    
 }
+.slick-slide > div{
+    margin: 0 15px;
+}
+
 /*                      Challenges PAGEEEEEEEEEEEE                         */
 
 
