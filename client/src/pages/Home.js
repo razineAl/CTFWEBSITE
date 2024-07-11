@@ -1,4 +1,6 @@
 import {useContext, useEffect, useState, useCallback, useRef} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faUser} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ArrowRight from '../components/ArrowRight';
 import ArrowLeft from '../components/ArrowLeft';
+import DifficultySpan from '../components/DifficultySpan';
 
 
 
@@ -91,17 +94,28 @@ function Home(){
                     </div>
                 </div>
                 <div className='navbar-part'>
-                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" >"}</Link>
+                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" "}<FontAwesomeIcon icon={faUser} /></Link>
                 </div>
             </nav>
             <div id='main-typing-container'>
                 <span><h2 className='typed-text'></h2></span>
             </div>
             <div id='home-main-content' className='slider-container'>
-                    <Slider {...settings} className='slider'>
+                    <Slider {...settings}>
                         {newChallenges.map((challenge,index)=>{
                             return(
-                                <div key={index} className='new-challenge'>{challenge.title}</div>
+                                <div key={index} className='new-challenge'>
+                                    <div className='new-challenge-content'>
+                                        <div className='new-challenge-first-half'>
+                                            {challenge.title}
+                                        </div>
+                                        <div className='new-challenge-second-half'>
+                                            <div className={`new-challenge-category color${challenge.difficulty}`}>{challenge.category}</div>
+                                            <div className='new-challenge-difficulty'><DifficultySpan></DifficultySpan></div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
                             )
 
                         })}
