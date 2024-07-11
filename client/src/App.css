@@ -198,21 +198,57 @@ form div input.focused{
     width: 100%;
     height: 100%;
     background-color: #f8f9fa;
-    margin-top: 30px;
+    margin-top: 15px;
+    padding-top: 15px;
+    
     
 }
-.slider{
+.slick-slider{
     width: 92%;
     margin: auto;
 }
-.new-challenge{
-    background-color: #d1242f;
-    height: 180px;
-    
+.slick-list{
+    padding: 30px 0 !important;
 }
 .slick-slide > div{
-    margin: 0 15px;
+    margin: 0 20px;
+    
 }
+.new-challenge{
+    background-color: #fff;
+    box-shadow:  0 2px 20px 2px rgba(0, 0, 0, 0.1);
+    height: 180px;   
+}
+.new-challenge:hover{
+    cursor: pointer;
+    box-shadow:  0 6px 20px 6px rgba(0, 0, 0, 0.1); 
+}
+.new-challenge-content{
+    width: 100%;
+    height: 100%;
+    padding: 15px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.new-challenge-first-half{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    border-right: solid 1px #e0e2e4;
+}
+.new-challenge-second-half{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    font-size: 1.3em;
+
+}
+
+
+
+
 
 /*                      Challenges PAGEEEEEEEEEEEE                         */
 
@@ -240,6 +276,7 @@ form div input.focused{
     grid-template-columns: 13fr 11fr;
     height: 50px;
     background-color: #fff;
+    z-index: 10;
 }
 .home-navbar>div:first-of-type{
     display: grid;
@@ -350,6 +387,7 @@ form div input.focused{
 }
 .color2{
     color: rgb(170, 215, 66);
+    text-shadow:1px 0.5px 0px rgb(188, 237, 74) ;
 }
 .color3{
     color: rgb(241, 182, 4);
@@ -359,6 +397,7 @@ form div input.focused{
 }
 .color5{
     color: rgb(237, 44, 73);
+    text-shadow:1px 0.5px 0px rgb(209, 39, 64) ;
 }
 .bg-color1{
     background-color: rgb(106, 190, 205);
