@@ -7,6 +7,8 @@ import Typed from 'typed.js';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import ArrowRight from '../components/ArrowRight';
+import ArrowLeft from '../components/ArrowLeft';
 
 
 
@@ -60,9 +62,12 @@ function Home(){
     const settings = {
         dots: false,
         infinite: false,
-        speed: 500,
+        speed: 650,
         slidesToShow: 3,
-        slidesToScroll: 3
+        slidesToScroll: 2,
+        nextArrow:<ArrowRight/>,
+        prevArrow:<ArrowLeft/>
+
     };
     
     return(
