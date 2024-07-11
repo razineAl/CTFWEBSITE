@@ -246,7 +246,53 @@ form div input.focused{
 
 }
 
-
+.difficulty-container{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    align-items: end;
+    height: 1.5rem;
+    width: 20px;
+}
+.difficulty-1{
+    background-color: #fff;
+    border: solid 1px rgb(106, 190, 205);
+    height: 0.3rem;
+}
+.difficulty-2{
+    background-color: #fff;
+    border: solid 1px rgb(170, 215, 66);
+    height: 0.5rem;
+}
+.difficulty-3{
+    background-color: #fff;
+    border: solid 1px rgb(241, 182, 4);
+    height: 0.7rem;
+}
+.difficulty-4{
+    background-color: #fff;
+    border: solid 1px rgb(244, 137, 37);
+    height: 0.85rem;
+}
+.difficulty-5{
+    background-color: #fff;
+    border: solid 1px rgb(237, 44, 73);
+    height: 1rem;
+}
+.difficulty-1.active{
+    background-color: rgb(106, 190, 205);
+}
+.difficulty-2.active{
+    background-color: rgb(170, 215, 66);
+}
+.difficulty-3.active{
+    background-color: rgb(241, 182, 4);
+}
+.difficulty-4.active{
+    background-color: rgb(244, 137, 37);
+}
+.difficulty-5.active{
+    background-color: rgb(237, 44, 73);
+}
 
 
 
