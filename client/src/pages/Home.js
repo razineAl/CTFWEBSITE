@@ -19,6 +19,8 @@ function Home(){
     const {authState,setAuthState} = useContext(AuthContext);
     const [newChallenges,setNewChallenges] = useState([]);
 
+    
+
 
     const cookies = new Cookies();
     
@@ -72,6 +74,22 @@ function Home(){
         prevArrow:<ArrowLeft/>
 
     };
+    const getTime = (time) => {
+
+        let creationTime = new Date(time).getTime();
+        let actualTime = new Date().getTime();
+        let result = actualTime - creationTime;
+
+        const seconds = Math.floor(result / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+
+        if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
+        if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+        if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+        return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+    }
     
     return(
         <div id='home'>
@@ -111,7 +129,8 @@ function Home(){
                                         </div>
                                         <div className='new-challenge-second-half'>
                                             <div className={`new-challenge-category color${challenge.difficulty}`}>{challenge.category}</div>
-                                            <div className='new-challenge-difficulty'><DifficultySpan></DifficultySpan></div>
+                                            <div className={`new-challenge-creation-text`}>created { getTime(challenge.creationDate)}</div>
+                                            <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                                         </div>
                                     </div>
                                     
