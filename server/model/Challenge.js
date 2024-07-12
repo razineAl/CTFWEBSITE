@@ -40,6 +40,11 @@ const challengeSchema = new Schema({
     flag:{
         type:String,
         required:true
+    },
+    solves:{
+        type:Number,
+        min:0,
+        default:0
     }
 });
 
