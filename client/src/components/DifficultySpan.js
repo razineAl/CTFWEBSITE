@@ -1,13 +1,13 @@
-function DifficultySpan() {
-
+function DifficultySpan(props) {
+    const {difficulty} = props;
   return (
 
             <div className="difficulty-container">
-                <span className={`difficulty-1`}></span>
-                <span className={`difficulty-2`}></span>
-                <span className={`difficulty-3`}></span>
-                <span className={`difficulty-4`}></span>
-                <span className={`difficulty-5`}></span>
+                {[...Array(5)].map((el,index)=>{
+                    return(
+                        <span key={index} className={`difficulty-${index+1} ${index < difficulty ? 'active' : ''}`}></span>
+                    )
+                })}
             </div>
   );
 }
