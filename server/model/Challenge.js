@@ -12,21 +12,31 @@ const challengeSchema = new Schema({
     },
     category:{
         type:String,
+        default:"Web Exploitation",
         required:true
     },
     difficulty:{
         type:Number,
-        required:true
+        required:true,
+        default:1,
+        min:1,
+        max:5
     },
     points:{
         type:Number,
         required:true,
-        min:0
+        min:0,
+        default:10
     },
     url:{
         type:String,
         required:true
     },
+    creationDate:{
+        type:Date,
+        required:true
+    }
+    ,
     flag:{
         type:String,
         required:true
