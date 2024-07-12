@@ -119,6 +119,7 @@ function Home(){
                 <span><h2 className='typed-text'></h2></span>
             </div>
             <div id='home-main-content' className='slider-container'>
+                    <h2 className='new-challenge-heading'>Our latest challenges</h2>
                     <Slider {...settings}>
                         {newChallenges.map((challenge,index)=>{
                             return(
