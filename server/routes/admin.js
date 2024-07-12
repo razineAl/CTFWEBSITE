@@ -6,7 +6,8 @@ const validateToken = require('../middlewares/authMiddleware');
 const {validateRole} = require('../middlewares/roleMiddleware');
 
 router.post('/createChallenge',validateToken,validateRole('admin'),async (req,res)=>{ 
-    const challenge = await Challenge.create(req.body);
+    const date = new Date();
+    const challenge = await Challenge.create({...req.body,creationDate:date});
     res.json('success');
 });
 router.put('/updateChallenge',validateToken,validateRole('admin'),async (req,res)=>{ 
