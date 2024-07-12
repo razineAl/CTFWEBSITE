@@ -229,6 +229,14 @@ form div input.focused{
     padding: 15px 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    position: relative;
+}
+.new-challenge-heading{
+    margin: 0;
+    background: linear-gradient(to right, #000046, #1cb5e0);
+    background-clip: text;
+    color: transparent;
+    padding-left: 5%;
 }
 .new-challenge-first-half{
     display: flex;
@@ -245,6 +253,10 @@ form div input.focused{
     font-size: 1.3em;
 
 }
+.new-challenge-creation-text{
+    color: #888c8fe6;
+    font-size: .65em;
+}
 
 .difficulty-container{
     display: grid;
@@ -252,46 +264,53 @@ form div input.focused{
     align-items: end;
     height: 1.5rem;
     width: 20px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
 }
 .difficulty-1{
     background-color: #fff;
-    border: solid 1px rgb(106, 190, 205);
+    border: solid 1px rgb(170, 215, 66);
     height: 0.3rem;
 }
 .difficulty-2{
     background-color: #fff;
-    border: solid 1px rgb(170, 215, 66);
+    border: solid 1px rgb(241, 182, 4);
     height: 0.5rem;
 }
 .difficulty-3{
     background-color: #fff;
-    border: solid 1px rgb(241, 182, 4);
+    border: solid 1px rgb(244, 137, 37);
     height: 0.7rem;
 }
 .difficulty-4{
     background-color: #fff;
-    border: solid 1px rgb(244, 137, 37);
+    border: solid 1px rgb(237, 44, 73);
     height: 0.85rem;
 }
 .difficulty-5{
     background-color: #fff;
-    border: solid 1px rgb(237, 44, 73);
+    border: solid 1px rgb(0, 0, 0);
     height: 1rem;
 }
 .difficulty-1.active{
-    background-color: rgb(106, 190, 205);
-}
-.difficulty-2.active{
     background-color: rgb(170, 215, 66);
 }
-.difficulty-3.active{
+.difficulty-2.active{
+    
     background-color: rgb(241, 182, 4);
 }
-.difficulty-4.active{
+.difficulty-3.active{
+    
     background-color: rgb(244, 137, 37);
 }
-.difficulty-5.active{
+.difficulty-4.active{
+    
     background-color: rgb(237, 44, 73);
+}
+.difficulty-5.active{
+    
+    background-color: rgb(0, 0, 0);
 }
 
 
@@ -302,12 +321,12 @@ form div input.focused{
 #challenges-main-page{
     
     width: 100%;
-    height: 100%;
+    min-width:fit-content;
     background-color: #f8f9fa;
 }
 #challenges-page{
     width: 100%;
-    height: 100%;
+    min-height: fit-content;
     background-color: #f8f9fa;
     padding: 0;
     display: grid;
@@ -428,19 +447,27 @@ form div input.focused{
 .filtered{
     background-color: #e4e3e356;
 }
-.color1{
+.color1 {
     color: rgb(106, 190, 205);
-}
-.color2{
+    text-shadow:
+      1px 1px 0 rgb(86, 150, 165),  /* Main shadow with no blur */
+      -1px -1px 0 rgb(126, 210, 225);  /* Lighter shadow with no blur for depth */
+  }
+.color2 {
     color: rgb(170, 215, 66);
-    text-shadow:1px 0.5px 0px rgb(188, 237, 74) ;
-}
+    text-shadow:
+      1px 1px 0 rgb(140, 180, 56), /* Main shadow with no blur */
+      -1px -1px 0 rgb(200, 245, 80); /* Lighter shadow with no blur for depth */
+  }
 .color3{
     color: rgb(241, 182, 4);
 }
-.color4{
+.color4 {
     color: rgb(244, 137, 37);
-}
+    text-shadow:
+      1px 1px 0 rgb(224, 117, 17), /* Main shadow with no blur */
+      -1px -1px 0 rgb(264, 157, 57); /* Lighter shadow with no blur for depth */
+  }
 .color5{
     color: rgb(237, 44, 73);
     text-shadow:1px 0.5px 0px rgb(209, 39, 64) ;
