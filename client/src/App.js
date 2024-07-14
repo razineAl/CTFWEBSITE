@@ -1,5 +1,6 @@
 import Login from "./pages/Login";
 import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from 'react-router-dom';
+import 'normalize.css'
 import './App.css'
 import Home from "./pages/Home";
 import AuthContext from "./helpers/AuthContext";
