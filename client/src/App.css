@@ -17,7 +17,7 @@ button:hover{
     cursor: pointer;
 }
 div.App{   
-    height: 100vh;
+    height: 100%;
     width: 100%;
     margin: 0;
     display: flex;
@@ -25,7 +25,7 @@ div.App{
     justify-content: space-around;
 }
 body{
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     margin: 0;
     position: relative;
@@ -79,7 +79,7 @@ nav img{
     color: hsl(213, 96%, 18%);
     cursor: pointer;
 }
-/*                                               */
+/*                          Logiin                     */
 form{
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
@@ -116,6 +116,9 @@ form div label{
     color: hsl(231, 6%, 59%);
     font-size: .85em;
     transition: top 0.3s,font-size 0.3s;
+}
+form div label:hover{
+    cursor:text;
 }
 form div label.focused{
     top: -15px;
@@ -318,21 +321,7 @@ form div input.focused{
 /*                      Challenges PAGEEEEEEEEEEEE                         */
 
 
-#challenges-main-page{
-    
-    width: 100%;
-    min-width:fit-content;
-    background-color: #f8f9fa;
-}
-#challenges-page{
-    width: 100%;
-    min-height: fit-content;
-    background-color: #f8f9fa;
-    padding: 0;
-    display: grid;
-    column-gap: 10px;
-    grid-template-columns: 1fr 5fr;
-}
+
 .home-navbar{
     position: -webkit-sticky;
     position: sticky;
@@ -372,27 +361,38 @@ form div input.focused{
     border-bottom: solid 2px #004E64;
     background-color: #ffffffe2;
 }
+#challenges-main-page{
+    height: auto;
+    width: 100%;
+    background-color: #f8f9fa;
+}
 
-#challenges-page .challenge-container{
-    width: 80%;
-    height: 200px;
+#challenges{
+    display: grid;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.challenge-container{
+    width: 100%;
+    height: 100px;
+    margin: auto;
     display: grid;
     grid-template-rows: 1fr 1fr 1fr;
     background-color: #fff;
-    border-radius: 5px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 2px 20px rgba(0, 0, 0, 0.1);
 }
-#challenges-page .challenge-container:hover{
+.challenge-container:hover{
     cursor: pointer;
 }
-#challenges-page .challenge-container div:first-child{
+.challenge-container div:first-child{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.1em;
 }
-#challenges-page .challenge-container div:first-child span{
+.challenge-container div:first-child span{
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -405,35 +405,8 @@ form div input.focused{
     top: 15px;
     right: 15px;
 }
-#challenges{
-    width: 100%;
-    display: grid;
-    padding: 20px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    overflow:hidden;
-}
-#categories-side-panel{
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    padding: 20px 5px 20px 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 2px 20px rgba(0, 0, 0, 0.1);
-    height: 450px;
-}
-#categories{
-    font-size: .9em;
-    color: #004E64;
-}
-#categories-side-panel select{
-    height: 30px;
-    color: #004E64;
-    font-size: 1.2em;
-    border: solid 1px #004E64;
-    border-radius: 5px;
-}
-#categories-side-panel select:hover{
-    cursor: pointer;
-}
+
+
 .black-filter{
     width: 100%;
     height: 100%;
