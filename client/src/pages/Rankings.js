@@ -36,7 +36,10 @@ function Rankings(){
             <nav className="home-navbar">
                 <div className="navbar-part">
                     <div className='navbar-section'>
-                        <Link className='link' to='/home'>Challenges</Link>
+                        <Link className='link' to='/home'>Home</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link' to='/challenges'>Challenges</Link>
                     </div>
                     <div className='navbar-section'>
                         <Link className='link' to='/ranking'>Rankings</Link>
@@ -47,16 +50,10 @@ function Rankings(){
                     <div className='navbar-section'>
                         <Link className='link'>FAQ</Link>
                     </div>
-
-                    
-                    
-                    
                 </div>
                 <div className='navbar-part'>
-                    <Link className='link' to={`../../profile/${authState.id}`}>{authState.username+" >"}</Link>
+                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" >"}</Link>
                 </div>
-                
-                
             </nav>
             <div id='ranking-tab'>
                 <div className='top-player-section top-player-section-title'>
