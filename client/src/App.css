@@ -30,6 +30,9 @@ body{
     margin: 0;
     position: relative;
 }
+#root:has(#pwd) {
+    height: 100vh;
+}
 *{
     font-family: ubuntu-regular,Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -267,10 +270,16 @@ form div input.focused{
     align-items: end;
     height: 1.5rem;
     width: 20px;
+}
+#home .difficulty-container{
     position: absolute;
     bottom: 15px;
     right: 15px;
 }
+#challenges .difficulty-container{
+    margin: auto;
+}
+
 .difficulty-1{
     background-color: #fff;
     border: solid 1px rgb(170, 215, 66);
@@ -331,6 +340,7 @@ form div input.focused{
     height: 50px;
     background-color: #fff;
     z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 .home-navbar>div:first-of-type{
     display: grid;
@@ -364,23 +374,84 @@ form div input.focused{
 #challenges-main-page{
     height: auto;
     width: 100%;
-    background-color: #f8f9fa;
+    
+    background-image: url('./fondBleu.jpg') ;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+
+}
+#challenge-page-welcome{
+    width: 95%;
+    margin: 25px auto 0 auto;
+    background-color: hsla(0, 0%, 100%, 0.304);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+#challenge-page-welcome h1{
+    background: linear-gradient(to right, #000046, #1cb5e0);
+    color: transparent;
+    background-clip: text;
+}
+#challenge-page-welcome p{
+    color: #fff;
 }
 
 #challenges{
-    display: grid;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    width: 100%;
+    width: 95%;
+    margin: 25px auto 0 auto;
+    padding: 0 20px;
+    background-color: #fff;
+}
+.category{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.category:not(:first-of-type){
+    border-top: solid 1px #dddedf;
+}
+
+.category:not(:first-of-type):hover{
+    cursor: pointer;
+}
+.category-title{
+    padding-left: 10px;
+}
+.category-title > h2{
+    font-size: 1.35em;
+    font-family: ubuntu-medium;
+    font-weight: normal;
+}
+.category-title > h3{
+    font-size: 1.15em;
+    font-family: ubuntu-regular;
+    font-weight: normal;
+}
+.category-challenges{
+    margin-bottom: 30px;
 }
 
 .challenge-container{
     width: 100%;
-    height: 100px;
+    height: 50px;
     margin: auto;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(5,1fr);
+    align-items: center;
     background-color: #fff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15), 0 2px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+.odd{
+    background-color: #f1f1f3;
+}
+.even{
+    background-color: #fff;
 }
 .challenge-container:hover{
     cursor: pointer;
@@ -392,19 +463,7 @@ form div input.focused{
     align-items: center;
     font-size: 1.1em;
 }
-.challenge-container div:first-child span{
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: ubuntu-medium;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-}
+
 
 
 .black-filter{
