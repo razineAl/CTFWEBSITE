@@ -9,6 +9,7 @@ import Rankings from "./pages/Rankings";
 import Admin from "./pages/Admin";
 import UserProfile from "./pages/UserProfile";
 import Challenges from "./pages/Challenges";
+import ChallengePage from "./pages/ChallengePage";
 
 function App() {
   const [authState,setAuthState] = useState({username:'',status:false,accessToken:'',id:'',role:'user'});
@@ -24,6 +25,7 @@ function App() {
             <Route path="/ranking" exact Component={Rankings}></Route>
             <Route path="/admin-panel" exact Component={Admin}></Route>
             <Route path="/profile/:id" exact Component={UserProfile}></Route>
+            <Route path="/challenge/:id" exact Component={ChallengePage}></Route>
             
 
           </Routes>
