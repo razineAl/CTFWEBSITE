@@ -374,31 +374,39 @@ form div input.focused{
 #challenges-main-page{
     height: auto;
     width: 100%;
-    
-    background-image: url('./fondBleu.jpg') ;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #EDECEC;
     
 
 }
 #challenge-page-welcome{
     width: 95%;
     margin: 25px auto 0 auto;
-    background-color: hsla(0, 0%, 100%, 0.304);
-    backdrop-filter: blur(10px);
+    background-color: hsl(0, 0%, 100%);
     padding: 10px 20px;
     box-sizing: border-box;
+    transition: box-shadow 0.5s;
+}
+#challenge-page-welcome:hover{
+    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1),
+    -7px -7px 15px #fff;
+}
+.bold{
+    font-family: ubuntu-medium;
+    font-size: 1.1em;
+    
 }
 #challenge-page-welcome h1{
-    background: linear-gradient(to right, #000046, #1cb5e0);
+    background: linear-gradient(to right, #00001a, #1cb5e0);
     color: transparent;
     background-clip: text;
 }
 #challenge-page-welcome p{
-    color: #fff;
+    color: #000000;
 }
-
+.lien{
+    text-decoration: none;
+    
+}
 #challenges{
     display: flex;
     flex-direction: column;
@@ -451,7 +459,7 @@ form div input.focused{
     background-color: #f1f1f3;
 }
 .even{
-    background-color: #fff;
+    background-color: #ffffff;
 }
 .challenge-container:hover{
     cursor: pointer;
@@ -534,8 +542,9 @@ form div input.focused{
     height: 425px;
     width: 600px;
     position: absolute;
-    top:150px;
-    left: 25%;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     background-color: #fff;
     z-index: 1;
     display: grid;
