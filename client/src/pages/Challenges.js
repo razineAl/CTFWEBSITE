@@ -86,7 +86,7 @@ function Challenges(){
                     </div>
                 </div>
                 <div className='navbar-part'>
-                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" >"}</Link>
+                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username}</Link>
                 </div>
             </nav>
 
@@ -94,7 +94,7 @@ function Challenges(){
                 <h1>Solving Challenges in Elmore CTF</h1>
                 <p>Choose the category you want to solve challenges in.</p>
                 <p>Pick a challenge.</p>
-                <p>Solve the challenge by submitting the flag in the dedicated area.<Link to=''>What's a flag ?</Link></p>
+                <p>Solve the challenge by submitting the flag in the dedicated area.<Link to='' className='lien'>What's a flag ?</Link></p>
             </div>
                 
             <div id='challenges'>
@@ -103,13 +103,13 @@ function Challenges(){
                     
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setGeneral(!general)}}><h3>General</h3></div>
+                    <div className='category-title' onClick={()=>{setGeneral(!general)}}><h3>General<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "general"}).length})`}</span></h3></div>
                     <div className={general ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "general"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container even` : `challenge-container odd` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
-                            <div className=''><p>{challenge.category}</p></div>
-                            <div className={`color${challenge.difficulty}`}>{challenge.title}</div>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
+                            <div className={``}>{challenge.title}</div>
+                            <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
@@ -120,13 +120,13 @@ function Challenges(){
                     </div>
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setWeb(!web)}}><h3>Web</h3></div>
+                    <div className='category-title' onClick={()=>{setWeb(!web)}}><h3>Web<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "web exploitation"}).length})`}</span> </h3></div>
                     <div className={web ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "web exploitation"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container even` : `challenge-container odd` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
-                            <div className=''><p>{challenge.category}</p></div>
-                            <div className={`color${challenge.difficulty}`}>{challenge.title}</div>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                            <div className={``}>{challenge.title}</div>
+                            <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
@@ -137,13 +137,13 @@ function Challenges(){
                     </div>
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setCracking(!cracking)}}><h3>Cracking</h3></div>
+                    <div className='category-title' onClick={()=>{setCracking(!cracking)}}><h3>Cracking <span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "Cracking"}).length})`}</span></h3></div>
                     <div className={cracking ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "Cracking"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container even` : `challenge-container odd` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
-                            <div className=''><p>{challenge.category}</p></div>
-                            <div className={`color${challenge.difficulty}`}>{challenge.title}</div>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                            <div className={``}>{challenge.title}</div>
+                            <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
@@ -154,30 +154,30 @@ function Challenges(){
                     </div>
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setReverse(!reverse)}}><h3>Reverse Engineering</h3></div>
+                    <div className='category-title' onClick={()=>{setReverse(!reverse)}}><h3>Reverse Engineering<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "Reverse Eng"}).length})`}</span></h3></div>
                     <div className={reverse ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "Reverse Eng"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container even` : `challenge-container odd` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
-                            <div className=''><p>{challenge.category}</p></div>
-                            <div className={`color${challenge.difficulty}`}>{challenge.title}</div>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                            <div className={``}>{challenge.title}</div>
+                            <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
                             
                         </div>
                     )
-                    })}
+                    })} 
                     </div>
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setForensics(!forensics)}}><h3>Forensics</h3></div>
+                    <div className='category-title' onClick={()=>{setForensics(!forensics)}}><h3>Forensics<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "forensics"}).length})`}</span></h3></div>
                     <div className={forensics ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "forensics"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container even` : `challenge-container odd` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
-                            <div className=''><p>{challenge.category}</p></div>
-                            <div className={`color${challenge.difficulty}`}>{challenge.title}</div>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                            <div className={``}>{challenge.title}</div>
+                            <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
