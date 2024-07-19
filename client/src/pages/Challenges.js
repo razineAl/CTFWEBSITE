@@ -107,7 +107,7 @@ function Challenges(){
                     <div className={general ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "general"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -124,7 +124,7 @@ function Challenges(){
                     <div className={web ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "web exploitation"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -141,7 +141,7 @@ function Challenges(){
                     <div className={cracking ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "Cracking"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -158,7 +158,7 @@ function Challenges(){
                     <div className={reverse ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "Reverse Eng"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -175,7 +175,7 @@ function Challenges(){
                     <div className={forensics ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "forensics"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{triggerChallenge(challenge)}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
