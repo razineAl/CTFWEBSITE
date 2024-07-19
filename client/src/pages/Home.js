@@ -12,15 +12,25 @@ import "slick-carousel/slick/slick-theme.css";
 import ArrowRight from '../components/ArrowRight';
 import ArrowLeft from '../components/ArrowLeft';
 import DifficultySpan from '../components/DifficultySpan';
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 
 
 function Home(){
     const {authState,setAuthState} = useContext(AuthContext);
+    const [loading,setLoading] = useState(true);
     const [newChallenges,setNewChallenges] = useState([]);
 
-    
+    const typedRef = useRef(null);
 
+    
+    const override = {
+        display: "block",
+        position:"absolute",
+        top:"50%",
+        left:"50%",
+        transform:"translate(-50%,-50%)"
+    };
 
     const cookies = new Cookies();
     
@@ -34,33 +44,36 @@ function Home(){
             axios.get('http://localhost:3001/challenge/newest/6',{headers:{accessToken:res.data.accessToken}})
             .then((response)=>{
                 setNewChallenges(response.data); 
+                setLoading(false);
             })    
         })
         
     },[])
     
     useEffect(() => {
-        
-        const options = {
-            strings: [
-              'Welcome to Elmore CTF',
-              'Where all the cybersecurity enthusiasts meet',
-              'Learn by solving challenges of various categories',
-              'Both server-side and client-side web security challenges',
-              'Forensics, Cryptography, Reverse Engineering and much more !'
-            ],
-            typeSpeed: 40,
-            backSpeed: 25,
-            backDelay: 1000,  
-            loop: true,
-          };
+
+        if (typedRef.current) {
+            const options = {
+                strings: [
+                  'Welcome to Elmore CTF',
+                  'Where all the cybersecurity enthusiasts meet',
+                  'Learn by solving challenges of various categories',
+                  'Both server-side and client-side web security challenges',
+                  'Forensics, Cryptography, Reverse Engineering and much more !'
+                ],
+                typeSpeed: 40,
+                backSpeed: 25,
+                backDelay: 1000,  
+                loop: true,
+              };
+              const typed = new Typed(typedRef.current, options);
     
-        const typed = new Typed('.typed-text', options);
-    
-        return () => {
-            typed.destroy();
-        };
-        
+              return () => {
+                  typed.destroy();
+              };
+        }
+
+              
     }, []);
 
        
@@ -92,8 +105,25 @@ function Home(){
     }
     
     return(
+        
+        
         <div id='home'>
-            <nav className="home-navbar">
+            {
+            loading ?
+            (
+                <ScaleLoader
+                    color="#000"
+                    loading={loading}
+                    cssOverride={override}
+                    size={50}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            )
+            :
+            (
+                <>
+                <nav className="home-navbar">
                 <div className="navbar-part">
                     <div className='navbar-section'>
                         <Link className='link' to='/home'>Home</Link>
@@ -116,7 +146,7 @@ function Home(){
                 </div>
             </nav>
             <div id='main-typing-container'>
-                <span><h2 className='typed-text'></h2></span>
+                <span><h2 className='typed-text' ref={typedRef}></h2></span>
             </div>
             <div id='home-main-content' className='slider-container'>
                     <h2 className='new-challenge-heading'>Our latest challenges</h2>
@@ -142,10 +172,13 @@ function Home(){
                     </Slider>
                   
             </div>
+                </>
+            )
             
 
-        
+            }
         </div>
+
     );
 }
 
