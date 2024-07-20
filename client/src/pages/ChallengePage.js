@@ -42,6 +42,15 @@ function ChallengePage() {
             console.log(error);
         })
     },[])
+    const submitFlag = ()=>{
+        axios.put(`http://localhost:3001/challenge/submit/${id}/${authState.id}`,{headers:{accessToken:authState.accessToken}})
+        .then((res)=>{
+            const response = res.data;
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
   return (
     <div id='main-challenge-page'>
       {
@@ -100,7 +109,7 @@ function ChallengePage() {
                         <h2>Flag Submission</h2>
                         <div id='challenge-submission-form'>
                             <input type='text'></input>
-                            <button type='submit'>Submit Flag</button>
+                            <button type='submit' onClick={submitFlag}>Submit Flag</button>
                         </div>
                         
                     </aside>
