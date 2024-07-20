@@ -2,6 +2,7 @@ const express = require('express');
 const Challenge = require('../model/Challenge');
 const router = express.Router();
 const validateToken = require('../middlewares/authMiddleware');
+const User = require('../model/User');
 
 router.get('/all',validateToken,async(req,res)=>{
     const challenges = await Challenge.find();
@@ -53,14 +54,30 @@ router.get('/difficulty/:difficulty',validateToken,async(req,res)=>{
     res.json(challenges);
 });
 
-router.post('/submit/:id',validateToken,async (req,res)=>{
-    const flag = req.body;
+router.put('/submit/:challengeId/:userId',async (req,res)=>{
+    const {flag} = req.body;
+    if(!req.params.challengeId) return res.sendStatus(400);
+    if(!req.params.userId) return res.sendStatus(400);
 
-    const challenge = Challenge.findById(req.params.id);
 
-    if (challenge.flag === flag) return res.send('well done !');
+    const challenge = await Challenge.findById(req.params.challengeId);
+
+    if (!challenge) return res.json('no such challenge');
+
+    if (challenge.flag !== flag) return res.json({err:"the flag isn't correct !"}); 
+
+    const currentUser = await User.findById(req.params.userId);
+
+    if (challenge.solves.includes(currentUser._id) || currentUser.challenges.includes(challenge._id)) return res.json("challenge already solved"); 
     
-    else return res.json({err:'wrong answer !'});
+    
+    challenge.solves = [...challenge.solves,currentUser._id];
+    const newChallenge = await challenge.save();
+    currentUser.points += challenge.points;
+    currentUser.challenges = [...currentUser.challenges,req.params.challengeId];  
+    await currentUser.save();
+    return res.json("successful");
+
 });
 
 
