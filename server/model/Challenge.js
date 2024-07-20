@@ -42,9 +42,8 @@ const challengeSchema = new Schema({
         required:true
     },
     solves:{
-        type:Number,
-        min:0,
-        default:0
+        type:[mongoose.Schema.Types.ObjectId],
+        default:[]
     }
 });
 

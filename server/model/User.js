@@ -23,7 +23,7 @@ const userSchema = new Schema({
         required:true
     },
     challenges:{
-        type:[String],
+        type:[mongoose.Schema.Types.ObjectId],
         default:[]
     },
     refreshToken : String
