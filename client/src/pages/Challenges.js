@@ -4,6 +4,7 @@ import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import DifficultySpan from '../components/DifficultySpan';
+import BarLoader from 'react-spinners/BarLoader';
 
 
 function Challenges(){
@@ -19,6 +20,7 @@ function Challenges(){
     const [reverse,setReverse] = useState(false);
     const [cracking,setCracking] = useState(false);
     const [forensics,setForensics] = useState(false);
+    const [loading,setLoading] = useState(true);
 
     const individualChallenge = useRef(null);
 
@@ -26,6 +28,14 @@ function Challenges(){
     const cookies = new Cookies();
     
     let navigate = useNavigate();
+
+    const override = {
+        display: "block",
+        position:"absolute",
+        top:"50%",
+        left:"50%",
+        transform:"translate(-50%,-50%)"
+    };
     
     useEffect(()=>{
         const refreshToken = cookies.get('refreshToken');
@@ -35,7 +45,8 @@ function Challenges(){
             axios.get('http://localhost:3001/challenge/all',{headers:{accessToken:res.data.accessToken}})
             .then((response)=>{
                 setChallenges(response.data);
-                setEffChallenges(response.data);   
+                setEffChallenges(response.data); 
+                setLoading(false);  
             })    
         })
         
@@ -67,8 +78,23 @@ function Challenges(){
     }
     return(
         <div id='challenges-main-page' onClick={(e)=>{handleCanceling(e)}}>
-            <nav className="home-navbar">
-                <div className="navbar-part">
+            {
+                loading ?
+                (
+                    <BarLoader
+                    color="#000046"
+                    loading={loading}
+                    cssOverride={override}
+                    size={20}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    />
+                )
+                :
+                (
+                    <>
+                <nav className="home-navbar">
+                    <div className="navbar-part">
                     <div className='navbar-section'>
                         <Link className='link' to='/home'>Home</Link>
                     </div>
@@ -105,9 +131,9 @@ function Challenges(){
                 <div className='category'>
                     <div className='category-title' onClick={()=>{setGeneral(!general)}}><h3>General<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "general"}).length})`}</span></h3></div>
                     <div className={general ? 'category-challenges' : 'category-challenges non-filtered'}>
-                    {effChallenges.filter(challenge=>{return challenge.category == "general"}).map((challenge,index)=>{
+                    {effChallenges.filter(challenge=>{return challenge.category == "general"}).sort((a,b)=>a.difficulty-b.difficulty).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -122,9 +148,9 @@ function Challenges(){
                 <div className='category'>
                     <div className='category-title' onClick={()=>{setWeb(!web)}}><h3>Web<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "web exploitation"}).length})`}</span> </h3></div>
                     <div className={web ? 'category-challenges' : 'category-challenges non-filtered'}>
-                    {effChallenges.filter(challenge=>{return challenge.category == "web exploitation"}).map((challenge,index)=>{
+                    {effChallenges.filter(challenge=>{return challenge.category == "Forensics"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -141,7 +167,7 @@ function Challenges(){
                     <div className={cracking ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "Cracking"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -158,7 +184,7 @@ function Challenges(){
                     <div className={reverse ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "Reverse Eng"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -175,7 +201,7 @@ function Challenges(){
                     <div className={forensics ? 'category-challenges' : 'category-challenges non-filtered'}>
                     {effChallenges.filter(challenge=>{return challenge.category == "forensics"}).map((challenge,index)=>{
                     return(
-                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{window.open(`../challenge/${challenge._id}`, "_blank", "noopener,noreferrer")}}>
+                        <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
                             <div className=''>{challenge.solves} solves</div>
@@ -203,6 +229,10 @@ function Challenges(){
                     </div>    
                 </div>}
             </div>
+                    </>
+                )
+            }
+            
         </div>
         
     );

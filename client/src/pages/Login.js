@@ -56,7 +56,9 @@ function Login(){
             }
         },[])
     return(
-        <>
+        <div id='login-page'>
+
+        
             <Navbar></Navbar>
             <div id='title'>
                 <span style={{animationDelay:0.1+'s'}}>E</span>
@@ -88,8 +90,8 @@ function Login(){
                 <button type='submit' className='bg-blue'>Log in</button>
             </form>
             
-
-        </>
+        </div>
+        
     );
 }
 

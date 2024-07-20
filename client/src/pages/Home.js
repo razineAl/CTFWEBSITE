@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ArrowRight from '../components/ArrowRight';
 import ArrowLeft from '../components/ArrowLeft';
 import DifficultySpan from '../components/DifficultySpan';
-import ScaleLoader from "react-spinners/ScaleLoader";
+import BarLoader from 'react-spinners/BarLoader';
 
 
 
@@ -74,7 +74,7 @@ function Home(){
         }
 
               
-    }, []);
+    }, [typedRef.current]);
 
        
     const settings = {
@@ -111,11 +111,11 @@ function Home(){
             {
             loading ?
             (
-                <ScaleLoader
-                    color="#000"
+                <BarLoader
+                    color="#000046"
                     loading={loading}
                     cssOverride={override}
-                    size={50}
+                    size={20}
                     aria-label="Loading Spinner"
                     data-testid="loader"
                 />
