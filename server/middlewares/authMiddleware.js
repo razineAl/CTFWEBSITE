@@ -5,11 +5,14 @@ const validateToken = async (req,res,next)=>{
 
 
     try {
-        const accessToken = req.header('accessToken');
+        const authHeader = req.headers.authorization || req.headers.Authorization;
 
-        if(!accessToken) return res.status(403).json({error:'user not logged in !'});
+        if (!authHeader?.startsWith('Bearer ')) return res.sendStatus(401);
 
-        const validToken = verify(accessToken,process.env.ACCESS_TOKEN_SECRET);
+        const token = authHeader.split(' ')[1];
+
+
+        const validToken = verify(token,process.env.ACCESS_TOKEN_SECRET);
 
         req.user = validToken;
         if (validToken) return next();
