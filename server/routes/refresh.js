@@ -11,13 +11,15 @@ const jwt = require('jsonwebtoken');
 
 router.get('/',async(req,res)=>{
 
-    const refreshToken = req.header('refreshToken');
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(401);
 
-    if(!refreshToken) return res.json('no cookies');
+
+    const refreshToken = cookies.jwt;
 
     const user = await User.findOne({refreshToken:refreshToken});
 
-    if (!user) return res.json('no user with this refresh Token');
+    if (!user) return res.status(403).json('no user with this refresh Token');
 
     const validRefresh = jwt.verify(user.refreshToken,process.env.REFRESH_TOKEN_SECRET);
 
