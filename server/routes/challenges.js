@@ -54,30 +54,43 @@ router.get('/difficulty/:difficulty',validateToken,async(req,res)=>{
     res.json(challenges);
 });
 
-router.put('/submit/:challengeId/:userId',async (req,res)=>{
-    const {flag} = req.body;
-    if(!req.params.challengeId) return res.sendStatus(400);
-    if(!req.params.userId) return res.sendStatus(400);
+router.put('/submit/:challengeId/:userId',validateToken, async (req, res) => {
+    const { challengeId, userId } = req.params;
+    const  {flag}  = req.body;
+
+    if (!challengeId) return res.status(400).json({ error: 'Challenge ID is required' });
+    if (!userId) return res.status(400).json({ error: 'User ID is required' });
+
+    try {
+        const challenge = await Challenge.findById(challengeId);
+        if (!challenge) return res.status(404).json({ error: 'No such challenge' });
 
 
-    const challenge = await Challenge.findById(req.params.challengeId);
+        const currentUser = await User.findById(userId);
+        if (!currentUser) return res.status(404).json({ error: 'User not found' });
 
-    if (!challenge) return res.json('no such challenge');
 
-    if (challenge.flag !== flag) return res.json({err:"the flag isn't correct !"}); 
 
-    const currentUser = await User.findById(req.params.userId);
+        if (challenge.flag !== flag) return res.status(200).json({ answer: false });
 
-    if (challenge.solves.includes(currentUser._id) || currentUser.challenges.includes(challenge._id)) return res.json("challenge already solved"); 
-    
-    
-    challenge.solves = [...challenge.solves,currentUser._id];
-    const newChallenge = await challenge.save();
-    currentUser.points += challenge.points;
-    currentUser.challenges = [...currentUser.challenges,req.params.challengeId];  
-    await currentUser.save();
-    return res.json("successful");
+        
 
+        if (challenge.solves.includes(currentUser._id) || currentUser.challenges.includes(challenge._id)) {
+            return res.status(200).json({ error: 'Challenge already solved' });
+        }
+
+        challenge.solves.push(currentUser._id);
+        currentUser.points += challenge.points;
+        currentUser.challenges.push(challengeId);
+
+        await challenge.save();
+        await currentUser.save();
+
+        return res.status(200).json({ answer: true });
+    } catch (error) {
+        console.error('Error handling request:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 
