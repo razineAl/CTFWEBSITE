@@ -4,7 +4,6 @@ import {faUser} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import Typed from 'typed.js';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
@@ -32,16 +31,14 @@ function Home(){
         transform:"translate(-50%,-50%)"
     };
 
-    const cookies = new Cookies();
     
     let navigate = useNavigate();
     
     useEffect(()=>{
-        const refreshToken = cookies.get('refreshToken');
-        axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
+        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
         .then((res)=>{
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get('http://localhost:3001/challenge/newest/6',{headers:{accessToken:res.data.accessToken}})
+            axios.get('http://localhost:3001/challenge/newest/6',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setNewChallenges(response.data); 
                 setLoading(false);
@@ -69,7 +66,7 @@ function Home(){
               const typed = new Typed(typedRef.current, options);
     
               return () => {
-                  typed.destroy();
+                typed.destroy();
               };
         }
 
@@ -153,7 +150,7 @@ function Home(){
                     <Slider {...settings}>
                         {newChallenges.map((challenge,index)=>{
                             return(
-                                <div key={index} className='new-challenge'>
+                                <div key={index} className='new-challenge' onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                                     <div className='new-challenge-content'>
                                         <div className='new-challenge-first-half'>
                                             {challenge.title}

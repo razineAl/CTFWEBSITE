@@ -16,17 +16,19 @@ function Login(){
     const {authState,setAuthState} = useContext(AuthContext);
 
     let navigate = useNavigate();
-    const cookies = new Cookies();
-    const sendLogin = ()=>{
-        axios.post('http://localhost:3001/auth/login',{username:username,password:password})
-        .then((res)=>{
-            if(!res.error){
-                cookies.set('refreshToken',res.data.refreshToken);
-                setAuthState({username:res.data.username,status:true,id:res.data.id,accessToken:res.data.accessToken});
-                navigate('/home');
 
-            }
+    const sendLogin = async ()=>{
+        await fetch('http://localhost:3001/auth/login',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            credentials:'include',
+            body:JSON.stringify({
+                username:username,
+                password:password
+            })
         })
+        navigate('/home');
+        
     }
     const handleFocus = ()=>{
         setFocus(true);
@@ -49,11 +51,11 @@ function Login(){
         }        
     }
     useEffect(
-        ()=>{
+        ()=>{/*
             const refreshToken = cookies.get('refreshToken');
             if (refreshToken) {
                 cookies.remove('refreshToken');
-            }
+            }*/
         },[])
     return(
         <div id='login-page'>

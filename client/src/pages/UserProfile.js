@@ -3,8 +3,6 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import AuthContext from '../helpers/AuthContext';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-import Home from './Home';
 
 
 function UserProfile(){
@@ -12,7 +10,6 @@ function UserProfile(){
     const {authState,setAuthState} = useContext(AuthContext);
 
 
-    const cookies = new Cookies();
 
     let navigate = useNavigate();
     let {id} = useParams();
@@ -20,11 +17,10 @@ function UserProfile(){
 
     useEffect(()=>{
 
-        const refreshToken = cookies.get('refreshToken');
-        axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
+        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
         .then((res)=>{
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get(`http://localhost:3001/users/byId/${id}`,{headers:{accessToken:res.data.accessToken}})
+            axios.get(`http://localhost:3001/users/byId/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setUser(response.data);  
             }) 

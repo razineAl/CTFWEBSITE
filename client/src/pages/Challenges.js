@@ -2,7 +2,6 @@ import {useContext, useEffect, useState, useCallback, useRef} from 'react';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import DifficultySpan from '../components/DifficultySpan';
 import BarLoader from 'react-spinners/BarLoader';
 
@@ -25,7 +24,6 @@ function Challenges(){
     const individualChallenge = useRef(null);
 
 
-    const cookies = new Cookies();
     
     let navigate = useNavigate();
 
@@ -38,17 +36,17 @@ function Challenges(){
     };
     
     useEffect(()=>{
-        const refreshToken = cookies.get('refreshToken');
-        axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
+        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
         .then((res)=>{
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get('http://localhost:3001/challenge/all',{headers:{accessToken:res.data.accessToken}})
+            axios.get('http://localhost:3001/challenge/all',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setChallenges(response.data);
                 setEffChallenges(response.data); 
                 setLoading(false);  
-            })    
+            })   
         })
+
         
     },[])
     useEffect(() => {
@@ -129,14 +127,14 @@ function Challenges(){
                     
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setGeneral(!general)}}><h3>General<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "general"}).length})`}</span></h3></div>
+                    <div className='category-title' onClick={()=>{setGeneral(!general)}}><h3>General<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "General"}).length})`}</span></h3></div>
                     <div className={general ? 'category-challenges' : 'category-challenges non-filtered'}>
-                    {effChallenges.filter(challenge=>{return challenge.category == "general"}).sort((a,b)=>a.difficulty-b.difficulty).map((challenge,index)=>{
+                    {effChallenges.filter(challenge=>{return challenge.category == "General"}).sort((a,b)=>a.difficulty-b.difficulty).map((challenge,index)=>{
                     return(
                         <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
-                            <div className=''>{challenge.solves} solves</div>
+                            <div className=''>{challenge.solves.length} {challenge.solves.length == 1 ? 'solve' : 'solves'}</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
                             
@@ -146,14 +144,14 @@ function Challenges(){
                     </div>
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setWeb(!web)}}><h3>Web<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "web exploitation"}).length})`}</span> </h3></div>
+                    <div className='category-title' onClick={()=>{setWeb(!web)}}><h3>Web<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "Web Exploitation"}).length})`}</span> </h3></div>
                     <div className={web ? 'category-challenges' : 'category-challenges non-filtered'}>
-                    {effChallenges.filter(challenge=>{return challenge.category == "Forensics"}).map((challenge,index)=>{
+                    {effChallenges.filter(challenge=>{return challenge.category == "Web Exploitation"}).sort((a,b)=>a.difficulty-b.difficulty).map((challenge,index)=>{
                     return(
                         <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
-                            <div className=''>{challenge.solves} solves</div>
+                            <div className=''>{challenge.solves.length} {challenge.solves.length == 1 ? 'solve' : 'solves'}</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
                             
@@ -165,12 +163,12 @@ function Challenges(){
                 <div className='category'>
                     <div className='category-title' onClick={()=>{setCracking(!cracking)}}><h3>Cracking <span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "Cracking"}).length})`}</span></h3></div>
                     <div className={cracking ? 'category-challenges' : 'category-challenges non-filtered'}>
-                    {effChallenges.filter(challenge=>{return challenge.category == "Cracking"}).map((challenge,index)=>{
+                    {effChallenges.filter(challenge=>{return challenge.category == "Cracking"}).sort((a,b)=>a.difficulty-b.difficulty).map((challenge,index)=>{
                     return(
                         <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
-                            <div className=''>{challenge.solves} solves</div>
+                            <div className=''>{challenge.solves.length} {challenge.solves.length == 1 ? 'solve' : 'solves'}</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
                             
@@ -182,12 +180,12 @@ function Challenges(){
                 <div className='category'>
                     <div className='category-title' onClick={()=>{setReverse(!reverse)}}><h3>Reverse Engineering<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "Reverse Eng"}).length})`}</span></h3></div>
                     <div className={reverse ? 'category-challenges' : 'category-challenges non-filtered'}>
-                    {effChallenges.filter(challenge=>{return challenge.category == "Reverse Eng"}).map((challenge,index)=>{
+                    {effChallenges.filter(challenge=>{return challenge.category == "Reverse Eng"}).sort((a,b)=>a.difficulty-b.difficulty).map((challenge,index)=>{
                     return(
                         <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
-                            <div className=''>{challenge.solves} solves</div>
+                            <div className=''>{challenge.solves.length} {challenge.solves.length == 1 ? 'solve' : 'solves'}</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
                             
@@ -197,14 +195,14 @@ function Challenges(){
                     </div>
                 </div>
                 <div className='category'>
-                    <div className='category-title' onClick={()=>{setForensics(!forensics)}}><h3>Forensics<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "forensics"}).length})`}</span></h3></div>
+                    <div className='category-title' onClick={()=>{setForensics(!forensics)}}><h3>Forensics<span className='bold'>{` (${effChallenges.filter(challenge=>{return challenge.category == "Forensics"}).length})`}</span></h3></div>
                     <div className={forensics ? 'category-challenges' : 'category-challenges non-filtered'}>
-                    {effChallenges.filter(challenge=>{return challenge.category == "forensics"}).map((challenge,index)=>{
+                    {effChallenges.filter(challenge=>{return challenge.category == "Forensics"}).sort((a,b)=>a.difficulty-b.difficulty).map((challenge,index)=>{
                     return(
                         <div className={index%2==0 ? `challenge-container odd` : `challenge-container even` } key={index} onClick={()=>{navigate(`../challenge/${challenge._id}`)}}>
                             <div className={``}>{challenge.title}</div>
                             <div className=''><p>{challenge.category}</p></div>            
-                            <div className=''>{challenge.solves} solves</div>
+                            <div className=''>{challenge.solves.length} {challenge.solves.length == 1 ? 'solve' : 'solves'}</div>
                             <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
                             <div className=''>{challenge.points} points</div>
                             

@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from 'react';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 
 
 function Rankings(){
@@ -11,19 +10,19 @@ function Rankings(){
 
 
     let navigate = useNavigate();
-    const cookies = new Cookies();
+
 
     useEffect(()=>{
 
-        const refreshToken = cookies.get('refreshToken');
-        axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
+        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
         .then((res)=>{
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get('http://localhost:3001/users/top/10',{headers:{accessToken:res.data.accessToken}})
+            axios.get('http://localhost:3001/users/top/10',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setTopUsers(response.data);  
             })    
         })
+        
     
         
     },[])
