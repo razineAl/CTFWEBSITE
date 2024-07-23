@@ -7,19 +7,24 @@ const app = express();
 const cors = require('cors');
 const credentials = require('./middlewares/corsMiddleware');
 const PORT = process.env.PORT;
-// const corsOptions = require('./config/corsOptions');
+
 
 dbConn();
 
 
-app.use(credentials);
 
+const corsOptions = {
+    origin: ['http://localhost:3000','http://localhost:3000/home'],
+    credentials: true, 
+  };
 
-app.use(cors());
 
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors(corsOptions));
+
 
 
 const authRouter = require('./routes/auth');
@@ -29,13 +34,6 @@ const userRouter = require('./routes/users');
 const refreshRouter = require('./routes/refresh');
 
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-    next();
-});
 
 
 app.use('/auth',authRouter);

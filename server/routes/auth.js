@@ -40,7 +40,7 @@ router.post('/login',async (req,res)=>{
     await user.save();
 
     
-    res.cookie('refresh',refreshToken,{maxAge:1000*3600*24});
+    res.cookie('jwt',refreshToken,{ httpOnly:true,maxAge:1000*3600*24,sameSite:'none',secure:true});
 
     res.json({refreshToken:refreshToken,accessToken:accessToken,username:user.username,id:user._id,role:user.role});
 

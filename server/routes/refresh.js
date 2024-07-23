@@ -1,7 +1,6 @@
 const express = require('express');
 const User = require('../model/User');
 const router = express.Router();
-const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
 
@@ -12,7 +11,8 @@ const jwt = require('jsonwebtoken');
 router.get('/',async(req,res)=>{
 
     const cookies = req.cookies;
-    if (!cookies?.jwt) return res.sendStatus(401);
+    if (!cookies?.jwt) return res.status(401).json('no cookies !');
+    
 
 
     const refreshToken = cookies.jwt;
