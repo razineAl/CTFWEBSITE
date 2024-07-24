@@ -24,7 +24,7 @@ router.get('/',async (req,res)=>{
     user.refreshToken = '';
     await user.save();
 
-    res.clearCookie('jwt',{httpOnly:true,secure:true,sameSite:'none',maxAge:24*3600*1000});
+    res.clearCookie('jwt');
     return res.sendStatus(204);
 
 })
