@@ -2,7 +2,6 @@ import { useContext, useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import Sidebar from '../components/Sidebar';
 
 function Admin() {
@@ -16,40 +15,23 @@ function Admin() {
     const [focused,setFocused] = useState(false); 
 
     
-    const cookies = new Cookies();
+   
     let navigate = useNavigate();
-    const refreshToken = cookies.get('refreshToken');
 
     useEffect(() => {
-        let isMounted = true;
-        axios.get('http://localhost:3001/refresh', { headers: { refreshToken: refreshToken } })
+        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
             .then((res) => {
-                if (isMounted) {
-                    setAuthState({ username: res.data.username, status: true, accessToken: res.data.accessToken, id: res.data.id, role: res.data.role });
-                    setLoading(false);
-                }
+                if (res.data.error) return navigate('/');
+                setAuthState({ username: res.data.username, status: true, accessToken: res.data.accessToken, id: res.data.id, role: res.data.role });
+                setLoading(false);
+                
             })
             .catch((err) => {
                 console.error(err);
-                if (isMounted) {
-                    setLoading(false);
-                    navigate('/login');
-                }
             });
-        return () => {
-            isMounted = false;
-        };
-    }, [refreshToken, setAuthState, navigate]);
+    }, [setAuthState, navigate]);
 
-    useEffect(() => {
-        if (!loading && authState.role !== 'Admin') {
-            navigate('/home');
-        }
-    }, [authState, loading, navigate]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+    
 
     const handleFocus = ()=>{
         setFocus(true);
@@ -120,7 +102,7 @@ function Admin() {
                         Delete User             {/*change        ---------      -----------    font*/}
                     </div>
                     <div className='admin-interface-section-body'>
-                        <form onSubmit="">
+                        <form >
                             <div>
                                 <label>Username</label>
                                 <input type='text' value={username2} onChange={(e)=>{setUsername2(e.target.value)}}></input>

@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../helpers/AuthContext';
-import Cookies from 'universal-cookie';
-import { useParams,Link } from 'react-router-dom';
+import { useParams,Link, useNavigate } from 'react-router-dom';
 import BarLoader from 'react-spinners/BarLoader';
 
 
@@ -11,8 +10,11 @@ function ChallengePage() {
     const {authState,setAuthState} = useContext(AuthContext);
     const [challenge,setChallenge] = useState({});
     const [loading,setLoading] = useState(true);
+    const [correct,setCorrect] = useState(false);
+    const [flag,setFlag] = useState('');
+    const [wrong,setWrong] = useState(false);
+    const [solved,setSolved] = useState(false);
     const {id} = useParams();
-    const cookies = new Cookies();
 
 
     const override = {
@@ -23,13 +25,15 @@ function ChallengePage() {
         transform:"translate(-50%,-50%)"
     };
 
-    const refreshToken = cookies.get('refreshToken');
+    const navigate = useNavigate();
+
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/refresh',{headers:{refreshToken:refreshToken}})
+        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
         .then((res)=>{
+            if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get(`http://localhost:3001/challenge/${id}`,{headers:{accessToken:res.data.accessToken}})
+            axios.get(`http://localhost:3001/challenge/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setChallenge(response.data);  
                 setLoading(false); 
@@ -43,9 +47,26 @@ function ChallengePage() {
         })
     },[])
     const submitFlag = ()=>{
-        axios.put(`http://localhost:3001/challenge/submit/${id}/${authState.id}`,{headers:{accessToken:authState.accessToken}})
+        axios.put(`http://localhost:3001/challenge/submit/${id}/${authState.id}`,{flag:flag},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
         .then((res)=>{
             const response = res.data;
+            console.log(response);
+            setFlag('');
+            if (response.error) {
+                if (response.error == "Challenge already solved"){
+                    setWrong(false); 
+                    setSolved(true);
+                    return;
+                }
+            }
+            if (response.answer) {
+                setWrong(false);
+                setCorrect(true);
+            } else {
+                setSolved(false);
+                setCorrect(false);
+                setWrong(true);
+            }
         })
         .catch((error)=>{
             console.log(error);
@@ -108,9 +129,26 @@ function ChallengePage() {
                     <aside id='challenge-details-aside'>
                         <h2>Flag Submission</h2>
                         <div id='challenge-submission-form'>
-                            <input type='text'></input>
-                            <button type='submit' onClick={submitFlag}>Submit Flag</button>
+                            <input type='text' value={flag} onChange={(e)=>{setFlag(e.target.value)}}></input>
+                            <button type='button' onClick={submitFlag}>Submit Flag</button>
+                            {
+                            wrong && 
+                            <div className='incorrect-comment'>
+                                <p>Incorrect Flag, please try again !</p>
+                            </div> }
+                            {
+                                correct && <div className='correct-comment'>
+                                                <p>Well done, here are your {challenge.points} points :&#41;</p>
+                                            </div>
+                            }
+                            {
+                                solved && <div className='solved-comment'>
+                                                <p>Correct, But you already solved this challenge :/</p>
+                                            </div>
+                            }
+                            
                         </div>
+                        
                         
                     </aside>
                 </main>

@@ -16,6 +16,7 @@ function Rankings(){
 
         axios.get('http://localhost:3001/refresh',{ withCredentials: true})
         .then((res)=>{
+            if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
             axios.get('http://localhost:3001/users/top/10',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
