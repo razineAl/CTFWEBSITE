@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 router.get('/',async(req,res)=>{
 
     const cookies = req.cookies;
-    if (!cookies?.jwt) return res.status(401).json('no cookies !');
+    if (!cookies?.jwt) return res.json({error:'no cookies'});
     
 
 
@@ -19,7 +19,7 @@ router.get('/',async(req,res)=>{
 
     const user = await User.findOne({refreshToken:refreshToken});
 
-    if (!user) return res.status(403).json('no user with this refresh Token');
+    if (!user) return res.json({error:'no user with this refresh Token'});
 
     const validRefresh = jwt.verify(user.refreshToken,process.env.REFRESH_TOKEN_SECRET);
 
@@ -29,7 +29,7 @@ router.get('/',async(req,res)=>{
             res.json({username:user.username,id:user._id,accessToken:accessToken,role:user.role});
         }
     } catch (error) {
-        res.sendStatus(403);
+        res.json({error:'forbidden !'});
     }
 
 
