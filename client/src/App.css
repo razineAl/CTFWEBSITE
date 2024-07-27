@@ -30,6 +30,7 @@ body{
     display: flex;
     flex-direction: column;
     position: relative;
+    font-family: ubuntu-regular,Verdana, Geneva, Tahoma, sans-serif;
 }
 #root:has(#pwd) {
     height: 100vh;
@@ -39,9 +40,7 @@ body{
     flex-direction: column;
     flex: 1;
 }
-*{
-    font-family: ubuntu-regular,Verdana, Geneva, Tahoma, sans-serif;
-}
+
 nav{
     width: 100%;
     display: flex;
@@ -50,11 +49,12 @@ nav{
     top: 0;
     left: 0;
     margin: 0;
-    color: #fff;
+    
 }
 #main-navbar{
     background-color: hsl(213, 96%, 18%);
     height: 80px;
+    color: #fff;
 }
 nav img{
     height: 90%;
@@ -354,19 +354,34 @@ form div input.focused{
     height: 50px;
     background-color: #fff;
     z-index: 10;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), 0 1px 7px rgba(0, 0, 0, 0.08);
 }
 .home-navbar>div:first-of-type{
     display: grid;
     grid-template-columns: repeat(5,1fr);
 }
-.home-navbar div:nth-of-type(2){
+.home-navbar>div:nth-of-type(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+}
+.navbar-part-second{
+    height: 100%;
+    width: auto;
+    max-width: max(30%,150px);
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    position: absolute;
+    right: 30px;
 }
 .home-navbar .link{
-
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
     color: black;
 
@@ -380,11 +395,17 @@ form div input.focused{
     align-items: center;
     justify-content: center;
 }
-.home-navbar .navbar-section:hover{
+.home-navbar .link:hover{
     cursor: pointer;
-    border-bottom: solid 2px #004E64;
+    
     background-color: #ffffffe2;
+    box-sizing: content-box;
 }
+.home-navbar >div:first-of-type .link:hover{
+    border-bottom: solid 2px #004E64;
+}
+
+
 #challenges-main-page{
     height: auto;
     width: 100%;
@@ -423,7 +444,7 @@ form div input.focused{
 #challenges{
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: auto;
     width: 95%;
     margin: 25px auto 0 auto;
     padding: 0 20px;
@@ -469,7 +490,7 @@ form div input.focused{
     text-align: center;
 }
 .odd{
-    background-color: #f1f1f3;
+    background-color: #f4f6f7;
 }
 .even{
     background-color: #ffffff;
@@ -648,33 +669,63 @@ form div input.focused{
 
 #ranking-page{
     width: 100%;
-    height: 100%;
-    padding-top: 150px;
+    height: auto;
     background-color: #f8f9fa;
     overflow:hidden;
-
+    
+}
+.hide{
+    display: none !important;
 }
 #ranking-tab{
-    width: 675px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    background-color: #fff;
-    box-shadow: 1px 1px 6px #004E64;
-    cursor: pointer;
+    margin: 25px auto 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-.top-player-section{
+#top-three-container{
+    width: 100%;
+    height: 300px;
     display: grid;
-    grid-template-columns: 3fr 1fr;
-    padding: 8px 0;
-    border-bottom: solid 1px hsl(229, 10%, 67%);
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 10px;
+    gap: 10px;
 }
-.top-player-username-container{
-    padding-left: 20px;
+#top-three-container>div{
+    background-color: #000046;
 }
-.top-player-points-container{
+#top-rest-container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #fff;
+}
+#top-rest-container .top-rest{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 6fr 4fr 4fr;
+    height: 45px;
+    align-items: center;
+    padding-left:  10px;
+
+}
+#top-rest-container .top-rest p,#top-rest-container .top-rest div{
+    display: inline-block;
+}
+#top-rest-container .top-rest>div:not(:nth-of-type(2)){
     text-align: center;
 }
+#top-rest-container .top-rest .ranking-link{
+    text-decoration: none;
+    color: hsl(213, 96%, 18%);
+}
+#top-rest-container .top-rest .ranking-link:hover{
+    text-decoration: underline;
+}
+
 
 /* individual challenge page */
 
@@ -698,35 +749,32 @@ form div input.focused{
 #challenge-details{
     height: 90%;
     width: 90%;
-    box-shadow: 2px 2px 10px 2px #b4b3b3;
+    box-shadow: 1px 1px 15px 1px #c9c9c9;
     background-color: #fff;
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 13fr 8fr;
+    padding: 15px 0;
 }
 #challenge-details-main{
     position: relative;
     padding: 0 20px;
     display: grid;
-    grid-template-rows: 1fr 3fr 2fr;
+    grid-template-rows: 2fr 7fr 3fr;
+    border-right: 1px solid #cacaca;
 }
 #challenge-details-main h2{
     text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cacaca;
 }
-#challenge-details-main::after{
-    content: "";
-    width: 0.8px;
-    height: 90%;
-    background-color: #c2c0c0;
-    position: absolute;
-    top: 5%;
-    right: 20px;
-}
+
 #challenge-details-main a{
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80%;
     height: 35px;
     margin: auto;
-    text-align: center;
     color: #fff;
     background-color: #000046;
     border: none;
@@ -736,10 +784,206 @@ form div input.focused{
 }
 #challenge-details-aside{
     position: relative;
-    padding: 0 20px;
+    padding: 0 20px;   
+}
+#challenge-details-aside h2{
+    font-weight: 400;  
 }
 #challenge-details-aside #challenge-submission-form{
-    width: 70%;
+    width: 80%;
+    height: 200px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    
+}
+#challenge-details-aside #challenge-submission-form input{
+    height: 35px;
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 5px;
+    padding: 0 10px;
+    color: hsl(213, 96%, 18%);
+    font-size: 1.01em;
+    font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    margin-bottom: 20px;
+}
+#challenge-details-aside #challenge-submission-form button{
+    height: 35px;
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 5px;
+    padding: 0 10px;
+    color: hsl(213, 96%, 18%);
+    font-size: 1.01em;
+    font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    margin-bottom: 20px;
+}
+#challenge-details-aside #challenge-submission-form button:hover{
+    border: none;
+    background-color: hsl(213, 96%, 18%);
+    color:#fff ;
+}
+
+.incorrect-comment{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    color: #de2b0f ;
+    background: #fdeae7;
+    border-bottom: solid 2px #de2b0f;
+    border-right: solid 2px #de2b0f;
+    font-size: .9em;
+    position: absolute;
+    bottom: 9%;
+}
+.hide{
+    display: none;
+}
+.correct-comment{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    color: #3a945b ;
+    background: #edf8f1;
+    border-bottom: solid 2px #3a945b;
+    border-right: solid 2px #3a945b;
+    font-size: .9em; 
+    position: absolute;
+    bottom: 9%;
+}
+.solved-comment{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    color: #007ba0;
+    background: #e6f9ff;
+    border-bottom: solid 2px #007ba0;
+    border-right: solid 2px #007ba0;
+    font-size: .9em; 
+    position: absolute;
+    bottom: 9%;
+}
+
+
+
+
+
+
+
+
+
+
+#main-footer {
+    font-family: "Open Sans", "sans-serif", "Arial" !important;
+    color: #767676;
+    padding: 20px 0;
+    text-align: center;
+}
+  
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+  
+.footer-logo img {
+    width: 50px;
+}
+  
+
+.footer-content p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-family: "Open Sans", "sans-serif", "Arial" !important;
+}
+  
+.footer-content {
+    
+    color: #767676;
+    font-size: .9em;
+}
+  
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    
+    font-family: "Open Sans", "sans-serif", "Arial" !important;
+}
+  
+.footer-links li {
+    display: inline;
+    margin: 0 10px;
+    
+}
+  
+.footer-links a {
+    color: #767676;
+    text-decoration: none;
+    font-family: "Open Sans", "sans-serif", "Arial" !important;
+}
+  
+/* ///////////////////////////////////////////////: */
+
+
+
+.profile-options-container{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 130%;
+    width: max(114%,130px);
+    bottom: -130%;
+    right: -7%;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    
+}
+.profile-options-container>div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding: 0 5px;
+}
+.profile-options-container>div:hover{
+    color: #004E64;
+    background-color: #ededed;
+}
+.profile-options-container>div:first-of-type{
+    border-radius: 5px 5px 0 0 ;
+}
+.profile-options-container>div:nth-of-type(2){
+    border-radius: 0 0 5px 5px  ;
+}
+.profile-options-container>div a{
+    font-size: .95em;
+}
+.profile-options-container>div span{
+    
+
+}
+.profile-options-container:hover{
+    cursor: pointer;
 }
