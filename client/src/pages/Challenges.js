@@ -4,6 +4,9 @@ import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import DifficultySpan from '../components/DifficultySpan';
 import BarLoader from 'react-spinners/BarLoader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
+import Footer from '../components/Footer';
 
 
 function Challenges(){
@@ -50,23 +53,14 @@ function Challenges(){
 
         
     },[])
-    useEffect(() => {
-        let filteredChallenges = challenges;
-        if (trace_challenge.category !== "All") {
-            filteredChallenges = filteredChallenges.filter(challenge => challenge.category === trace_challenge.category);
-        }
-        if (trace_challenge.difficulty !== "All") {
-            filteredChallenges = filteredChallenges.filter(challenge => challenge.difficulty.toString() === trace_challenge.difficulty);
-        }
-        setEffChallenges(filteredChallenges);
-    }, [challenges, trace_challenge]);
-
-    const triggerChallenge = (challenge)=>{
-        setVisible(true);
-        setChosen(challenge);
-        setFiltered(true);
 
 
+    const logout = async ()=>{
+        axios.get('http://localhost:3001/logout',{withCredentials:true})
+        .then((res)=>{
+            navigate('/');
+        })
+        
     }
     const handleCanceling = (e)=>{
         
@@ -93,7 +87,7 @@ function Challenges(){
                 (
                     <>
                 <nav className="home-navbar">
-                    <div className="navbar-part">
+                <div className="navbar-part">
                     <div className='navbar-section'>
                         <Link className='link' to='/home'>Home</Link>
                     </div>
@@ -104,14 +98,21 @@ function Challenges(){
                         <Link className='link' to='/ranking'>Rankings</Link>
                     </div>
                     <div className='navbar-section'>
-                        <Link className='link'>Premium</Link>
+                        <Link className='link' to='/billing'>Premium</Link>
                     </div>
                     <div className='navbar-section'>
                         <Link className='link'>FAQ</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>
-                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username}</Link>
+                    <div className='navbar-part-second'>
+                        <Link className='link' to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
+                        <div className='profile-options-container'>
+                            <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
+                            <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </nav>
 
@@ -228,6 +229,7 @@ function Challenges(){
                     </div>    
                 </div>}
             </div>
+            <Footer></Footer>
                     </>
                 )
             }

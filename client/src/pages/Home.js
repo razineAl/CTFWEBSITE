@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState, useCallback, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faUser} from '@fortawesome/free-solid-svg-icons';
+import {faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -12,6 +12,7 @@ import ArrowRight from '../components/ArrowRight';
 import ArrowLeft from '../components/ArrowLeft';
 import DifficultySpan from '../components/DifficultySpan';
 import BarLoader from 'react-spinners/BarLoader';
+import Footer from '../components/Footer';
 
 
 
@@ -37,6 +38,7 @@ function Home(){
     useEffect(()=>{
         axios.get('http://localhost:3001/refresh',{ withCredentials: true})
         .then((res)=>{
+            if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
             axios.get('http://localhost:3001/challenge/newest/6',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
@@ -58,8 +60,8 @@ function Home(){
                   'Both server-side and client-side web security challenges',
                   'Forensics, Cryptography, Reverse Engineering and much more !'
                 ],
-                typeSpeed: 40,
-                backSpeed: 25,
+                typeSpeed: 35,
+                backSpeed: 20,
                 backDelay: 1000,  
                 loop: true,
               };
@@ -100,7 +102,13 @@ function Home(){
         if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
         return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
     }
-    
+    const logout = async ()=>{
+        axios.get('http://localhost:3001/logout',{withCredentials:true})
+        .then((res)=>{
+            navigate('/');
+        })
+        
+    }
     return(
         
         
@@ -132,14 +140,21 @@ function Home(){
                         <Link className='link' to='/ranking'>Rankings</Link>
                     </div>
                     <div className='navbar-section'>
-                        <Link className='link'>Premium</Link>
+                        <Link className='link' to='/billing'>Premium</Link>
                     </div>
                     <div className='navbar-section'>
                         <Link className='link'>FAQ</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>
-                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username+" "}<FontAwesomeIcon icon={faUser} /></Link>
+                    <div className='navbar-part-second'>
+                        <Link className='link' to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
+                        {false && <div className='profile-options-container '>
+                            <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
+                            <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
+                        </div>}
+                    </div>
+                    
                 </div>
             </nav>
             <div id='main-typing-container'>
@@ -169,6 +184,7 @@ function Home(){
                     </Slider>
                   
             </div>
+            <Footer></Footer>
                 </>
             )
             
