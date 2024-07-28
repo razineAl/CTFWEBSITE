@@ -425,7 +425,8 @@ form div input.focused{
     -7px -7px 15px #fff;
 }
 .bold{
-    font-family: ubuntu-medium;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: 600;
     font-size: 1.1em;
     
 }
@@ -490,7 +491,7 @@ form div input.focused{
     text-align: center;
 }
 .odd{
-    background-color: #f4f6f7;
+    background-color: #f8f8f8;
 }
 .even{
     background-color: #ffffff;
@@ -680,28 +681,63 @@ form div input.focused{
 #ranking-tab{
     width: 100%;
     display: flex;
+    padding: 0 10px;
     flex-direction: column;
-    margin: 25px auto 0 auto;
+    margin: 25px auto;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 #top-three-container{
     width: 100%;
     height: 300px;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    padding: 10px;
+    grid-template-columns: 18fr 11fr 11fr;
+    padding: 10px 0;
     gap: 10px;
 }
 #top-three-container>div{
-    background-color: #000046;
+    position: relative;
+    background-color: #fff;
+    border: solid 2px hsl(213, 96%, 18%);
+    border-radius: 3px;
+    color: hsl(213, 96%, 18%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+.top-three-position{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.6em;
+}
+.top-three-position p, .top-three-points p, .top-three-challenges p{
+    margin: 0;
+}
+.top-three-points{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 1.2em;
+}
+.top-three-challenges{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 1.2em;
+}
+.top-three-username{
+   font-size: 2em;
+   
+}
+
 #top-rest-container{
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
-    padding: 10px;
     background-color: #fff;
+    margin-top: 20px;
+    box-shadow: 0 3px 15px 2px #ebebeb;
 }
 #top-rest-container .top-rest{
     width: 100%;
@@ -718,12 +754,20 @@ form div input.focused{
 #top-rest-container .top-rest>div:not(:nth-of-type(2)){
     text-align: center;
 }
-#top-rest-container .top-rest .ranking-link{
+.ranking-link{
     text-decoration: none;
     color: hsl(213, 96%, 18%);
 }
-#top-rest-container .top-rest .ranking-link:hover{
+.ranking-link:hover{
+    cursor: pointer;
     text-decoration: underline;
+}
+p.ranking-link:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+p.ranking-link{
+    text-align: center;
 }
 
 
