@@ -19,9 +19,11 @@ import Footer from '../components/Footer';
 function Home(){
     const {authState,setAuthState} = useContext(AuthContext);
     const [loading,setLoading] = useState(true);
+    const [navOptions,setNavOptions] = useState(false);
     const [newChallenges,setNewChallenges] = useState([]);
 
     const typedRef = useRef(null);
+    const optionsRef = useRef(null);
 
     
     const override = {
@@ -65,6 +67,7 @@ function Home(){
                 backDelay: 1000,  
                 loop: true,
               };
+              
               const typed = new Typed(typedRef.current, options);
     
               return () => {
@@ -109,6 +112,20 @@ function Home(){
         })
         
     }
+    const showOptions = (e)=>{
+        setNavOptions(true);
+    }
+    const toggleOptions = (e)=>{
+        if (optionsRef.current) {
+            if (!optionsRef.current.contains(e.target)) {
+                setNavOptions(false)
+            } 
+        }    
+    }
+    const hideOptions = (e)=>{
+        setNavOptions(false)
+  
+    }
     return(
         
         
@@ -147,9 +164,9 @@ function Home(){
                     </div>
                 </div>
                 <div className='navbar-part'>
-                    <div className='navbar-part-second'>
-                        <Link className='link' to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
-                        {false && <div className='profile-options-container '>
+                    <div className='navbar-part-second' >
+                        <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
+                        {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
                             <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
                             <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
                         </div>}

@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext, useEffect, useState,useRef} from 'react';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -16,6 +16,8 @@ function Rankings(){
     const [more,setMore] = useState(false);
 
     const [loading,setLoading] = useState(true);
+    const [navOptions,setNavOptions] = useState(false);
+    const optionsRef = useRef(null);
 
 
     let navigate = useNavigate();
@@ -40,8 +42,19 @@ function Rankings(){
         
     },[])
 
-    const goToProfile = (user)=>{
-        navigate(`../profile/${user._id}`);
+    const showOptions = (e)=>{
+        setNavOptions(true);
+    }
+    const toggleOptions = (e)=>{
+        if (optionsRef.current) {
+            if (!optionsRef.current.contains(e.target)) {
+                setNavOptions(false)
+            } 
+        }    
+    }
+    const hideOptions = (e)=>{
+        setNavOptions(false)
+  
     }
     const logout = async ()=>{
         axios.get('http://localhost:3001/logout',{withCredentials:true})
@@ -113,12 +126,12 @@ function Rankings(){
                     </div>
                 </div>
                 <div className='navbar-part'>
-                    <div className='navbar-part-second'>
-                        <Link className='link' to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
-                        <div className='profile-options-container hide'>
+                    <div className='navbar-part-second' >
+                        <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
+                        {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
                             <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
                             <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
-                        </div>
+                        </div>}
                     </div>
                     
                 </div>

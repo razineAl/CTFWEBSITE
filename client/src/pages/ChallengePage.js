@@ -1,8 +1,10 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState,useRef } from 'react';
 import AuthContext from '../helpers/AuthContext';
 import { useParams,Link, useNavigate } from 'react-router-dom';
 import BarLoader from 'react-spinners/BarLoader';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
 
 
 function ChallengePage() {
@@ -16,6 +18,9 @@ function ChallengePage() {
     const [solved,setSolved] = useState(false);
     const {id} = useParams();
 
+    const [navOptions,setNavOptions] = useState(false);
+    const optionsRef = useRef(null);
+
 
     const override = {
         display: "block",
@@ -27,6 +32,13 @@ function ChallengePage() {
 
     const navigate = useNavigate();
 
+    const logout = async ()=>{
+        axios.get('http://localhost:3001/logout',{withCredentials:true})
+        .then((res)=>{
+            navigate('/');
+        })
+        
+    }
 
     useEffect(()=>{
         axios.get('http://localhost:3001/refresh',{ withCredentials: true})
@@ -72,6 +84,20 @@ function ChallengePage() {
             console.log(error);
         })
     }
+    const showOptions = (e)=>{
+        setNavOptions(true);
+    }
+    const toggleOptions = (e)=>{
+        if (optionsRef.current) {
+            if (!optionsRef.current.contains(e.target)) {
+                setNavOptions(false)
+            } 
+        }    
+    }
+    const hideOptions = (e)=>{
+        setNavOptions(false)
+  
+    }
   return (
     <div id='main-challenge-page'>
       {
@@ -101,14 +127,21 @@ function ChallengePage() {
                         <Link className='link' to='/ranking'>Rankings</Link>
                     </div>
                     <div className='navbar-section'>
-                        <Link className='link'>Premium</Link>
+                        <Link className='link' to='/billing'>Premium</Link>
                     </div>
                     <div className='navbar-section'>
                         <Link className='link'>FAQ</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>
-                    <Link className='link' to={`../profile/${authState.id}`}>{authState.username}</Link>
+                    <div className='navbar-part-second' >
+                        <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
+                        {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
+                            <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
+                            <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
+                        </div>}
+                    </div>
+                    
                 </div>
             </nav>
             <div id='challenge-details-container'>
