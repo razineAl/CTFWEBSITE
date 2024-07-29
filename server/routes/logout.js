@@ -15,7 +15,7 @@ router.get('/',async (req,res)=>{
     const user = await User.findOne({refreshToken:refreshToken});
 
     if(!user) {
-        res.clearCookie('jwt',{httpOnly:true,secure:true,sameSite:'none',maxAge:24*3600*1000});
+        res.clearCookie('jwt');
         return res.sendStatus(204);
     }
 

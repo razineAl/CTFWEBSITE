@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const dbConn = require('./config/dbConn');
 const app = express();
 const cors = require('cors');
-const credentials = require('./middlewares/corsMiddleware');
 const PORT = process.env.PORT;
 
 
@@ -32,6 +31,7 @@ const challengeRouter = require('./routes/challenges');
 const adminRouter = require('./routes/admin');
 const userRouter = require('./routes/users');
 const refreshRouter = require('./routes/refresh');
+const logoutRouter = require('./routes/logout');
 
 
 
@@ -41,6 +41,7 @@ app.use('/challenge',challengeRouter);
 app.use('/admin',adminRouter);
 app.use('/users',userRouter);
 app.use('/refresh',refreshRouter);
+app.use('/logout',logoutRouter);
 
 
 mongoose.connection.once('open',()=>{
