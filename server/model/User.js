@@ -14,6 +14,14 @@ const userSchema = new Schema({
         type:Number,
         required:true
     },
+    ranking:{
+        type:Number,
+        min:1
+    },
+    creationDate:{
+        type:Date,
+        required:true
+    },
     isPremium:{
         type:Boolean,
         required:true
