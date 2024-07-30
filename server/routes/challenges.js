@@ -45,6 +45,41 @@ router.get('/category/:category',validateToken,async(req,res)=>{
     res.json(challenges);
 });
 
+
+
+router.get('/solved/category/:userID',async(req,res)=>{
+
+    const user = await User.findOne({_id:req.params.userID});
+    
+
+
+    const challenges = await Challenge.find();
+    const usefulChallenges = challenges.filter(challenge=>user.challenges.indexOf(challenge._id)!==-1);
+
+
+    const categories = {};
+    const difficulties = {};
+
+    usefulChallenges.forEach(challenge => {
+      const category = challenge.category;
+      if (categories[category]) {
+        categories[category]++;
+      } else {
+        categories[category] = 1;
+      }
+    });
+    usefulChallenges.forEach(challenge => {
+      const difficulty = challenge.difficulty;
+      if (difficulties[difficulty]) {
+        difficulties[difficulty]++;
+      } else {
+        difficulties[difficulty] = 1;
+      }
+    });
+
+    res.json({categories,difficulties});
+});
+
 router.get('/difficulty/:difficulty',validateToken,async(req,res)=>{
 
     const difficulty = req.params.difficulty;
