@@ -18,8 +18,9 @@ router.get('/byId/:id',validateToken ,async (req,res)=>{
 
 router.get('/challengeId/:challenge',validateToken, async (req,res)=>{
     const challenge = req.params.challenge;
-    const users = await User.find({challenges:challenge});
-    res.json(users);
+    const users = await User.find();
+    const SolvedUsers = users.filter(user=>{user.challenges.includes(challenge)}); 
+    res.json(SolvedUsers);
 });
 router.get('/top/:number',validateToken,async (req,res)=>{
     const number = parseInt(req.params.number);
