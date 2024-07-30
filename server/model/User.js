@@ -22,11 +22,15 @@ const userSchema = new Schema({
         type:String,
         required:true
     },
-    challenges:{
-        type:[mongoose.Schema.Types.ObjectId],
+    challenges:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Challenge',
         default:[]
-    },
-    refreshToken : String
+    }],
+    refreshToken : {
+        type:String,
+        default:''
+    }
 });
 
 module.exports = mongoose.model('User',userSchema);

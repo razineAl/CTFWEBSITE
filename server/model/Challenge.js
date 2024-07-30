@@ -41,10 +41,11 @@ const challengeSchema = new Schema({
         type:String,
         required:true
     },
-    solves:{
-        type:[mongoose.Schema.Types.ObjectId],
+    solves:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
         default:[]
-    }
+    }]
 });
 
 module.exports = mongoose.model('Challenge',challengeSchema);
