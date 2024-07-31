@@ -405,6 +405,49 @@ form div input.focused{
     border-bottom: solid 2px #004E64;
 }
 
+.profile-options-container{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 130%;
+    width: max(114%,130px);
+    bottom: -130%;
+    right: -7%;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    
+}
+.profile-options-container>div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    text-align: center;
+    position: relative;
+    padding: 0 5px;
+}
+.profile-options-container>div:hover{
+    color: #004E64;
+    background-color: #ededed;
+}
+.profile-options-container>div:first-of-type{
+    border-radius: 5px 5px 0 0 ;
+}
+.profile-options-container>div:nth-of-type(2){
+    border-radius: 0 0 5px 5px  ;
+}
+.profile-options-container>div a{
+    font-size: .95em;
+}
+.profile-options-container:hover{
+    cursor: pointer;
+}
+
 
 #challenges-main-page{
     height: auto;
@@ -936,6 +979,7 @@ p.ranking-link{
     color: #767676;
     padding: 20px 0;
     text-align: center;
+    margin-top: 25px;
 }
   
 .footer-container {
@@ -983,51 +1027,86 @@ p.ranking-link{
   
 /* ///////////////////////////////////////////////: */
 
-
-
-.profile-options-container{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 130%;
-    width: max(114%,130px);
-    bottom: -130%;
-    right: -7%;
-    border-radius: 5px;
-    background-color: #fff;
-    border: 1px solid #d5d5d5;
-    
-}
-.profile-options-container>div{
+#user-profile-page{
     width: 100%;
+    height: auto;
+    background-color: #f8f9fa;
+}
+#user-profile-general-section{
+    width: 95%;
+    height: 80px;
+    background-color: #fff;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin: 45px auto ;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    box-shadow: 0 1px 15px #dfdfdf;
+}
+#user-profile-general-section-titles{
+    background-color: hsl(213, 96%, 18%);
+    color: #fff;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    font-size: 1.2em;
+}
+#user-profile-general-section-titles>div{
     flex: 1;
+}
+#user-profile-general-section p{
     text-align: center;
-    position: relative;
-    padding: 0 5px;
+    margin: 0;
 }
-.profile-options-container>div:hover{
-    color: #004E64;
-    background-color: #ededed;
+#user-profile-general-section-information{
+    display: flex;
+    flex-direction: row;
+    color: hsl(213, 96%, 18%);
+    align-items: center;
+    font-size: 1.3em;
 }
-.profile-options-container>div:first-of-type{
-    border-radius: 5px 5px 0 0 ;
+#user-profile-general-section-information>div{
+    flex: 1;
 }
-.profile-options-container>div:nth-of-type(2){
-    border-radius: 0 0 5px 5px  ;
+#user-profile-informations-section{
+    width: 95%;
+    height: max-content;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0 1px 15px #ededed;
+    padding: 20px 0;
 }
-.profile-options-container>div a{
-    font-size: .95em;
-}
-.profile-options-container>div span{
+.chart-container {
+    height: 250px !important;
+    width: max-content; 
+    background-color: #FFF;
+    margin: auto;
     
+  }
+  .chart-container canvas {
+    width: 100% !important; /* Override inline width */
+    height: 100% !important; /* Override inline height */
+  }
+#stats-filter{
+    width: 500px;
+    margin: 0 auto 10px auto;
+}
+#user-profile-informations-section button{
+    background-color: transparent;
+    border: none;
+    color: #636c76;
+    font-size: .8em;
+    
+}
+#user-profile-informations-section button:hover{
+    color: #0969da;
+}
 
+#user-profile-informations-section span{
+    font-size: .5em;
 }
-.profile-options-container:hover{
-    cursor: pointer;
+
+.recharts-responsive-container{
+    margin: auto;
+    
 }
+
