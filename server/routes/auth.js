@@ -9,13 +9,18 @@ const jwt = require('jsonwebtoken');
 router.post('/register',async (req,res)=>{
     const {username,password} = req.body;
 
+    const date = new Date();
+
     const foundUsername = await User.findOne({username:username});
 
     if (foundUsername) return res.json({error:'username already taken'});
 
     const hashedpwd = await bcrypt.hash(password,10);
 
-    const user = await User.create({username:username,password:hashedpwd,points:0,isPremium:false,role:'user'});
+    const users = await User.find().sort({ranking:-1});
+
+
+    const user = await User.create({username:username,password:hashedpwd,creationDate:date,points:0,isPremium:false,ranking:users[0].ranking+1,role:'user'});
 
     res.json('success');
 
