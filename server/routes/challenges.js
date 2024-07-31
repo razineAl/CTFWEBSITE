@@ -93,10 +93,12 @@ router.put('/submit/:challengeId/:userId',validateToken, async (req, res) => {
     const { challengeId, userId } = req.params;
     const  {flag}  = req.body;
 
+
     if (!challengeId) return res.status(400).json({ error: 'Challenge ID is required' });
     if (!userId) return res.status(400).json({ error: 'User ID is required' });
 
     try {
+        const users = await User.find().sort({points:-1});
         const challenge = await Challenge.findById(challengeId);
         if (!challenge) return res.status(404).json({ error: 'No such challenge' });
 
@@ -104,7 +106,7 @@ router.put('/submit/:challengeId/:userId',validateToken, async (req, res) => {
         const currentUser = await User.findById(userId);
         if (!currentUser) return res.status(404).json({ error: 'User not found' });
 
-
+    
 
         if (challenge.flag !== flag) return res.status(200).json({ answer: false });
 
@@ -112,6 +114,13 @@ router.put('/submit/:challengeId/:userId',validateToken, async (req, res) => {
 
         if (challenge.solves.includes(currentUser._id) || currentUser.challenges.includes(challenge._id)) {
             return res.status(200).json({ error: 'Challenge already solved' });
+        }
+
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            user.ranking = i+1;
+            await user.save();
+            
         }
 
         challenge.solves.push(currentUser._id);
