@@ -1,39 +1,70 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis,Cell, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { Bar } from 'react-chartjs-2';
+import 'chart.js/auto';
 
-import '../App.css';
+const BarChart = ({ data }) => {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            // Custom tooltip label
+            return `${context.dataset.label}: ${context.parsed.y}`;
+          }
+        },
+        backgroundColor: '#000', // Tooltip background color
+        titleColor: '#fff', // Tooltip title color
+        bodyColor: '#fff', // Tooltip body color
+        borderColor: '#fff', // Tooltip border color
+        borderWidth: 1
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: '#000' // X-axis labels color
+        }
+      },
+      y: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          beginAtZero: true,
+          color: '#000' // Y-axis labels color
+        }
+      }
+    }
+  };
 
+  const chartData = {
+    labels: data.labels,
+    datasets: [
+      {
+        label: 'Solved Challenges',
+        data: data.values,
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF',
+          '#FF9F40'
+        ],
+        borderRadius: 2, // Bar corners radius
+        barThickness: 10, // Bar width
+      }
+    ]
+  };
 
+  return <Bar data={chartData} options={options}/>;
+};
 
-
-const colors = ['#003f5c','#4a4e69','#bc5090','#ff6361','#7a5195'];
-
-const BarCharts = ({ data }) => (
-  <ResponsiveContainer width="50%" height={200}>
-    <div id='mondiv'>j</div>
-    <BarChart
-      data={data}
-      margin={{
-        top: 20, right: 30, left: 20, bottom: 5,
-      }}
-      barSize={10}
-    >
-      <XAxis dataKey="category" />
-      
-      <YAxis />
-        <Bar
-          dataKey="solved"
-          radius={[2, 2, 0, 0]}  // Slightly rounded corners
-          isAnimationActive={false}  // Disable hover animation // Use the color from data
-        >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-        ))}
-        </Bar>
-      </BarChart>
-  </ResponsiveContainer>
-);
-
-
-
-export default BarCharts;
+export default BarChart;
