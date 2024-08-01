@@ -130,7 +130,7 @@ function ChallengePage() {
                         <Link className='link' to='/billing'>Premium</Link>
                     </div>
                     <div className='navbar-section'>
-                        <Link className='link'>FAQ</Link>
+                        <Link className='link' to='/faq'>FAQ</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>
@@ -175,8 +175,8 @@ function ChallengePage() {
                                             </div>
                             }
                             {
-                                solved && <div className='solved-comment'>
-                                                <p>Correct, But you already solved this challenge :/</p>
+                                solved && <div className='solved-comment'> 
+                                                <p>Correct, But you already solved it&nbsp;&nbsp;:/</p>
                                             </div>
                             }
                             

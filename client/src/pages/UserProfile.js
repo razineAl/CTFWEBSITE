@@ -82,7 +82,7 @@ function UserProfile(){
         
     }
 
-    const date = new Date();
+    const date = new Date(user.creationDate);
 
     const Months = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec']
 
@@ -140,7 +140,7 @@ function UserProfile(){
                         <Link className='link' to='/billing'>Premium</Link>
                     </div>
                     <div className='navbar-section'>
-                        <Link className='link'>FAQ</Link>
+                        <Link className='link' to='/faq'>FAQ</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>
@@ -167,7 +167,7 @@ function UserProfile(){
                 <div><p>{user.points}</p></div>
                 <div><p>{user.ranking}</p></div>
                 <div><p>{user.challenges.length || 0}</p></div>
-                <div><p>{Months[date.getMonth(user.creationDate)]+' '+ date.getFullYear(user.creationDate)}</p></div>
+                <div><p>{Months[date.getMonth()]+' '+ date.getFullYear()}</p></div>
             </div>
             </div>
             <div id='user-profile-informations-section'>

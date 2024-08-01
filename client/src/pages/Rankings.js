@@ -122,7 +122,7 @@ function Rankings(){
                         <Link className='link' to='/billing'>Premium</Link>
                     </div>
                     <div className='navbar-section'>
-                        <Link className='link'>FAQ</Link>
+                        <Link className='link' to='/faq'>FAQ</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>
