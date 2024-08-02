@@ -69,7 +69,8 @@ function FAQ() {
     const [faqItems,setFaqItems] = useState([
         {
           question: 'What is a CTF challenge ?',
-          answer: 'A CTF is a challenge in CYBERSECURITY where the goal is to find a piece of information called flag and submit it. In order to find it you have to',
+          answer: 'A CTF is a challenge in cybersecurity where the goal is to find a piece of information called flag and submit it. In order to find it you have to employ your knowledge in many fields including web hacking, reverse engineering and many others... ',
+          answerContinuation:'That being said, it is also an excellent way to improve your knowledge in those fields !',
           open:true
         },
         {
@@ -164,13 +165,19 @@ function FAQ() {
                     {faqItems.map((item,index)=>{
                         return(
                         <li key={index}>
-                            <div className='faq-question-container' onClick={()=>{showAnswer(index)}} >
+                            <div className={`faq-question-container ${item.open ? 'open' : ''}`} onClick={()=>{showAnswer(index)}} >
                                 <span className={item.open ? 'rotate' : ''}><FontAwesomeIcon icon={faCaretRight} /></span><p>&nbsp;&nbsp;&nbsp;&nbsp;{item.question} </p>
                             </div>
                             {
                                     item.open && (
-                                    <div className='faq-answer-container'>
+                                    <div className={`faq-answer-container`}>
                                         <p>{item.answer}</p>
+                                        {
+                                            item.answerContinuation && (
+                                                <p className='faq-answer-continuation'>{item.answerContinuation}</p>
+                                            )
+                                        }
+                                        
                                     </div>
                                 )
                             }
@@ -181,6 +188,7 @@ function FAQ() {
                     })}
                 </ul>
             </main>
+            <Footer></Footer>
            </> 
             )}
         
