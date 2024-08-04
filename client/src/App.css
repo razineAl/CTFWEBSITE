@@ -127,7 +127,7 @@ form div{
     display: flex;
     position: relative;
 }
-form div label{
+#login-page form div label{
     position: absolute;
     top: 5px;
     left: 3px;
@@ -135,10 +135,10 @@ form div label{
     font-size: .85em;
     transition: top 0.3s,font-size 0.3s;
 }
-form div label:hover{
+#login-page form div label:hover{
     cursor:text;
 }
-form div label.focused{
+#login-page form div label.focused{
     top: -15px;
     font-size: .75em;
     color: hsl(213, 96%, 18%);
@@ -534,14 +534,17 @@ form div input.focused{
     background-color: #fff;
     text-align: center;
 }
+.challenge-container > div:first-child{
+    color: hsl(213, 96%, 18%);
+}
+.challenge-container > div:first-child:hover{
+    text-decoration: underline;
+}
 .odd{
     background-color: #f8f8f8;
 }
 .even{
     background-color: #ffffff;
-}
-.challenge-container:hover{
-    cursor: pointer;
 }
 .challenge-container div:first-child{
     position: relative;
@@ -628,11 +631,6 @@ form div input.focused{
     z-index: 1;
     display: grid;
     grid-template-rows: 1fr 2fr 1fr;
-}
-#triggered-challenge-container #tr-challenge-header{
-
-    background-color: #ff0000;
-
 }
 #challenge-modal{  
     position: fixed;
@@ -1081,10 +1079,10 @@ p.ranking-link{
     margin: auto;
     
   }
-  .chart-container canvas {
-    width: 100% !important; /* Override inline width */
-    height: 100% !important; /* Override inline height */
-  }
+.chart-container canvas {
+    width: 100% !important; 
+    height: 100% !important; 
+}
 #stats-filter{
     width: 500px;
     margin: 0 auto 10px auto;
@@ -1146,7 +1144,7 @@ p.ranking-link{
 #main-faq-content ul .faq-question-container span{
     height: auto;
     width: auto;
-    transition: rotate .4s ease;
+    transition: rotate .3s ease;
 }
 .rotate{
     rotate: 90deg;
@@ -1178,4 +1176,110 @@ p.ranking-link{
     line-height: 1.5em;
 }
 
+
+
+/*                          Registration                                  */
+#registration-page{
+    width: 100%;
+    height: auto;
+    background-color: #f8f9fa;
+    padding-top: 10px;
+}
+#main1{
+    width: 90%;
+    height: calc(auto + 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    background-color: #fff;
+    box-shadow: 0 2px 15px #e4e4e4;
+    margin: 10px auto 20px auto;
+}
+#main1>div:first-of-type{
+    width: 85%;
+    height: auto;
+    margin: auto;
+    margin-bottom: 20px;
+}
+#main1>div:first-of-type h1{
+    font-family: ubuntuBold,Verdana, Geneva, Tahoma, sans-serif;
+    color: hsl(213, 96%, 18%);
+}
+#main1>div:first-of-type p{
+    color:hsl(231, 11%, 63%);
+}
+#main1 form{
+    width: 85%;
+    height: auto;
+    margin: auto;
+    display: grid;
+    grid-template-rows: repeat(4,1fr);
+}
+#main1 p{
+    margin: 0;
+}
+#main1 form>div{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 25px;
+}
+#main1 form>div input{
+    height: 40px;
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 5px;
+    padding: 0 10px;
+    color: hsl(213, 96%, 18%);
+    font-size: 1.05em;
+    font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+}
+#main1 form>div input:focus{
+    border: 2px solid hsl(213, 96%, 18%);    
+}
+::placeholder{
+    color: hsl(231, 11%, 63%);
+    font-size: .9em;
+}
+:-ms-input-placeholder{
+    color: hsl(231, 11%, 63%);
+    font-size: .9em;
+}
+#main1 form>div label{
+    font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
+    color: hsl(213, 96%, 18%);
+    margin-bottom: 10px;
+}
+.invalid{
+    border: 1px solid hsl(354, 84%, 57%) !important; 
+}
+.validInput{
+    border: 1px solid #3a945b !important; 
+}
+.error-msg{
+    position: absolute;
+    bottom:-25px;
+    left: 0;
+    color: hsl(354, 84%, 57%);
+    font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
+    font-size: .9em;
+}
+
+#main1 >div:has(button){
+    width: 85%;
+    height: 60px;
+    margin: auto;
+    position: relative;
+}
+#main1 button{
+    background-color: hsl(213, 96%, 18%);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    height: 40px;
+    width: 100px;
+    position: absolute;
+    right: 0;
+
+}
 
