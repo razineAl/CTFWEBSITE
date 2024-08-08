@@ -11,12 +11,9 @@ import Footer from '../components/Footer';
 
 function Challenges(){
     const {authState,setAuthState} = useContext(AuthContext);
-    const [challenges,setChallenges] = useState([]);
     const [effChallenges,setEffChallenges] = useState([]);
-    const [trace_challenge,setTrace_challenge] = useState({category:'All',difficulty:'All'});
     const [visible,setVisible] = useState(false);
     const [filtered,setFiltered] = useState(false);
-    const [chosen,setChosen] = useState({});
     const [general,setGeneral] = useState(false);
     const [web,setWeb] = useState(false);
     const [reverse,setReverse] = useState(false);
@@ -48,7 +45,6 @@ function Challenges(){
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
             axios.get('http://localhost:3001/challenge/all',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
-                setChallenges(response.data);
                 setEffChallenges(response.data); 
                 setLoading(false);  
             })   
@@ -118,7 +114,7 @@ function Challenges(){
                         <Link className='link' to='/billing'>Premium</Link>
                     </div>
                     <div className='navbar-section'>
-                        <Link className='link'>FAQ</Link>
+                        <Link className='link' to='/faq'>FAQ</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>
@@ -233,19 +229,7 @@ function Challenges(){
             
             </div>
         
-            <div className={filtered ? 'filtered' : 'non-filtered'} id='challenge-modal'>
-            {visible && <div id='triggered-challenge-container' ref={individualChallenge}>
-                    <div id='tr-challenge-header'>
-                        {chosen.title}
-                    </div>    
-                    <div id='tr-challenge-body'>
-                        <p>{chosen.body + "."} <a href={chosen.url} target='blank'>Link to the challenge</a></p>
-                    </div>    
-                    <div id='tr-challenge-footer'>
-                        {chosen.difficulty}
-                    </div>    
-                </div>}
-            </div>
+
             <Footer></Footer>
                     </>
                 )

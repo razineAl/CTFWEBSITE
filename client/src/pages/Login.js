@@ -18,16 +18,12 @@ function Login(){
     let navigate = useNavigate();
 
     const sendLogin = async ()=>{
-        await fetch('http://localhost:3001/auth/login',{
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            credentials:'include',
-            body:JSON.stringify({
-                username:username,
-                password:password
-            })
+
+        axios.post('http://localhost:3001/auth/login',{username:username,password:password},{withCredentials:true})
+        .then((res)=>{
+            navigate('/home');
         })
-        navigate('/home');
+        
         
     }
     const handleFocus = ()=>{
@@ -51,11 +47,11 @@ function Login(){
         }        
     }
     useEffect(
-        ()=>{/*
-            const refreshToken = cookies.get('refreshToken');
-            if (refreshToken) {
-                cookies.remove('refreshToken');
-            }*/
+        ()=>{
+            axios.get('http://localhost:3001/logout',{withCredentials:true})
+            .then((res)=>{
+                
+            })
         },[])
     return(
         <div id='login-page'>
