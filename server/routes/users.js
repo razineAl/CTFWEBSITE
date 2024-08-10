@@ -22,6 +22,7 @@ router.get('/challengeId/:challenge',validateToken, async (req,res)=>{
     const SolvedUsers = users.filter(user=>{user.challenges.includes(challenge)}); 
     res.json(SolvedUsers);
 });
+
 router.get('/top/:number',validateToken,async (req,res)=>{
     const number = parseInt(req.params.number);
 
@@ -37,7 +38,24 @@ router.get('/top/:number',validateToken,async (req,res)=>{
     } catch (error) {
         res.status(500).json("some error occured in the backend !");
     }
-})
+});
+
+router.get('/newest/:number',validateToken,async (req,res)=>{
+    const number = parseInt(req.params.number);
+
+    if (isNaN(number)) {
+        return res.status(400).json("not a number !");
+    }
+    try {
+        const users = await User.find()
+        .sort({creationDate:-1})
+        .limit(number);
+        res.json(users);
+
+    } catch (error) {
+        res.status(500).json("some error occured in the backend !");
+    }
+});
 
 module.exports = router;
 
