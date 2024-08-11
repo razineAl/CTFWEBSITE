@@ -133,7 +133,7 @@ form div{
     left: 3px;
     color: hsl(231, 6%, 59%);
     font-size: .85em;
-    transition: top 0.3s,font-size 0.3s;
+    transition: top 0.15s ease,font-size 0.15s ease;
 }
 #login-page form div label:hover{
     cursor:text;
@@ -254,9 +254,9 @@ form div input.focused{
 }
 .new-challenge-heading{
     margin: 0;
-    background: linear-gradient(to right, #000046, #1cb5e0);
-    background-clip: text;
+    background-image:linear-gradient(to right, #000046, #1cb5e0);
     color: transparent;
+    background-clip: text;
     padding-left: 5%;
 }
 .new-challenge-first-half{
@@ -294,7 +294,23 @@ form div input.focused{
 #challenges .difficulty-container{
     margin: auto;
 }
-
+#new-users-container{
+    width: 300px;
+    height: 200px;
+    background-color: #fff;
+    box-shadow: 0 2px 15px #eaeaea;
+}
+#new-users-container ul{
+    height: 50%;
+    width: 100%;
+    margin: auto;
+    list-style: none;
+}
+#new-users-container h2{
+    background-image:linear-gradient(to right, #000046, #1cb5e0);
+    color: transparent;
+    background-clip: text;
+}
 .difficulty-1{
     background-color: #fff;
     border: solid 1px rgb(170, 215, 66);
@@ -475,7 +491,7 @@ form div input.focused{
     
 }
 #challenge-page-welcome h1{
-    background: linear-gradient(to right, #00001a, #1cb5e0);
+    background-image:linear-gradient(to right, #000046, #1cb5e0);
     color: transparent;
     background-clip: text;
 }
@@ -1239,11 +1255,11 @@ p.ranking-link{
 }
 ::placeholder{
     color: hsl(231, 11%, 63%);
-    font-size: .9em;
+    font-size: 0.9em;
 }
 :-ms-input-placeholder{
     color: hsl(231, 11%, 63%);
-    font-size: .9em;
+    font-size: 0.9em;
 }
 #main1 form>div label{
     font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
@@ -1280,6 +1296,5 @@ p.ranking-link{
     width: 100px;
     position: absolute;
     right: 0;
-
 }
 
