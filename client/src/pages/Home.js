@@ -21,6 +21,7 @@ function Home(){
     const [loading,setLoading] = useState(true);
     const [navOptions,setNavOptions] = useState(false);
     const [newChallenges,setNewChallenges] = useState([]);
+    const [newUsers,setNewUsers] = useState([]);
 
     const typedRef = useRef(null);
     const optionsRef = useRef(null);
@@ -45,6 +46,10 @@ function Home(){
             axios.get('http://localhost:3001/challenge/newest/6',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setNewChallenges(response.data); 
+            })    
+            axios.get('http://localhost:3001/users/newest/5',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
+            .then((response)=>{
+                setNewUsers(response.data); 
                 setLoading(false);
             })    
         })
@@ -178,6 +183,28 @@ function Home(){
                 <span><h2 className='typed-text' ref={typedRef}></h2></span>
             </div>
             <div id='home-main-content' className='slider-container'>
+                <div id='home-faq-parent'>
+                <div id='home-faq-container'>
+                    <h2>What is a CTF ?</h2>
+                    <div id='home-faq-inside'>
+                        <p>A CTF is a challenge in cybersecurity where the goal is to find a piece of information called flag and submit it. In order to find it you have to employ your knowledge in many fields including web hacking, reverse engineering and many others...</p>
+                        <Link to='/faq'>Read More</Link>
+                    </div>
+                </div>
+                <div id='new-users-container'>
+                    <h3>New Members</h3>
+                    <ul id='new-users-list'>
+                        {
+                            newUsers.map((newUser,index)=>{
+                                return (
+                                    <li key={index} className='new-user'>{newUser.username}</li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+                </div>
+                
                     <h2 className='new-challenge-heading'>Our latest challenges</h2>
                     <Slider {...settings}>
                         {newChallenges.map((challenge,index)=>{
@@ -199,6 +226,10 @@ function Home(){
 
                         })}
                     </Slider>
+                
+                
+
+                
                   
             </div>
             <Footer></Footer>
