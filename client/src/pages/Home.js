@@ -26,6 +26,8 @@ function Home(){
     const typedRef = useRef(null);
     const optionsRef = useRef(null);
 
+    const Months = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
+
     
     const override = {
         display: "block",
@@ -218,8 +220,9 @@ function Home(){
                     <ul id='new-users-list'>
                         {
                             newUsers.map((newUser,index)=>{
+                                const date = new Date(newUser.creationDate);
                                 return (
-                                    <li key={index} className='new-user'>{newUser.username}</li>
+                                    <li key={index} className='new-user'><p>{newUser.username}</p><p>{Months[date.getMonth()]}</p></li>
                                 )
                             })
                         }
