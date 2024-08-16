@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState, useCallback, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRight, faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,6 +20,7 @@ function Home(){
     const {authState,setAuthState} = useContext(AuthContext);
     const [loading,setLoading] = useState(true);
     const [navOptions,setNavOptions] = useState(false);
+    const [mored,setMored] = useState(false);
     const [newChallenges,setNewChallenges] = useState([]);
     const [newUsers,setNewUsers] = useState([]);
 
@@ -212,7 +213,7 @@ function Home(){
                     <h2>What is a CTF ?</h2>
                     <div id='home-faq-inside'>
                         <p>A CTF is a challenge in cybersecurity where the goal is to find a piece of information called flag and submit it. In order to find it you have to employ your knowledge in many fields including web hacking, reverse engineering and many others...</p>
-                        <Link to='/faq'>Read More</Link>
+                        <Link to='/faq' className='more' onMouseOver={()=>{setMored(true)}} onMouseOut={()=>{setMored(false)}}>Read More<span className={mored ? 'mored' : ''}><FontAwesomeIcon icon={faArrowRight} /></span></Link>
                     </div>
                 </div>
                 <div id='new-users-container'>
@@ -222,7 +223,7 @@ function Home(){
                             newUsers.map((newUser,index)=>{
                                 const date = new Date(newUser.creationDate);
                                 return (
-                                    <li key={index} className='new-user'><p>{newUser.username}</p><p>{Months[date.getMonth()]}</p></li>
+                                    <li key={index} className='new-user'><p className='membership-name'>{newUser.username}</p><p className='membership-date'>{`${date.getDay()} ${Months[date.getMonth()]} ${date.getFullYear()}`}</p></li>
                                 )
                             })
                         }
