@@ -84,7 +84,7 @@ function UserProfile(){
 
     const date = new Date(user.creationDate);
 
-    const Months = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec']
+    const Months = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
 
 
     const chartData1 = {
@@ -100,11 +100,7 @@ function UserProfile(){
 
 
     const changeStats = ()=>{
-        if (difficulty) {
-            setDifficulty(false);
-        } else {
-            setDifficulty(true);
-        }
+        setDifficulty(!difficulty);
     }
 
     return(
@@ -166,7 +162,7 @@ function UserProfile(){
                 <div><p>{user.username}</p></div>
                 <div><p>{user.points}</p></div>
                 <div><p>{user.ranking}</p></div>
-                <div><p>{user.challenges.length || 0}</p></div>
+                <div><p>{user.challenges ? user.challenges.length : 0}</p></div>
                 <div><p>{Months[date.getMonth()]+' '+ date.getFullYear()}</p></div>
             </div>
             </div>
