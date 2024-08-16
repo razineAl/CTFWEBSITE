@@ -222,10 +222,9 @@ form div input.focused{
     margin-top: 15px;
     padding-top: 15px;
     
-    
 }
 .slick-slider{
-    width: 92%;
+    width: 94%;
     margin: auto;
 }
 .slick-list{
@@ -257,7 +256,7 @@ form div input.focused{
     background-image:linear-gradient(to right, #000046, #1cb5e0);
     color: transparent;
     background-clip: text;
-    padding-left: 5%;
+    padding-left: 30px;
 }
 .new-challenge-first-half{
     display: flex;
@@ -294,6 +293,49 @@ form div input.focused{
 #challenges .difficulty-container{
     margin: auto;
 }
+
+#home-faq-parent{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    
+}
+#home-faq-parent h2{
+    background-image:linear-gradient(to right, #000046, #1cb5e0);
+    color: transparent;
+    background-clip: text;
+}
+#home-faq-container{
+    background-color: #fff;
+    padding: 0 15px;
+    box-shadow: 0 2px 15px #eaeaea;
+    position: relative;
+}
+.more{
+    color: hsl(213, 96%, 18%);
+    text-decoration: none;
+    display: inline-block;
+    font-family: ubuntu-medium;
+}
+#home-faq-container .more{
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+}
+
+#home-faq-container span{
+    position: relative;
+    left: 0;
+    margin-left: 7px;
+    transition: left .15s ease;
+    font-family: ubuntu-medium;
+}
+#home-faq-container span.mored{
+    left:5px;
+}
 #new-users-container{
     width: 300px;
     height: 200px;
@@ -305,11 +347,28 @@ form div input.focused{
     width: 100%;
     margin: auto;
     list-style: none;
+    padding: 0;
 }
-#new-users-container h2{
+#new-users-container h3{
     background-image:linear-gradient(to right, #000046, #1cb5e0);
     color: transparent;
     background-clip: text;
+}
+.new-user{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+.membership-date{
+    color: #888c8fe6;
+    font-size: .95em;
+}
+.membership-name{
+    font-size: 1.05em;
+}
+.new-user p{
+    display: inline-block;
+    padding-left: 5px;
+    margin: 2px 0;
 }
 .difficulty-1{
     background-color: #fff;
@@ -469,7 +528,7 @@ form div input.focused{
 #challenges-main-page{
     height: auto;
     width: 100%;
-    background-color: #EDECEC;
+    background-color: #f8f9fa;
     
 }
 #challenge-page-welcome{
@@ -478,11 +537,7 @@ form div input.focused{
     background-color: hsl(0, 0%, 100%);
     padding: 10px 20px;
     box-sizing: border-box;
-    transition: box-shadow 0.5s;
-}
-#challenge-page-welcome:hover{
-    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.1),
-    -7px -7px 15px #fff;
+    box-shadow: 0 2px 15px #e0e0e0;
 }
 .bold{
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -510,6 +565,7 @@ form div input.focused{
     margin: 25px auto 0 auto;
     padding: 0 20px;
     background-color: #fff;
+    box-shadow: 0 2px 15px #e0e0e0;
 }
 .category{
     display: flex;
