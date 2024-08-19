@@ -102,7 +102,9 @@ function UserProfile(){
     const changeStats = ()=>{
         setDifficulty(!difficulty);
     }
-
+    const goToSettings = ()=>{
+        navigate(`/account/settings/${authState.id}`);
+    }
     return(
         <div id='user-profile-page'>
 
@@ -143,7 +145,7 @@ function UserProfile(){
                     <div className='navbar-part-second' >
                         <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
                         {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
-                            <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
+                            <div onClick={goToSettings}><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
                             <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
                         </div>}
                     </div>

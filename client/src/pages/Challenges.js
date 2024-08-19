@@ -82,6 +82,9 @@ function Challenges(){
             setFiltered(false);
         }
     }
+    const goToSettings = ()=>{
+        navigate(`/account/settings/${authState.id}`);
+    }
     return(
         <div id='challenges-main-page' onClick={(e)=>{handleCanceling(e)}}>
             {
@@ -121,7 +124,7 @@ function Challenges(){
                     <div className='navbar-part-second' >
                         <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
                         {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
-                            <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
+                            <div onClick={goToSettings}><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
                             <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
                         </div>}
                     </div>
@@ -133,7 +136,7 @@ function Challenges(){
                 <h1>Solving Challenges in Elmore CTF</h1>
                 <p>Choose the category you want to solve challenges in.</p>
                 <p>Pick a challenge.</p>
-                <p>Solve the challenge by submitting the flag in the dedicated area.<Link to='' className='lien'>What's a flag ?</Link></p>
+                <p>Solve the challenge by submitting the flag in the dedicated area.<Link to='' className='more'>What's a flag ?</Link></p>
             </div>
                 
             <div id='challenges'>

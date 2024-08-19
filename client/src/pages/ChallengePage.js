@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState,useRef } from 'react';
 import AuthContext from '../helpers/AuthContext';
 import { useParams,Link, useNavigate } from 'react-router-dom';
 import BarLoader from 'react-spinners/BarLoader';
+import DifficultySpan from '../components/DifficultySpan';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
 
@@ -20,6 +21,8 @@ function ChallengePage() {
 
     const [navOptions,setNavOptions] = useState(false);
     const optionsRef = useRef(null);
+
+    const difficultyLevels = ['Very Easy','Easy','Medium','Hard','Extremely Hard']
 
 
     const override = {
@@ -98,6 +101,9 @@ function ChallengePage() {
         setNavOptions(false)
   
     }
+    const goToSettings = ()=>{
+        navigate(`/account/settings/${authState.id}`);
+    }
   return (
     <div id='main-challenge-page'>
       {
@@ -137,7 +143,7 @@ function ChallengePage() {
                     <div className='navbar-part-second' >
                         <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
                         {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
-                            <div><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
+                            <div onClick={goToSettings}><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
                             <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
                         </div>}
                     </div>
@@ -156,13 +162,22 @@ function ChallengePage() {
                             <p>{challenge.body}</p>
                         </div>
                         <div>
+                            <h3>Category</h3>
+                            <p>{challenge.category}</p>
+                        </div>
+                        <div id='difficulty-div'>
+                            <h3>Difficulty</h3>
+                            <p>{difficultyLevels[challenge.difficulty-1]}</p>
+                            <DifficultySpan difficulty={challenge.difficulty}></DifficultySpan>
+                        </div>
+                        <div>
                             <a href={challenge.url} target='_blank'>Start Challenge</a>
                         </div>
                     </main>
                     <aside id='challenge-details-aside'>
-                        <h2>Flag Submission</h2>
+                        <h2>Flag Submission ({challenge.points} points)</h2>
                         <div id='challenge-submission-form'>
-                            <input type='text' value={flag} onChange={(e)=>{setFlag(e.target.value)}}></input>
+                            <input type='text' value={flag} onChange={(e)=>{setFlag(e.target.value)}} placeholder='Enter the Flag'></input>
                             <button type='button' onClick={submitFlag}>Submit Flag</button>
                             {
                             wrong && 
