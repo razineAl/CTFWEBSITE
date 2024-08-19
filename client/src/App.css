@@ -253,7 +253,7 @@ form div input.focused{
 }
 .new-challenge-heading{
     margin: 0;
-    background-image:linear-gradient(to right, #000046, #1cb5e0);
+    background-image:linear-gradient(to right, #000046, hsl(213, 96%, 18%));
     color: transparent;
     background-clip: text;
     padding-left: 30px;
@@ -304,7 +304,7 @@ form div input.focused{
     
 }
 #home-faq-parent h2{
-    background-image:linear-gradient(to right, #000046, #1cb5e0);
+    background-image:linear-gradient(to right, #000046, hsl(213, 96%, 18%));
     color: transparent;
     background-clip: text;
 }
@@ -343,31 +343,35 @@ form div input.focused{
     box-shadow: 0 2px 15px #eaeaea;
 }
 #new-users-container ul{
-    height: 50%;
+    height: auto;
     width: 100%;
     margin: auto;
     list-style: none;
     padding: 0;
 }
 #new-users-container h3{
-    background-image:linear-gradient(to right, #000046, #1cb5e0);
+    background-image:linear-gradient(to right, #000046, hsl(213, 96%, 18%));
     color: transparent;
     background-clip: text;
+    text-align: center;
 }
 .new-user{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 33fr 15fr;
 }
 .membership-date{
     color: #888c8fe6;
     font-size: .95em;
+    text-align: center;
 }
 .membership-name{
     font-size: 1.05em;
 }
+.new-user {
+    padding: 0 10px;
+}
 .new-user p{
     display: inline-block;
-    padding-left: 5px;
     margin: 2px 0;
 }
 .difficulty-1{
@@ -546,7 +550,7 @@ form div input.focused{
     
 }
 #challenge-page-welcome h1{
-    background-image:linear-gradient(to right, #000046, #1cb5e0);
+    background-image:linear-gradient(to right, #000046, hsl(213, 96%, 18%));
     color: transparent;
     background-clip: text;
 }
@@ -903,8 +907,8 @@ p.ranking-link{
     justify-content: center;
 }
 #challenge-details{
-    height: 90%;
-    width: 90%;
+    height: max(90%,450px);
+    width: 95%;
     box-shadow: 1px 1px 15px 1px #c9c9c9;
     background-color: #fff;
     display: grid;
@@ -913,9 +917,9 @@ p.ranking-link{
 }
 #challenge-details-main{
     position: relative;
+    height: 100%;
     padding: 0 20px;
-    display: grid;
-    grid-template-rows: 2fr 7fr 3fr;
+    
     border-right: 1px solid #cacaca;
 }
 #challenge-details-main h2{
@@ -924,6 +928,30 @@ p.ranking-link{
     border-bottom: 1px solid #cacaca;
 }
 
+#challenge-details-main > div:last-of-type{
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    translate: -50% 0;
+    margin: auto;
+}
+#challenge-details-main > div p{
+    margin-top: 0;
+    padding: 0 10px;
+}
+#challenge-details-main #difficulty-div p{
+    display: inline-block;
+}
+#challenge-details-main #difficulty-div h3{
+    margin-bottom: 5px;
+}
+#challenge-details-main #difficulty-div> div{
+    display: inline-grid;
+}
+#challenge-details-main > div h3{
+    margin-bottom: 10px;
+}
 #challenge-details-main a{
     display: flex;
     justify-content: center;
@@ -932,11 +960,10 @@ p.ranking-link{
     height: 35px;
     margin: auto;
     color: #fff;
-    background-color: #000046;
+    background-color: hsl(213, 96%, 18%);
     border: none;
     border-radius: 2px;
     text-decoration: none;
-
 }
 #challenge-details-aside{
     position: relative;
@@ -970,20 +997,24 @@ p.ranking-link{
 }
 #challenge-details-aside #challenge-submission-form button{
     height: 35px;
-    border: 1px solid hsl(229, 24%, 87%);
     border-radius: 5px;
     padding: 0 10px;
-    color: hsl(213, 96%, 18%);
+    
     font-size: 1.01em;
     font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
     outline: none;
     margin-bottom: 20px;
-}
-#challenge-details-aside #challenge-submission-form button:hover{
     border: none;
     background-color: hsl(213, 96%, 18%);
     color:#fff ;
 }
+/*
+#challenge-details-aside #challenge-submission-form button:focus{
+    border: 1px solid hsl(229, 24%, 87%);
+    background-color: #F0F0F0;
+    color: hsl(213, 96%, 18%);
+}*/
+
 
 .incorrect-comment{
     width: 100%;
@@ -1191,7 +1222,7 @@ p.ranking-link{
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 #main-faq-content h1{
-   background-image:linear-gradient(to right, #000046, #1cb5e0);
+   background-image:linear-gradient(to right, #000046, hsl(213, 96%, 18%));
    background-clip:text;
    color: transparent;
    margin: 0%;
@@ -1354,3 +1385,66 @@ p.ranking-link{
     right: 0;
 }
 
+/*                   SETTINGS PAGEEEEEEEEEEEEEE                             */
+
+#settings-page{
+    width: 100%;
+    height: auto;
+    background-color: #f8f9fa;
+}
+#settings-main-page{
+    background-color: #fff;
+    width: 95%;
+    margin: 25px auto;
+    box-shadow: 0 2px 15px #e0e0e0;
+    padding: 0 20px;
+}
+#settings-main-page > div{
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+}
+#settings-main-page > div > div:has(button){
+    position: relative;
+    height: 35px;
+    margin-bottom: 20px;
+}
+#settings-main-page h2{
+    font-weight: 500;
+    padding-bottom: 15px;
+    border-bottom: 1px solid hsl(229, 24%, 87%);
+}
+#settings-main-page button{
+    height: 35px;
+    width: max-content;
+    border-radius: 2px;
+    padding: 0 20px;
+    outline: none;
+    border: none;
+    background-color: hsl(213, 96%, 18%);
+    color:#fff ;
+    position: absolute;
+    right: 0;
+
+}
+#settings-main-page input{
+    height: 35px;
+    border: 1px solid hsl(229, 24%, 87%);
+    border-radius: 2px;
+    padding: 0 10px;
+    color: hsl(213, 96%, 18%);
+    font-family: ubuntu-medium,Verdana, Geneva, Tahoma, sans-serif;
+    outline: none;
+    margin: 10px 0 20px 0;
+}
+#settings-main-page #delete-account{
+    height: 35px;
+    width: max-content;
+    border-radius: 2px;
+    padding: 0 20px;
+    outline: none;
+    
+    border: none;
+    background-color: hsl(354, 95%, 52%);
+    color:#fff ;
+}
