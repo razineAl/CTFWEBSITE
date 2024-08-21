@@ -84,6 +84,29 @@ router.put('/update/username/:userID', validateToken, async (req, res) => {
     }
 });
 
+
+router.post('/validity/username', async (req, res) => {
+    try {
+        const { username } = req.body;
+
+        
+        if (!username || typeof username !== 'string') {
+            return res.status(400).json({ error: "Invalid input" });
+        }
+
+        const user = await User.findOne({username:username});
+        if (!user) {
+            return res.status(200).json({validity:true});
+        }
+        return res.status(200).json({validity:false});
+
+        
+    } catch (error) {
+        console.error("Error updating username:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 router.put('/update/password/:userID', async (req, res) => {
     try {
         const userID = req.params.userID;
