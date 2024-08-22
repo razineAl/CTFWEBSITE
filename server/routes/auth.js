@@ -7,20 +7,20 @@ const jwt = require('jsonwebtoken');
 
 
 router.post('/register',async (req,res)=>{
-    const {username,password} = req.body;
+    const {email,username,password} = req.body;
 
     const date = new Date();
 
-    const foundUsername = await User.findOne({username:username});
+    const foundUser = await User.findOne({email:email});
 
-    if (foundUsername) return res.json({error:'username already taken'});
+    if (foundUser) return res.json({error:'email already taken'});
 
     const hashedpwd = await bcrypt.hash(password,10);
 
     const users = await User.find().sort({ranking:-1});
 
 
-    const user = await User.create({username:username,password:hashedpwd,creationDate:date,points:0,isPremium:false,ranking:users[0].ranking+1,role:'user'});
+    const user = await User.create({username:username,email:email,password:hashedpwd,creationDate:date,points:0,isPremium:false,ranking:users[0].ranking+1,role:'user'});
 
     res.json('success');
 
@@ -28,14 +28,14 @@ router.post('/register',async (req,res)=>{
 
 router.post('/login',async (req,res)=>{
 
-    const {username,password} = req.body;
+    const {email,password} = req.body;
 
-    const user = await User.findOne({username:username});
+    const user = await User.findOne({email:email});
 
-    if (!user) return res.status(404).json({error:'there is no user with this username !'});
+    if (!user) return res.status(404).json({error:'there is no user with this email !'});
 
     const match = await bcrypt.compare(password,user.password);
-    if(!match) return res.status(403).json({error:'invalid username or password '});
+    if(!match) return res.status(403).json({error:'invalid email or password '});
 
     
     const accessToken = jwt.sign({username:user.username},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'900s'});

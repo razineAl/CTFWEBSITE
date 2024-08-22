@@ -9,7 +9,7 @@ import Cookies from 'universal-cookie';
 
 
 function Login(){
-    const [username,setUsername] = useState('');
+    const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [focused,setFocused] = useState(false);
     const [focus,setFocus] = useState(false);
@@ -19,7 +19,7 @@ function Login(){
 
     const sendLogin = async ()=>{
 
-        axios.post('http://localhost:3001/auth/login',{username:username,password:password},{withCredentials:true})
+        axios.post('http://localhost:3001/auth/login',{email:email,password:password},{withCredentials:true})
         .then((res)=>{
             navigate('/home');
         })
@@ -36,7 +36,7 @@ function Login(){
     }
 
     const handleBlur = ()=>{
-        if (username==='') {
+        if (email==='') {
             setFocus(false);
         }
 
@@ -72,14 +72,14 @@ function Login(){
             </div>
             <form onSubmit={(e)=>{
                 e.preventDefault();
-                if (username!=='' && password!=='') {
+                if (email!=='' && password!=='') {
                     sendLogin();
                 }
                 }}>
 
                 <div>
-                    <label htmlFor='user' className={focus ? 'focused' : ''}>Username</label>
-                    <input className={ focus ? 'focused' : ''} type='text' id='user' name='user' value={username} onBlur={handleBlur} onFocus={handleFocus} onChange={(e)=>{setUsername(e.target.value)}}></input>
+                    <label htmlFor='user' className={focus ? 'focused' : ''}>Email</label>
+                    <input className={ focus ? 'focused' : ''} type='text' id='user' name='user' value={email} onBlur={handleBlur} onFocus={handleFocus} onChange={(e)=>{setEmail(e.target.value)}}></input>
                 </div>
                 <div>
                     <label htmlFor='pwd' className={focused ? 'focused' : ''}>Password</label>
