@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function Registration() {
 
@@ -9,9 +10,11 @@ function Registration() {
     const [passwordConf,setPasswordConf] = useState('');
     const [validUsername,setValidUsername] = useState(false);
     const [authenticUsername,setAuthenticUsername] = useState(true);
+    const [usernameTimeout,setUsernameTimeout] = useState(null);
     
     const [validEmail,setValidEmail] = useState(false);
-    const [readyForm,setReadyForm] = useState(false);
+
+    const  navigate = useNavigate();
     
 
     const handlePassword = (e)=>{
@@ -28,6 +31,13 @@ function Registration() {
       } else{
         setValidUsername(false);
       }
+      if (usernameTimeout) {
+        clearTimeout(usernameTimeout);
+      }
+
+      const userTimeout = setTimeout(()=>{usernameValidity(e)},350);
+
+      setUsernameTimeout(userTimeout);
     }
 
 
@@ -47,15 +57,25 @@ function Registration() {
 
     const usernameValidity = (e)=>{
       if (username.length > 4 && username.length < 15) {
-        axios.post('http://localhost:3001/users/validity/username',{username:username})
+        axios.post('http://localhost:3001/users/validity/username',{username:e.target.value})
         .then((res)=>{
-          setAuthenticUsername(res.data.valid)
+          setAuthenticUsername(res.data.validity);
+          
         })
+        
       }
       
     }
 
-
+    const submitRegistrationForm = ()=>{
+      axios.post('http://localhost:3001/auth/register',{email:email,username,username,password:password})
+      .then((res)=>{
+        if (res.data === 'success') {
+          navigate('/');
+        }
+        
+      })
+    }
 
   return (
     <div id='registration-page'>
@@ -64,14 +84,15 @@ function Registration() {
       <h1>Sign Up</h1>
       <p>Please enter your information, All the fields are required.</p>
     </div>
-    <form action="">
+    <form action={submitRegistrationForm}>
       <div>
-        <label for="name">Username</label>
-        <input type="text" name="name" className={username === '' ? '' : validUsername ? 'validInput' : 'invalid'} value={username} onChange={(e)=>{handleUsername(e)}} id="name" tabIndex="1" placeholder="e.g. John Doe" onBlur={(e)=>{usernameValidity(e)}} required/>
+        <label htmlFor="name">Username</label>
+        <input type="text" name="name" className={username === '' ? '' : validUsername && authenticUsername ? 'validInput' : 'invalid'} value={username} onChange={(e)=>{handleUsername(e)}} id="name" tabIndex="1" placeholder="e.g. John Doe"  required/>
         <p className={username === '' ? 'hide' : !validUsername ? 'error-msg' : 'hide'}>The username must have between 4 and 15 characters</p>
+        <p className={username === '' ? 'hide' : !validUsername ? 'hide' : !authenticUsername ? 'error-msg' : 'hide' }>Username already taken</p>
       </div>
       <div>
-        <label for="email">Email Address</label>
+        <label htmlFor="email">Email Address</label>
         <input type="email" name="email" className={email === '' ? '' : validEmail ? 'validInput' : 'invalid'} value={email} onChange={(e)=>{handleEmail(e)}} id="email" tabIndex="2" placeholder="e.g. johndoe@lorem.com" required/>
         {
           email !== '' && !validEmail &&(
@@ -80,19 +101,19 @@ function Registration() {
         }
       </div>
       <div>
-        <label for="passw">Password</label>
+        <label htmlFor="passw">Password</label>
         <input type="password" className={password === '' || passwordConf === '' ? '' : password === passwordConf ? 'validInput' : 'invalid'} name="passw" value={password} onChange={(e)=>{handlePassword(e)}} tabIndex="3" id="passw" required/>
       </div>
       <div>
-        <label for="passwc">Confirm Password</label>
+        <label htmlFor="passwc">Confirm Password</label>
         <input type="password" className={password === '' || passwordConf === '' ? '' : password === passwordConf ? 'validInput' : 'invalid'} tabIndex="4" name="passc" value={passwordConf} onChange={(e)=>{handlePasswordConfirmation(e)}}  id="passc" required/>
         <p className={password === '' || passwordConf === '' ? 'hide' : password !== passwordConf ? 'error-msg' : 'hide'}>The password and the confirmation must be identical</p>
       </div>
     </form>
     <div>
         {
-            password !== '' && (
-                <button type='submit'>Sign up</button>
+            validUsername && authenticUsername && validEmail && password == passwordConf && password !=='' && (
+                <button type='submit' onClick={submitRegistrationForm}>Sign up</button>
             )
         }
         
