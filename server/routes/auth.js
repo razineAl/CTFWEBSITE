@@ -15,6 +15,10 @@ router.post('/register',async (req,res)=>{
 
     if (foundUser) return res.json({error:'email already taken'});
 
+    const foundUsername = await User.findOne({username:username});
+
+    if (foundUsername) return res.json({error:'username already taken'});
+
     const hashedpwd = await bcrypt.hash(password,10);
 
     const users = await User.find().sort({ranking:-1});
