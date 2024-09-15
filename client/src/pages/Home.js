@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState, useCallback, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faArrowRight, faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
+import Navbar from '../components/Navbar';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,13 +20,12 @@ import Footer from '../components/Footer';
 function Home(){
     const {authState,setAuthState} = useContext(AuthContext);
     const [loading,setLoading] = useState(true);
-    const [navOptions,setNavOptions] = useState(false);
     const [mored,setMored] = useState(false);
     const [newChallenges,setNewChallenges] = useState([]);
     const [newUsers,setNewUsers] = useState([]);
 
     const typedRef = useRef(null);
-    const optionsRef = useRef(null);
+    
 
     const Months = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
 
@@ -107,36 +107,15 @@ function Home(){
         const minutes = Math.floor(seconds / 60);
         const hours = Math.floor(minutes / 60);
         const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
 
+        if (months > 0) return `${months} month${months > 1 ? 's' : ''} ago`;
         if (days > 0) return `${days} day${days > 1 ? 's' : ''} ago`;
         if (hours > 0) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
         if (minutes > 0) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
         return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
     }
-    const logout = async ()=>{
-        axios.get('http://localhost:3001/logout',{withCredentials:true})
-        .then((res)=>{
-            navigate('/');
-        })
-        
-    }
-    const showOptions = (e)=>{
-        setNavOptions(true);
-    }
-    const toggleOptions = (e)=>{
-        if (optionsRef.current) {
-            if (!optionsRef.current.contains(e.target)) {
-                setNavOptions(false)
-            } 
-        }    
-    }
-    const hideOptions = (e)=>{
-        setNavOptions(false)
-  
-    }
-    const goToSettings = ()=>{
-        navigate(`/account/settings/${authState.id}`);
-    }
+    
     return(
         
         
@@ -156,35 +135,7 @@ function Home(){
             :
             (
                 <>
-                <nav className="home-navbar">
-                <div className="navbar-part">
-                    <div className='navbar-section'>
-                        <Link className='link' to='/home'>Home</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/challenges'>Challenges</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/ranking'>Rankings</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/billing'>Premium</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/faq'>FAQ</Link>
-                    </div>
-                </div>
-                <div className='navbar-part'>
-                    <div className='navbar-part-second' >
-                        <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
-                        {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
-                            <div onClick={goToSettings}><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
-                            <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
-                        </div>}
-                    </div>
-                    
-                </div>
-            </nav>
+            <Navbar></Navbar>
             <div id='main-typing-container'>
                 <span><h2 className='typed-text' ref={typedRef}></h2></span>
             </div>
@@ -226,7 +177,7 @@ function Home(){
                             newUsers.map((newUser,index)=>{
                                 const date = new Date(newUser.creationDate);
                                 return (
-                                    <li key={index} className='new-user'><p className='membership-name'>{newUser.username}</p><p className='membership-date'>{`${date.getDay()} ${Months[date.getMonth()]} ${date.getFullYear()}`}</p></li>
+                                    <li key={index} className='new-user'><p className='membership-name'>{newUser.username}</p><p className='membership-date'>{`${date.getDate()} ${Months[date.getMonth()]} ${date.getFullYear()}`}</p></li>
                                 )
                             })
                         }

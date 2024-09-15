@@ -6,6 +6,7 @@ import AuthContext from '../helpers/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import BarLoader from 'react-spinners/BarLoader';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 
 
@@ -43,28 +44,7 @@ function FAQ() {
         
     },[])
     
-    const logout = async ()=>{
-        axios.get('http://localhost:3001/logout',{withCredentials:true})
-        .then((res)=>{
-            navigate('/');
-        })
-
-    }
-    const showOptions = (e)=>{
-        setNavOptions(true);
-    }
-    const toggleOptions = (e)=>{
-        if (optionsRef.current) {
-            if (!optionsRef.current.contains(e.target)) {
-                setNavOptions(false)
-            } 
-        }    
-    }
-    const hideOptions = (e)=>{
-        setNavOptions(false)
-
-    }
-
+   
 
     const [faqItems,setFaqItems] = useState([
         {
@@ -110,9 +90,7 @@ function FAQ() {
           i === index ? { ...item, open: !item.open } : item
         )));
       };
-      const goToSettings = ()=>{
-        navigate(`/account/settings/${authState.id}`);
-    }
+
 
 
   return (
@@ -132,35 +110,7 @@ function FAQ() {
                 :
                 (
                     <>
-                <nav className="home-navbar">
-                <div className="navbar-part">
-                    <div className='navbar-section'>
-                        <Link className='link' to='/home'>Home</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/challenges'>Challenges</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/ranking'>Rankings</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/billing'>Premium</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/faq'>FAQ</Link>
-                    </div>
-                </div>
-                <div className='navbar-part'>
-                    <div className='navbar-part-second' >
-                        <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
-                        {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
-                            <div onClick={goToSettings}><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
-                            <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
-                        </div>}
-                    </div>
-                    
-                </div>
-            </nav>
+                <Navbar></Navbar>
             <main id='main-faq-content'>
                 <h1>What you might be asking yourself about</h1>
                 <ul>

@@ -8,6 +8,7 @@ import {faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-ic
 
 import Footer from '../components/Footer';
 import BarChart from '../components/BarChart';
+import Navbar from '../components/Navbar';
 
 
 function UserProfile(){
@@ -59,28 +60,7 @@ function UserProfile(){
         
         
     },[id])
-    const showOptions = (e)=>{
-        setNavOptions(true);
-    }
-    const toggleOptions = (e)=>{
-        if (optionsRef.current) {
-            if (!optionsRef.current.contains(e.target)) {
-                setNavOptions(false)
-            } 
-        }    
-    }
-    const hideOptions = (e)=>{
-        setNavOptions(false)
-  
-    }
-
-    const logout = async ()=>{
-        axios.get('http://localhost:3001/logout',{withCredentials:true})
-        .then((res)=>{
-            navigate('/');
-        })
-        
-    }
+    
 
     const date = new Date(user.creationDate);
 
@@ -102,9 +82,7 @@ function UserProfile(){
     const changeStats = ()=>{
         setDifficulty(!difficulty);
     }
-    const goToSettings = ()=>{
-        navigate(`/account/settings/${authState.id}`);
-    }
+
     return(
         <div id='user-profile-page'>
 
@@ -123,35 +101,7 @@ function UserProfile(){
                 :
                 (
                     <>
-                <nav className="home-navbar">
-                <div className="navbar-part">
-                    <div className='navbar-section'>
-                        <Link className='link' to='/home'>Home</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/challenges'>Challenges</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/ranking'>Rankings</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/billing'>Premium</Link>
-                    </div>
-                    <div className='navbar-section'>
-                        <Link className='link' to='/faq'>FAQ</Link>
-                    </div>
-                </div>
-                <div className='navbar-part'>
-                    <div className='navbar-part-second' >
-                        <Link className='link' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{toggleOptions(e)}} to={`../profile/${authState.id}`}>{authState.username}&nbsp;&nbsp;<FontAwesomeIcon icon={faUser} /></Link>
-                        {navOptions && <div className='profile-options-container ' onMouseOver={(e)=>{showOptions(e)}} onMouseOut={(e)=>{hideOptions(e)}} ref={optionsRef}>
-                            <div onClick={goToSettings}><a>Settings</a> <span><FontAwesomeIcon icon={faGear} /></span> </div>
-                            <div onClick={logout}><a>Logout </a> <span><FontAwesomeIcon icon={faRightFromBracket} /></span> </div>
-                        </div>}
-                    </div>
-                    
-                </div>
-            </nav>
+                <Navbar></Navbar>
             <div id='user-profile-general-section'>
             <div id='user-profile-general-section-titles'>
                 <div><p>Username</p></div>

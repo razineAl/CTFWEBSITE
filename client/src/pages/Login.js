@@ -1,8 +1,7 @@
-import Navbar from '../components/Navbar';
-import {useContext, useEffect, useState} from 'react';
+import image from '../ElmoreCTF.png';
+import { useEffect, useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Footer from '../components/Footer';
+import { useNavigate,Link } from 'react-router-dom';
 
 
 
@@ -52,14 +51,26 @@ function Login(){
                 
             })
         },[])
+    // const navigation = (url)=>{
+    //     window.location.href = url;
+    // }
+    // const auth = async ()=>{
+    //     const response = await fetch('http://localhost:3001/oauth',{method:'POST'});
+    //     const data = await response.json();
+    //     navigation(data.url);
+    // }
     return(
         <div id='login-page'>
 
-            <Navbar></Navbar>
+            <nav id="main-navbar">
+                <div><img src={image} alt=""></img></div>
+                <div><p>you haven't already created an account ?</p><Link className='btn' to='/registration'>Sign up</Link></div>
+            </nav>
             <main id='login-page-main-content'>
                 <div className='content'>
-                    <h2>Elmore</h2>
-                    <h2>Elmore</h2>
+                    <h2>Elmore CTF</h2>
+                    <h2>Elmore CTF</h2>
+                    
                 </div>
                 <div id='login-form-container'>
                 <form onSubmit={(e)=>{
@@ -82,7 +93,6 @@ function Login(){
                 </div>
                 
             </main>
-            <Footer></Footer>
             
             
         </div>
