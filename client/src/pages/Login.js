@@ -2,6 +2,7 @@ import image from '../ElmoreCTF.png';
 import { useEffect, useState} from 'react';
 import axios from 'axios';
 import { useNavigate,Link } from 'react-router-dom';
+import { url } from '../App';
 
 
 
@@ -17,7 +18,7 @@ function Login(){
 
     const sendLogin = async ()=>{
 
-        axios.post('http://localhost:3001/auth/login',{email:email,password:password},{withCredentials:true})
+        axios.post(`${url}:${process.env.PORT}/auth/login`,{email:email,password:password},{withCredentials:true})
         .then((res)=>{
             navigate('/home');
         })
@@ -46,7 +47,7 @@ function Login(){
     }
     useEffect(
         ()=>{
-            axios.get('http://localhost:3001/logout',{withCredentials:true})
+            axios.get('${url}:${process.env.PORT}/logout',{withCredentials:true})
             .then((res)=>{
                 
             })
