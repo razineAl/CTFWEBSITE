@@ -90,6 +90,10 @@ nav img{
     color: hsl(213, 96%, 18%);
     cursor: pointer;
 }
+.btn{
+    color: #fff;
+    font-size: 1.2em;
+}
 /*                          Logiin                     */
 #login-page{
     width: 100%;
@@ -101,7 +105,7 @@ nav img{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-#login-page-main-content > div{
+#login-page-main-content > div:nth-child(2){
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,6 +125,7 @@ nav img{
     padding: 0;
     font-family: "Poppins", sans-serif;
     white-space: no-wrap;
+    width: max-content;
 }
   
   .content h2:nth-child(1) {
@@ -478,7 +483,7 @@ form div input.focused{
 }
 .home-navbar>div:first-of-type{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(4,1fr);
 }
 .home-navbar>div:nth-of-type(2){
     display: flex;
