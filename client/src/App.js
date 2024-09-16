@@ -15,8 +15,12 @@ import FAQ from "./pages/FAQ";
 import Registration from "./pages/Registration";
 import Settings from "./pages/Settings";
 
+export const url = 'https://ctfwebsite.onrender.com';
+
 function App() {
   const [authState,setAuthState] = useState({username:'',status:false,accessToken:'',id:'',role:'user'});
+
+  
 
   return (
     <div className="App">
