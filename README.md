@@ -3,7 +3,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/repo.git
+git clone https://github.com/razineAl/CTFWEBSITE.git
 
 # Move to the client directory
 cd client
