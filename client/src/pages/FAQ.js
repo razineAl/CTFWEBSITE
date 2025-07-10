@@ -32,7 +32,7 @@ function FAQ() {
     
     
     useEffect(()=>{
-        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
+        axios.get('http://localhost:3002/refresh',{ withCredentials: true})
         .then((res)=>{
             if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});

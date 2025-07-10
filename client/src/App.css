@@ -483,7 +483,7 @@ form div input.focused{
 }
 .home-navbar>div:first-of-type{
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(5,1fr);
 }
 .home-navbar>div:nth-of-type(2){
     display: flex;

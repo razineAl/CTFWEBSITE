@@ -12,7 +12,7 @@ function Navbar(){
     const {authState,setAuthState} = useContext(AuthContext);
     let navigate = useNavigate();
     const logout = async ()=>{
-        axios.get('http://localhost:3001/logout',{withCredentials:true})
+        axios.get('http://localhost:3002/logout',{withCredentials:true})
         .then((res)=>{
             navigate('/');
         })
@@ -51,6 +51,9 @@ function Navbar(){
                     </div>
                     <div className='navbar-section'>
                         <Link className='link' to='/faq'>FAQ</Link>
+                    </div>
+                    <div className='navbar-section'>
+                        <Link className='link' to='/blog'>Blog</Link>
                     </div>
                 </div>
                 <div className='navbar-part'>

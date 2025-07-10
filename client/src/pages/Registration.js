@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
+import { url } from '../App';
+
 function Registration() {
 
     const [username,setUsername] = useState('');
@@ -57,7 +59,7 @@ function Registration() {
 
     const usernameValidity = (e)=>{
       if (username.length > 4 && username.length < 15) {
-        axios.post('http://localhost:3001/users/validity/username',{username:e.target.value})
+        axios.post(`${url}:3001/users/validity/username`,{username:e.target.value})
         .then((res)=>{
           setAuthenticUsername(res.data.validity);
           
@@ -68,7 +70,7 @@ function Registration() {
     }
 
     const submitRegistrationForm = ()=>{
-      axios.post('http://localhost:3001/auth/register',{email:email,username,username,password:password})
+      axios.post(`${url}:3001/auth/register`,{email:email,username,username,password:password})
       .then((res)=>{
         if (res.data === 'success') {
           navigate('/');

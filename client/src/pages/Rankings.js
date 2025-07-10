@@ -26,11 +26,11 @@ function Rankings(){
 
     useEffect(()=>{
 
-        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
+        axios.get('http://localhost:3002/refresh',{ withCredentials: true})
         .then((res)=>{
             if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get('http://localhost:3001/users/top/10',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
+            axios.get('http://localhost:3002/users/top/10',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setTopUsers(response.data);  
                 setTopThree(response.data.slice(0,3));
@@ -47,7 +47,7 @@ function Rankings(){
     const showMore = async()=>{
         if (!more) {
             setMore(true);
-            axios.get('http://localhost:3001/users/top/50',{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
+            axios.get('http://localhost:3002/users/top/50',{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
             .then((response)=>{
                 setTopUsers(response.data);  
                 setTopThree(response.data.slice(0,3));
@@ -55,7 +55,7 @@ function Rankings(){
             })
         } else {
             setMore(false);
-            axios.get('http://localhost:3001/users/top/10',{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
+            axios.get('http://localhost:3002/users/top/10',{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
             .then((response)=>{
                 setTopUsers(response.data);  
                 setTopThree(response.data.slice(0,3));

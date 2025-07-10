@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import image from '../Elmore.png';
+import image from '../ElmoreCTFLOGO.svg';
 
 
 function Footer() {

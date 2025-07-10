@@ -38,11 +38,11 @@ function ChallengePage() {
 
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
+        axios.get('http://localhost:3002/refresh',{ withCredentials: true})
         .then((res)=>{
             if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get(`http://localhost:3001/challenge/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
+            axios.get(`http://localhost:3002/challenge/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setChallenge(response.data);  
                 setLoading(false); 
@@ -56,7 +56,7 @@ function ChallengePage() {
         })
     },[])
     const submitFlag = ()=>{
-        axios.put(`http://localhost:3001/challenge/submit/${id}/${authState.id}`,{flag:flag},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
+        axios.put(`http://localhost:3002/challenge/submit/${id}/${authState.id}`,{flag:flag},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
         .then((res)=>{
             const response = res.data;
             console.log(response);

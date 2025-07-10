@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState, useCallback, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faArrowRight, faGear, faRightFromBracket, faUser} from '@fortawesome/free-solid-svg-icons';
+import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
 import AuthContext from '../helpers/AuthContext';
@@ -14,6 +14,7 @@ import ArrowLeft from '../components/ArrowLeft';
 import DifficultySpan from '../components/DifficultySpan';
 import BarLoader from 'react-spinners/BarLoader';
 import Footer from '../components/Footer';
+import { url } from '../App';
 
 
 
@@ -42,15 +43,15 @@ function Home(){
     let navigate = useNavigate();
     
     useEffect(()=>{
-        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
+        axios.get(`${url}:3002/refresh`,{ withCredentials: true})
         .then((res)=>{
             if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get('http://localhost:3001/challenge/newest/6',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
+            axios.get(`${url}:3002/challenge/newest/6`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setNewChallenges(response.data); 
             })    
-            axios.get('http://localhost:3001/users/newest/5',{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
+            axios.get(`${url}:3002/users/newest/5`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setNewUsers(response.data); 
                 setLoading(false);

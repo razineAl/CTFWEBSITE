@@ -41,15 +41,15 @@ function UserProfile(){
 
     useEffect(()=>{
 
-        axios.get(`${url}:${process.env.PORT}/refresh`,{ withCredentials: true})
+        axios.get(`${url}:3002/refresh`,{ withCredentials: true})
         .then((res)=>{
             if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});
-            axios.get(`${url}:${process.env.PORT}/users/byId/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
+            axios.get(`${url}:3002/users/byId/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setUser(response.data); 
             }) 
-            axios.get(`${url}:${process.env.PORT}/challenge/solved/category/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
+            axios.get(`${url}:3002/challenge/solved/category/${id}`,{withCredentials:true,headers:{'Authorization':`Bearer ${res.data.accessToken}`}})
             .then((response)=>{
                 setSolvedByCat(response.data.categories); 
                 setSolvedByDiff(response.data.difficulties); 

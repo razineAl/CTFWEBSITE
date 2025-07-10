@@ -13,7 +13,7 @@ dbConn();
 
 
 const corsOptions = {
-    origin: ['http://localhost:3000','http://localhost:3000/home'],
+    origin: ['http://localhost:3000'],
     credentials: true, 
   };
 
@@ -27,6 +27,7 @@ app.use(cors(corsOptions));
 
 
 const authRouter = require('./routes/auth');
+const oauthRouter = require('./routes/oauth');
 const challengeRouter = require('./routes/challenges');
 const adminRouter = require('./routes/admin');
 const userRouter = require('./routes/users');
@@ -37,6 +38,7 @@ const logoutRouter = require('./routes/logout');
 
 
 app.use('/auth',authRouter);
+app.use('/oauth',oauthRouter);
 app.use('/challenge',challengeRouter);
 app.use('/admin',adminRouter);
 app.use('/users',userRouter);

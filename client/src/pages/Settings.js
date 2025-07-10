@@ -26,7 +26,7 @@ function Settings() {
 
 
     useEffect(()=>{
-        axios.get('http://localhost:3001/refresh',{ withCredentials: true})
+        axios.get('http://localhost:3002/refresh',{ withCredentials: true})
         .then((res)=>{
             if (res.data.error) return navigate('/');
             setAuthState({username:res.data.username,status:true,accessToken:res.data.accessToken,id:res.data.id,role:res.data.role});  
@@ -49,19 +49,19 @@ function Settings() {
     
 
     const changeUsername = ()=>{
-        axios.put(`http://localhost:3001/users/update/username/${id}`,{username:username},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
+        axios.put(`http://localhost:3002/users/update/username/${id}`,{username:username},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
         .then((res)=>{
             navigate(0);
         })
     }   
     const changePassword = ()=>{
-        axios.put(`http://localhost:3001/users/update/password/${id}`,{currentPassword:oldPass,newPassword:password,passwordConfirmation:newPass},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
+        axios.put(`http://localhost:3002/users/update/password/${id}`,{currentPassword:oldPass,newPassword:password,passwordConfirmation:newPass},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
         .then((res)=>{
             navigate(0);
         })
     }   
     const deleteAccount = ()=>{
-        axios.put(`http://localhost:3001/users/account/delete/${id}`,{account:account},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
+        axios.put(`http://localhost:3002/users/account/delete/${id}`,{account:account},{withCredentials:true,headers:{'Authorization':`Bearer ${authState.accessToken}`}})
         .then((res)=>{
             navigate('/');
         })

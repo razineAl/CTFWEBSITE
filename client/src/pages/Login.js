@@ -18,7 +18,7 @@ function Login(){
 
     const sendLogin = async ()=>{
 
-        axios.post(`${url}:${process.env.PORT}/auth/login`,{email:email,password:password},{withCredentials:true})
+        axios.post(`${url}:3002/auth/login`,{email:email,password:password},{withCredentials:true})
         .then((res)=>{
             navigate('/home');
         })
@@ -45,13 +45,6 @@ function Login(){
             setFocused(false);
         }        
     }
-    useEffect(
-        ()=>{
-            axios.get('${url}:${process.env.PORT}/logout',{withCredentials:true})
-            .then((res)=>{
-                
-            })
-        },[])
     // const navigation = (url)=>{
     //     window.location.href = url;
     // }
